@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Player
 {
@@ -14,6 +12,7 @@ namespace Player
         #region Variables
 
         [SerializeField] private float speed = 250f;
+        [SerializeField] private float mobileSpeed = 2f;
         [SerializeField] private float sizeOffset = .6f;
         private Rigidbody _playerRb;
         private Vector3 _screenBoundaries;
@@ -51,11 +50,8 @@ namespace Player
             //Mobile Controls
             if (Input.touchCount <= 0) return;
             var touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Moved)
-            {
-                var touchPosition = _mainCamera.ScreenToWorldPoint(Input.GetTouch(0).position);
-                _playerRb.MovePosition(new Vector2(touchPosition.x * 10f * Time.deltaTime, 0));
-            }
+            var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -10.0f));
+            _playerRb.velocity = touch.phase == TouchPhase.Ended ? Vector3.zero : Vector3.left * point.x * mobileSpeed;
 #endif
         }
 
