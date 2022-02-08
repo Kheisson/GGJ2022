@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 00a94d5c0400c3845829080142d48f4a
+guid: ce3b46d200b50f34cb9af9e70e745d20
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,10 +8,10 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
-    second: {fileID: 2100000, guid: a68eb1308e98dd04e9d0f8ec8aad1a91, type: 2}
+    second: {fileID: 2100000, guid: 9e75af7db34b9314c934e389864687cd, type: 2}
   materials:
-    materialImportMode: 1
-    materialName: 1
+    materialImportMode: 0
+    materialName: 0
     materialSearch: 1
     materialLocation: 1
   animations:
@@ -40,14 +40,14 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
-    importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -78,7 +78,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -97,7 +97,7 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
