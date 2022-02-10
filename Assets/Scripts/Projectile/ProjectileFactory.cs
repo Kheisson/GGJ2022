@@ -8,7 +8,7 @@ namespace Projectile
         #region Fields
         
         private static ProjectileFactory _instance;
-        private static byte _spawnCount = 10;
+        private static byte _spawnCount = 20;
 
         #endregion
 
@@ -19,12 +19,6 @@ namespace Projectile
             get { return _instance ??= new ProjectileFactory(); }
         }
 
-        public byte SpawnCount
-        {
-            get => _spawnCount;
-            set => _spawnCount = value;
-        }
-
         #endregion
 
         #region Methods
@@ -32,9 +26,10 @@ namespace Projectile
         public List<IProjectile> CreateWeaponQueue(GameObject projectile)
         {
             var weapons = new List<IProjectile>();
+            var parent = new GameObject("WeaponContainer");
             for (int i = 0; i < _spawnCount; i++)
             {
-                var instance = Object.Instantiate(projectile);
+                var instance = Object.Instantiate(projectile, parent.transform);
                 weapons.Add(instance.GetComponent<IProjectile>());
             }
             return weapons;

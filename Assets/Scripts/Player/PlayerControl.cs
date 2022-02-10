@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Projectile;
 using UnityEngine;
 
@@ -25,10 +27,16 @@ namespace Player
         private float _sizeOffset;
         private float _delayFire;
         private float _fireRate;
-        
+        private bool _disableControl = true;
 
         #endregion
 
+        #region Properties
+
+        public bool ControlsDisabled => _disableControl;
+
+        #endregion
+        
         #region Methods
 
         private void Awake()
@@ -36,12 +44,18 @@ namespace Player
             _mainCamera = Camera.main;
             _playerRb = GetComponent<Rigidbody>();
             _playerRb.useGravity = false;
-            _screenBoundaries = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+            _screenBoundaries = GameSettings.ScreenBoundaries;
             _sizeOffset = GetComponent<Collider>().bounds.extents.x;
+        }
+
+        private void Start()
+        {
+            StartCoroutine(StartPosition(new Vector3(0, _screenBoundaries.y / 2, 0)));
         }
 
         private void FixedUpdate()
         {
+            if (_disableControl) return;
             ClampPosition();
             HandleMovement();
         }
@@ -81,7 +95,7 @@ namespace Player
             //Mobile Controls
             if (Input.touchCount <= 0) return;
             var touch = Input.GetTouch(0);
-            var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -10.0f));
+            var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
             point = new Vector2(-point.x, _screenBoundaries.y / 2);
             transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, mobileSpeed);
             if(touch.phase != TouchPhase.Ended)
@@ -101,6 +115,23 @@ namespace Player
                 z = position.z
             };
             transform.position = clampedPosition;
+        }
+        
+        /// <summary>
+        /// Lerps player position to the starting position and enabled controls
+        /// </summary>
+        /// <param name="startingPosition"> Sets the position the craft should start at</param>
+        private IEnumerator StartPosition(Vector3 startingPosition)
+        {
+            print("start");
+            while (Vector3.Distance(startingPosition, transform.position) > 1f) 
+            {
+                transform.position = Vector3.Lerp(transform.position, startingPosition, Time.deltaTime);
+                yield return null;
+            }
+
+            transform.position = new Vector3(0, _screenBoundaries.y / 2, 0);
+            _disableControl = false;
         }
 
         #endregion
