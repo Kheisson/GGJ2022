@@ -11,9 +11,8 @@ namespace Player
     public class PlayerControl : MonoBehaviour
     {
         #region Consts
-
         private Vector2 _velocity = Vector2.zero;
-
+        private const string PlayerContainerName = "Player Weapon Container";
         #endregion
 
         #region Fields
@@ -29,6 +28,7 @@ namespace Player
         private float _delayFire;
         private float _fireRate;
         private float _screenBoundryDivider = 1.3f;
+        private int _spawnCount = 20;
         private bool _disableControl = true;
 
         #endregion
@@ -85,7 +85,7 @@ namespace Player
         /// </summary>
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(currentWeapon);
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(currentWeapon, _spawnCount, PlayerContainerName);
         }
 
         /// <summary>

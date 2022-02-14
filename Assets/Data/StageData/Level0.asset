@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b27252ecb4d448aa376783655e9de3a, type: 3}
   m_Name: Level0
   m_EditorClassIdentifier: 
-  delaySpawnTimer: 0
+  delaySpawnTimer: 3.66
   enemySpawnList:
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 0}
   spawnEachAmount: 01000000

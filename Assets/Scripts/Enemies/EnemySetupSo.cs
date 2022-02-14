@@ -10,7 +10,7 @@ namespace Enemies
 
         [SerializeField] private int health;
         [SerializeField] private float speed;
-        [SerializeField] private BaseProjectile weapon;
+        [SerializeField] private GameObject weapon;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace Enemies
 
         public int EnemyHealth => health;
         public float EnemySpeed => speed;
-        public BaseProjectile EnemyProjectile => weapon;
+        public GameObject EnemyProjectile => weapon;
 
         #endregion
     }

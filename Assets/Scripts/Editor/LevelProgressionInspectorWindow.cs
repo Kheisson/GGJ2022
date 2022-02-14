@@ -29,7 +29,7 @@ namespace Editor
                 }
                 catch (ArgumentOutOfRangeException e)
                 {
-                    Debug.LogError($"Enemy list in {body.name} stage data cannot be left empty!");
+                    Debug.LogError($"Enemy list in {body.name} stage data cannot be left empty! \n{e.Message}");
                 }
             }
 

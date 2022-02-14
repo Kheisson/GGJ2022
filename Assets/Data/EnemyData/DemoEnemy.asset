@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 300
   speed: 0
-  weapon: {fileID: 4011823926679216778, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
+  weapon: {fileID: 273339286909359908, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}

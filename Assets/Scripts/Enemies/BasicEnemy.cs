@@ -1,6 +1,7 @@
 using System.Collections;
 using Player;
-using Unity.Mathematics;
+using Projectile;
+using TMPro;
 using UnityEngine;
 
 namespace Enemies
@@ -8,11 +9,16 @@ namespace Enemies
     public class BasicEnemy : Enemy
     {
         private const byte AvailableShots = 3;
+        private const string EnemyContainerName = "BasicEnemy Weapon Container";
 
         protected override void Attack()
         {
-            print("ATTACK");
             StartCoroutine(BasicEnemyAttack());
+        }
+
+        protected override void CreateProjectileQueue()
+        {
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, AvailableShots, EnemyContainerName);
         }
 
         private IEnumerator BasicEnemyAttack()
@@ -22,9 +28,7 @@ namespace Enemies
             {
                 for (int i = 0; i < AvailableShots; i++)
                 {
-                    var enemyProjectile = Instantiate(enemySetupSo.EnemyProjectile, _spawnProjectilePos.transform);
-                    enemyProjectile.transform.LookAt(playerPos.transform.position);
-                    enemyProjectile.Fire(transform.position);
+                    _projectiles[i].Fire(transform.position - (Vector3.up * 6));
                     yield return new WaitForSeconds(0.3f);
                 }
 

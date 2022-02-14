@@ -1,6 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using Core;
+using Projectile;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -12,22 +15,18 @@ namespace Enemies
         private int _health;
         private float _screenBoundryDivider = 1.3f;
         protected bool _disableControl;
-        protected GameObject _spawnProjectilePos;
+        protected List<IProjectile> _projectiles;
 
         #endregion
 
         #region Methods
 
-        private void Start()
-        {
-            _spawnProjectilePos = Instantiate(new GameObject("WeaponSpawnPoint"), transform.position, Quaternion.identity);
-            _spawnProjectilePos.transform.position = new Vector3(0, 0, -6);
-        }
-
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
             _disableControl = true;
+            if (_projectiles == null || _projectiles.Count == 0)
+                CreateProjectileQueue();
             StartCoroutine(MoveToStartingPosition(new Vector3(0, -GameSettings.ScreenBoundaries.y / _screenBoundryDivider, 0)));
         }
 
@@ -50,6 +49,11 @@ namespace Enemies
         }
 
         protected virtual void Attack()
+        {
+            
+        }
+        
+        protected virtual void CreateProjectileQueue()
         {
             
         }
