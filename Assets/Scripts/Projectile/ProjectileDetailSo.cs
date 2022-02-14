@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Projectile
 {
     [CreateAssetMenu(fileName = "New Projectile", menuName = "Scriptables/New Projectile")]
-    public class ProjectileDetailSO : ScriptableObject
+    public class ProjectileDetailSo : ScriptableObject
     {
 
         #region Fields

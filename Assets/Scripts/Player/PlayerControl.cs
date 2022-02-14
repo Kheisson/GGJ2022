@@ -20,6 +20,7 @@ namespace Player
         
         [SerializeField] private float mobileSpeed = 0.5f;
         [SerializeField] private GameObject currentWeapon;
+        [SerializeField] private Transform projectileSpawnPosition;
         private List<IProjectile> _projectiles;
         private Rigidbody _playerRb;
         private Vector3 _screenBoundaries;
@@ -27,6 +28,7 @@ namespace Player
         private float _sizeOffset;
         private float _delayFire;
         private float _fireRate;
+        private float _screenBoundryDivider = 1.3f;
         private bool _disableControl = true;
 
         #endregion
@@ -50,7 +52,7 @@ namespace Player
 
         private void Start()
         {
-            StartCoroutine(StartPosition(new Vector3(0, _screenBoundaries.y / 2, 0)));
+            StartCoroutine(MoveToStartingPosition(new Vector3(0, _screenBoundaries.y / _screenBoundryDivider, 0)));
         }
 
         private void FixedUpdate()
@@ -75,7 +77,7 @@ namespace Player
             if (!(_delayFire > _fireRate)) return;
             _delayFire = 0;
             var projectile = _projectiles.First(projectile => !projectile.IsActive);
-            projectile.Fire(transform.position);
+            projectile.Fire(projectileSpawnPosition.position);
         }
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace Player
             if (Input.touchCount <= 0) return;
             var touch = Input.GetTouch(0);
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
-            point = new Vector2(-point.x, _screenBoundaries.y / 2);
+            point = new Vector2(-point.x, _screenBoundaries.y / _screenBoundryDivider);
             transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, mobileSpeed);
             if(touch.phase != TouchPhase.Ended)
                 HandleAttack();
@@ -121,16 +123,15 @@ namespace Player
         /// Lerps player position to the starting position and enabled controls
         /// </summary>
         /// <param name="startingPosition"> Sets the position the craft should start at</param>
-        private IEnumerator StartPosition(Vector3 startingPosition)
+        private IEnumerator MoveToStartingPosition(Vector3 startingPosition)
         {
-            print("start");
-            while (Vector3.Distance(startingPosition, transform.position) > 1f) 
+            while (Vector3.Distance(startingPosition, transform.position) > 0.1f) 
             {
                 transform.position = Vector3.Lerp(transform.position, startingPosition, Time.deltaTime);
                 yield return null;
             }
 
-            transform.position = new Vector3(0, _screenBoundaries.y / 2, 0);
+            transform.position = new Vector3(0, _screenBoundaries.y / _screenBoundryDivider, 0);
             _disableControl = false;
         }
 

@@ -1,13 +1,14 @@
+using Core;
 using UnityEngine;
 
 namespace Projectile
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
     public class BaseProjectile : MonoBehaviour, IProjectile
     {
         #region Fields
 
-        [SerializeField] private ProjectileDetailSO projectileDetails;
+        [SerializeField] private ProjectileDetailSo projectileDetails;
         private Rigidbody _projectileRb;
 
         #endregion
@@ -16,6 +17,7 @@ namespace Projectile
 
         public bool IsActive => gameObject.activeInHierarchy;
         public float FireRate => projectileDetails.FireRate;
+        public int Damage => projectileDetails.Damage;
 
         #endregion
         
@@ -24,12 +26,13 @@ namespace Projectile
         private void Awake()
         {
             _projectileRb = GetComponent<Rigidbody>();
+            GetComponent<Collider>().isTrigger = true;
             gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
         {
-            _projectileRb.velocity = Vector3.up * projectileDetails.ProjectileSpeed;
+            _projectileRb.velocity = transform.forward * projectileDetails.ProjectileSpeed;
         }
 
         private void OnBecameInvisible() => gameObject.SetActive(false);
@@ -38,6 +41,14 @@ namespace Projectile
         {
             transform.position = startingPoint;
             gameObject.SetActive(true);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(typeof(IDamagable), out var subject))
+            {
+                subject.GetComponent<IDamagable>().Damage(projectileDetails.Damage);
+            }
         }
 
         #endregion

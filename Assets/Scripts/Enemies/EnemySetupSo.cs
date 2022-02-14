@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class EnemySetupSO : ScriptableObject
+    [CreateAssetMenu(fileName = "New Enemy", menuName = "Scriptables/New Enemy")]
+    public class EnemySetupSo : ScriptableObject
     {
         #region Fields
 
