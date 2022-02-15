@@ -98,7 +98,7 @@ namespace Player
             if (Input.touchCount <= 0) return;
             var touch = Input.GetTouch(0);
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
-            point = new Vector2(-point.x, _screenBoundaries.y / _screenBoundryDivider);
+            point = new Vector2(-point.x, -point.y);
             transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, mobileSpeed);
             if(touch.phase != TouchPhase.Ended)
                 HandleAttack();
@@ -113,7 +113,7 @@ namespace Player
             var clampedPosition = new Vector3
             {
                 x = Mathf.Clamp(position.x, _screenBoundaries.x + _sizeOffset, -_screenBoundaries.x - _sizeOffset),
-                y = position.y,
+                y = Mathf.Clamp(position.y, _screenBoundaries.y + _sizeOffset, -_screenBoundaries.y - _sizeOffset),
                 z = position.z
             };
             transform.position = clampedPosition;

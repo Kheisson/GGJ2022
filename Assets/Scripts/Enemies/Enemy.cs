@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using Core;
 using Projectile;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamagable
     {
+        #region Consts
+
+        private static readonly Vector3 UniversalEnemyStartingPosition = new Vector3
+        {
+            x = 0,
+            y = 60,
+            z = 0
+        };
+
+        #endregion
+        
         #region Fields
 
         [SerializeField] protected EnemySetupSo enemySetupSo;
@@ -24,6 +34,7 @@ namespace Enemies
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
+            transform.position = UniversalEnemyStartingPosition;
             _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();

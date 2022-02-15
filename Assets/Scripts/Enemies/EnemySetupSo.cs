@@ -1,4 +1,3 @@
-using Projectile;
 using UnityEngine;
 
 namespace Enemies

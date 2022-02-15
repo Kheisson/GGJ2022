@@ -1,7 +1,5 @@
 using System.Collections;
-using Player;
 using Projectile;
-using TMPro;
 using UnityEngine;
 
 namespace Enemies
@@ -10,6 +8,11 @@ namespace Enemies
     {
         private const byte AvailableShots = 3;
         private const string EnemyContainerName = "BasicEnemy Weapon Container";
+
+        private void Update()
+        {
+            transform.position += Vector3.down * enemySetupSo.EnemySpeed;
+        }
 
         protected override void Attack()
         {
@@ -23,7 +26,6 @@ namespace Enemies
 
         private IEnumerator BasicEnemyAttack()
         {
-            var playerPos = FindObjectOfType<PlayerControl>();
             while (true)
             {
                 for (int i = 0; i < AvailableShots; i++)
