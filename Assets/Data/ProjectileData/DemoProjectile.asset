@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DemoProjectile
   m_EditorClassIdentifier: 
   projectileSpeed: 40
-  fireRate: 0.2
+  fireRate: 0.5
   damage: 20

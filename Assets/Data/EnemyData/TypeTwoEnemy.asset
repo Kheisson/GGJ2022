@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45bfd5ac148144c9aa9aab9afc46b389, type: 3}
-  m_Name: DemoEnemy
+  m_Name: TypeTwoEnemy
   m_EditorClassIdentifier: 
-  health: 200
+  health: 120
   speed: 0.25
-  weapon: {fileID: 273339286909359908, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
+  weapon: {fileID: 7349849333140580480, guid: 1c39980986c9842f58a31654ae265d42, type: 3}

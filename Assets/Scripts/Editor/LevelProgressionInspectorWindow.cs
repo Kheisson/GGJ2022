@@ -19,13 +19,13 @@ namespace Editor
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("enemySpawnList"),true);
             
-            if(body.EnemyCount > body.SpawnEachAmount.Count)
+            if(body.EnemySpawnList.Count > body.SpawnEachAmount.Count)
                 body.SpawnEachAmount.Add(1);
-            if (body.EnemyCount < body.SpawnEachAmount.Count && body.SpawnEachAmount.Count > 0)
+            if (body.EnemySpawnList.Count < body.SpawnEachAmount.Count && body.SpawnEachAmount.Count > 0)
             {
                 try
                 {
-                    body.SpawnEachAmount.RemoveAt(body.EnemyCount - 1);
+                    body.SpawnEachAmount.RemoveAt(body.EnemySpawnList.Count - 1);
                 }
                 catch (ArgumentOutOfRangeException e)
                 {

@@ -37,7 +37,7 @@ namespace Projectile
 
         private void OnBecameInvisible() => gameObject.SetActive(false);
 
-        public void Fire(Vector2 startingPoint)
+        public virtual void Fire(Vector2 startingPoint)
         {
             transform.position = startingPoint;
             gameObject.SetActive(true);

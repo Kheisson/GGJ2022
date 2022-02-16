@@ -133,6 +133,7 @@ namespace Player
 
             transform.position = new Vector3(0, _screenBoundaries.y / _screenBoundryDivider, 0);
             _disableControl = false;
+            SpawnManager.Instance.StartSpawning();
         }
 
         #endregion

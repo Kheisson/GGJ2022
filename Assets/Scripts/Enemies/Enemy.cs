@@ -10,7 +10,7 @@ namespace Enemies
     {
         #region Consts
 
-        private static readonly Vector3 UniversalEnemyStartingPosition = new Vector3
+        public static readonly Vector3 UniversalEnemyStartingPosition = new Vector3
         {
             x = 0,
             y = 60,
@@ -21,11 +21,13 @@ namespace Enemies
         
         #region Fields
 
-        [SerializeField] protected EnemySetupSo enemySetupSo;
+        [SerializeField] private EnemySetupSo enemySetupSo;
+        [SerializeField] private string enemyContainerName;
+        [SerializeField] private byte availableShots;
         private int _health;
-        private float _screenBoundryDivider = 1.3f;
-        protected bool _disableControl;
-        protected List<IProjectile> _projectiles;
+        private bool _disableControl;
+        private List<IProjectile> _projectiles;
+        
 
         #endregion
 
@@ -34,41 +36,58 @@ namespace Enemies
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
-            transform.position = UniversalEnemyStartingPosition;
             _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();
-            StartCoroutine(MoveToStartingPosition(new Vector3(0, -GameSettings.ScreenBoundaries.y / _screenBoundryDivider, 0)));
+        }
+
+        private void Update()
+        {
+            if(!_disableControl)
+                transform.position += Vector3.down * enemySetupSo.EnemySpeed;
         }
 
         private void Defeat()
         {
             gameObject.SetActive(false);
         }
+        
+        private void OnBecameInvisible() => gameObject.SetActive(false);
 
-        private IEnumerator MoveToStartingPosition(Vector3 startingPosition)
+        private void OnBecameVisible()
         {
-            while (Vector3.Distance(startingPosition, transform.position) > 0.1f) 
-            {
-                transform.position = Vector3.Lerp(transform.position, startingPosition, Time.deltaTime);
-                yield return null;
-            }
-
-            transform.position = new Vector3(0, -GameSettings.ScreenBoundaries.y / _screenBoundryDivider, 0);
             _disableControl = false;
             Attack();
         }
-
-        protected virtual void Attack()
-        {
-            
-        }
         
-        protected virtual void CreateProjectileQueue()
+        private IEnumerator EnemyAttackCoroutine()
         {
-            
+            while (true)
+            {
+                for (int i = 0; i < availableShots; i++)
+                {
+                    _projectiles[i].Fire(transform.position - (Vector3.up * 6));
+                    yield return new WaitForSeconds(0.3f);
+                }
+
+                yield return new WaitForSeconds(3f);
+            }
         }
 
+        private void Attack()
+        {
+            StartCoroutine(EnemyAttackCoroutine());
+        }
+
+        private void CreateProjectileQueue()
+        {
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, enemyContainerName);
+        } 
+
+        /// <summary>
+        /// Disables the gameObject if health is eq/below zero
+        /// </summary>
+        /// <param name="damage">Passed from projectile</param>
         public void Damage(int damage)
         {
             _health -= damage;

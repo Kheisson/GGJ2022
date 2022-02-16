@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7323482686250912591}
   - component: {fileID: 4775728730727612293}
   - component: {fileID: 8819045963785753865}
-  - component: {fileID: 7331999599311620129}
+  - component: {fileID: 2679902041142841855}
   m_Layer: 0
   m_Name: EnemyType3
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4502918655401801455, guid: 3a6627deab6ad3447be5f6858c215a94, type: 3}
---- !u!114 &7331999599311620129
+--- !u!114 &2679902041142841855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +106,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6432890185671433808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9584dac22ea4b8bb7b0ca6f87a1ca01, type: 3}
+  m_Script: {fileID: 11500000, guid: 157899f9e778442a90fd42eefa6c4be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemySetupSo: {fileID: 11400000, guid: d05d4498ab715430fb34192f230c5912, type: 2}
+  enemyContainerName: 
+  availableShots: 0
