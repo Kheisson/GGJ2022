@@ -11,9 +11,10 @@ namespace Projectile
             base.Fire(startingPoint);
             
             if (_player == null)
-                _player = GameObject.FindObjectOfType<PlayerControl>();
+                _player = FindObjectOfType<PlayerControl>();
             
-            transform.LookAt(_player.transform.position, Vector3.forward);
+            transform.LookAt(_player != null ? _player.transform.position : Vector3.zero,
+                Vector3.forward);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Core
                 return _screenBoundaries;
             }
         }
+
         #endregion
     }
 }
