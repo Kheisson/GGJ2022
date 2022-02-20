@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Core;
 using Projectile;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Enemies
 {
@@ -18,7 +17,7 @@ namespace Enemies
             y = 60,
             z = 0
         };
-
+        
         #endregion
         
         #region Fields
@@ -39,7 +38,7 @@ namespace Enemies
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezePositionZ |
                              RigidbodyConstraints.FreezeRotationX |
-                             RigidbodyConstraints.FreezeRotationY | 
+                             RigidbodyConstraints.FreezeRotationY |
                              RigidbodyConstraints.FreezeRotationZ;
         }
 
@@ -77,7 +76,7 @@ namespace Enemies
                 for (int i = 0; i < availableShots; i++)
                 {
                     _projectiles[i].Fire(transform.position - (Vector3.up * 6));
-                    yield return new WaitForSeconds(0.3f);
+                    yield return new WaitForSeconds(_projectiles[i].FireRate);
                 }
 
                 yield return new WaitForSeconds(3f);

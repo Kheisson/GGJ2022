@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72fef5b8344047f397d821fa5bb268d2, type: 3}
-  m_Name: FortyFiveDegreesProjectile
+  m_Script: {fileID: 11500000, guid: 45bfd5ac148144c9aa9aab9afc46b389, type: 3}
+  m_Name: TypeThreeEnemy
   m_EditorClassIdentifier: 
-  projectileSpeed: 25
-  fireRate: 0.2
-  damage: 30
+  health: 40
+  speed: 0.5
+  weapon: {fileID: 4167122863067444432, guid: 62b7b4b56df7c442cb8e74e38b3c9f5c, type: 3}
