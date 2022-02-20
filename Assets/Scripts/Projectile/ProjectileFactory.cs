@@ -20,13 +20,12 @@ namespace Projectile
 
         #region Methods
 
-        public List<IProjectile> CreateWeaponQueue(GameObject projectile, int spawnCount, string containerName)
+        public List<IProjectile> CreateWeaponQueue(GameObject projectile, int spawnCount, Transform parentObject)
         {
             var weapons = new List<IProjectile>();
-            var parent = new GameObject(containerName);
             for (int i = 0; i < spawnCount; i++)
             {
-                var instance = Object.Instantiate(projectile, parent.transform);
+                var instance = Object.Instantiate(projectile, parentObject);
                 weapons.Add(instance.GetComponent<IProjectile>());
             }
             return weapons;

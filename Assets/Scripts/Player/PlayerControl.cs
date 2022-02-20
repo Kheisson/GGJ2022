@@ -12,7 +12,6 @@ namespace Player
     {
         #region Consts
         private Vector2 _velocity = Vector2.zero;
-        private const string PlayerContainerName = "Player Weapon Container";
         #endregion
 
         #region Fields
@@ -85,7 +84,7 @@ namespace Player
         /// </summary>
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(currentWeapon, _spawnCount, PlayerContainerName);
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(currentWeapon, _spawnCount, transform);
         }
 
         /// <summary>

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Core;
 using Projectile;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemies
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Enemy : MonoBehaviour, IDamagable
     {
         #region Consts
@@ -22,16 +24,24 @@ namespace Enemies
         #region Fields
 
         [SerializeField] private EnemySetupSo enemySetupSo;
-        [SerializeField] private string enemyContainerName;
         [SerializeField] private byte availableShots;
         private int _health;
         private bool _disableControl;
         private List<IProjectile> _projectiles;
-        
 
         #endregion
 
         #region Methods
+
+        private void Awake()
+        {
+            var rb = GetComponent<Rigidbody>();
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezePositionZ |
+                             RigidbodyConstraints.FreezeRotationX |
+                             RigidbodyConstraints.FreezeRotationY | 
+                             RigidbodyConstraints.FreezeRotationZ;
+        }
 
         private void OnEnable()
         {
@@ -41,7 +51,7 @@ namespace Enemies
                 CreateProjectileQueue();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if(!_disableControl)
                 transform.position += Vector3.down * enemySetupSo.EnemySpeed;
@@ -81,8 +91,8 @@ namespace Enemies
 
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, enemyContainerName);
-        } 
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, transform);
+        }
 
         /// <summary>
         /// Disables the gameObject if health is eq/below zero

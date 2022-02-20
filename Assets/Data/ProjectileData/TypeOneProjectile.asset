@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72fef5b8344047f397d821fa5bb268d2, type: 3}
-  m_Name: FortyFiveDegreesProjectile
+  m_Name: TypeOneProjectile
   m_EditorClassIdentifier: 
-  projectileSpeed: 30
-  fireRate: 0
-  damage: 30
+  projectileSpeed: 20
+  fireRate: 0.5
+  damage: 20

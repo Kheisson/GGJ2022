@@ -110,5 +110,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySetupSo: {fileID: 11400000, guid: d05d4498ab715430fb34192f230c5912, type: 2}
-  enemyContainerName: 
   availableShots: 0
