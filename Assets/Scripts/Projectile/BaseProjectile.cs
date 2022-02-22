@@ -48,6 +48,7 @@ namespace Projectile
             if (other.TryGetComponent(typeof(IDamagable), out var subject))
             {
                 subject.GetComponent<IDamagable>().Damage(projectileDetails.Damage);
+                gameObject.SetActive(false);
             }
         }
 

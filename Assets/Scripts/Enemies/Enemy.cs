@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
@@ -24,9 +25,10 @@ namespace Enemies
 
         [SerializeField] private EnemySetupSo enemySetupSo;
         [SerializeField] private byte availableShots;
+        private List<IProjectile> _projectiles;
+        private Renderer _objectRenderer;
         private int _health;
         private bool _disableControl;
-        private List<IProjectile> _projectiles;
 
         #endregion
 
@@ -34,6 +36,7 @@ namespace Enemies
 
         private void Awake()
         {
+            _objectRenderer = GetComponent<MeshRenderer>();
             var rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezePositionZ |
@@ -48,6 +51,7 @@ namespace Enemies
             _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();
+            _objectRenderer.enabled = true;
         }
 
         private void FixedUpdate()
@@ -58,7 +62,7 @@ namespace Enemies
 
         private void Defeat()
         {
-            gameObject.SetActive(false);
+            _objectRenderer.enabled = false;
         }
         
         private void OnBecameInvisible() => gameObject.SetActive(false);
@@ -91,6 +95,17 @@ namespace Enemies
         private void CreateProjectileQueue()
         {
             _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, transform);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.name.Contains("Player"))
+                return;
+            
+            if (other.TryGetComponent(typeof(IDamagable), out var subject))
+                subject.GetComponent<IDamagable>().Damage(25);
+            
+            gameObject.SetActive(false);
         }
 
         /// <summary>

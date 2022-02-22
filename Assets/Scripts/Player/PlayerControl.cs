@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,16 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody),typeof(Collider))] 
-    public class PlayerControl : MonoBehaviour
+    public class PlayerControl : MonoBehaviour, IDamagable
     {
         #region Consts
         private Vector2 _velocity = Vector2.zero;
+        private readonly float _screenBoundaryDivider = 1.3f;
         #endregion
 
         #region Fields
-        
-        [SerializeField] private float mobileSpeed = 0.5f;
-        [SerializeField] private GameObject currentWeapon;
+
+        [SerializeField] private PlayerSettingsSo playerSettingsSo;
         [SerializeField] private Transform projectileSpawnPosition;
         private List<IProjectile> _projectiles;
         private Rigidbody _playerRb;
@@ -26,14 +27,14 @@ namespace Player
         private float _sizeOffset;
         private float _delayFire;
         private float _fireRate;
-        private float _screenBoundryDivider = 1.3f;
-        private int _spawnCount = 20;
+        private int _playerHealth;
         private bool _disableControl = true;
+        
+        public event Action PlayerDefeatedEvent;
 
         #endregion
 
         #region Properties
-
         public bool ControlsDisabled => _disableControl;
 
         #endregion
@@ -47,11 +48,13 @@ namespace Player
             _playerRb.useGravity = false;
             _screenBoundaries = GameSettings.ScreenBoundaries;
             _sizeOffset = GetComponent<Collider>().bounds.extents.x;
+            _playerHealth = playerSettingsSo.MaxHealth;
+            PlayerDefeatedEvent += PlayerDefeatedEvent;
         }
 
         private void Start()
         {
-            StartCoroutine(MoveToStartingPosition(new Vector3(0, _screenBoundaries.y / _screenBoundryDivider, 0)));
+            StartCoroutine(MoveToStartingPosition(new Vector3(0, _screenBoundaries.y / _screenBoundaryDivider, 0)));
         }
 
         private void FixedUpdate()
@@ -84,7 +87,7 @@ namespace Player
         /// </summary>
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(currentWeapon, _spawnCount, transform);
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(playerSettingsSo.CurrentWeapon, playerSettingsSo.SpawnCount, projectileSpawnPosition);
         }
 
         /// <summary>
@@ -98,7 +101,7 @@ namespace Player
             var touch = Input.GetTouch(0);
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
             point = new Vector2(-point.x, -point.y);
-            transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, mobileSpeed);
+            transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, playerSettingsSo.MobileSpeed);
             if(touch.phase != TouchPhase.Ended)
                 HandleAttack();
         }
@@ -130,11 +133,27 @@ namespace Player
                 yield return null;
             }
 
-            transform.position = new Vector3(0, _screenBoundaries.y / _screenBoundryDivider, 0);
+            transform.position = new Vector3(0, _screenBoundaries.y / _screenBoundaryDivider, 0);
             _disableControl = false;
             SpawnManager.Instance.StartSpawning();
         }
 
+        private void OnPlayerDefeatedEvent()
+        {
+            Debug.Log("Player died!");
+        }
+        
+        public void Damage(int damage)
+        {
+            if (_playerHealth - damage <= 0)
+            {
+                PlayerDefeatedEvent?.Invoke();
+            }
+            else
+            {
+                _playerHealth -= damage;
+            }
+        }
         #endregion
     }
 }
