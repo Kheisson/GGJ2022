@@ -31,6 +31,7 @@ namespace Player
         private bool _disableControl = true;
         
         public event Action PlayerDefeatedEvent;
+        public event Action<int> PlayerDamagedEvent;
 
         #endregion
 
@@ -151,6 +152,7 @@ namespace Player
             }
             else
             {
+                PlayerDamagedEvent?.Invoke(damage);
                 _playerHealth -= damage;
             }
         }

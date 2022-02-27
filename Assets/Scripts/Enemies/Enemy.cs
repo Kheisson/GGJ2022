@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using Pickups;
 using Projectile;
 using UnityEngine;
 
@@ -25,8 +25,9 @@ namespace Enemies
 
         [SerializeField] private EnemySetupSo enemySetupSo;
         [SerializeField] private byte availableShots;
+
+        private List<Pickup> _pickups = new List<Pickup>();
         private List<IProjectile> _projectiles;
-        private Renderer _objectRenderer;
         private int _health;
         private bool _disableControl;
 
@@ -36,7 +37,6 @@ namespace Enemies
 
         private void Awake()
         {
-            _objectRenderer = GetComponent<MeshRenderer>();
             var rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezePositionZ |
@@ -51,7 +51,6 @@ namespace Enemies
             _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();
-            _objectRenderer.enabled = true;
         }
 
         private void FixedUpdate()
@@ -62,10 +61,23 @@ namespace Enemies
 
         private void Defeat()
         {
-            _objectRenderer.enabled = false;
+            if (_pickups.Count == 0)
+            {
+                _pickups = SpawnManager.Instance.GetPickables(enemySetupSo.TypeOfPickup, enemySetupSo.PickupSpawnAmount);
+            }
+
+            foreach (var pickup in _pickups)
+            {
+                pickup.SpawnOnDestroy(transform);
+            }
+            
+            gameObject.SetActive(false);
         }
-        
-        private void OnBecameInvisible() => gameObject.SetActive(false);
+
+        private void OnBecameInvisible()
+        {
+            gameObject.SetActive(false);
+        }
 
         private void OnBecameVisible()
         {
@@ -88,7 +100,7 @@ namespace Enemies
         }
 
         private void Attack()
-        {
+        { 
             StartCoroutine(EnemyAttackCoroutine());
         }
 

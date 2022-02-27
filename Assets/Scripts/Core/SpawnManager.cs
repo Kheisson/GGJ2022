@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
+using Pickups;
 using UnityEngine;
 
 namespace Core
@@ -9,6 +10,7 @@ namespace Core
     {
         [SerializeField] private LevelProgressionSo levelProgressionSo;
         private List<Enemy> _enemies = new List<Enemy>();
+        private List<Pickup> _pickups = new List<Pickup>();
         private static SpawnManager _instance;
 
         public static SpawnManager Instance => _instance;
@@ -57,5 +59,23 @@ namespace Core
         private void StopSpawning() => StopAllCoroutines();
 
         public void StartSpawning() => StartCoroutine(StartSpawningCoroutine());
+
+        public List<Pickup> GetPickables(PickupType pickupType, int amountToSpawn)
+        {
+            var b = _pickups.FindAll(pickup =>
+                pickup.name.Contains(pickupType.ToString()) && !pickup.gameObject.activeInHierarchy);
+
+            if (b.Count == amountToSpawn)
+                return b;
+                
+            var pickupGO = Resources.Load<Pickup>($"Pickups/{pickupType}");
+            for (int i = 0; i < amountToSpawn - b.Count; i++)
+            {
+                _pickups.Add(Instantiate(pickupGO, transform));
+                b.Add(Instantiate(pickupGO, transform));
+            }
+
+            return b;
+        }
     }
 }

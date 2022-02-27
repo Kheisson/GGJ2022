@@ -7,7 +7,7 @@ namespace Core
         #region Fields
         
         private static Vector3 _screenBoundaries;
-        
+
         #endregion
 
         #region Methods

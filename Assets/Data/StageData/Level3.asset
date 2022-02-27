@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b27252ecb4d448aa376783655e9de3a, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: 
+  delaySpawnTimer: 3.53
+  enemySpawnList:
+  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 321161921404952044, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
+  spawnEachAmount: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000005000000

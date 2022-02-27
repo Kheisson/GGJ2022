@@ -1,3 +1,4 @@
+using Pickups;
 using UnityEngine;
 
 namespace Enemies
@@ -10,6 +11,8 @@ namespace Enemies
         [SerializeField] private int health;
         [SerializeField] private float speed;
         [SerializeField] private GameObject weapon;
+        [SerializeField] private int pickupSpawnAmount = 3;
+        [SerializeField] private PickupType pickupType = PickupType.Triangle;
 
         #endregion
 
@@ -18,6 +21,9 @@ namespace Enemies
         public int EnemyHealth => health;
         public float EnemySpeed => speed;
         public GameObject EnemyProjectile => weapon;
+
+        public int PickupSpawnAmount => pickupSpawnAmount;
+        public PickupType TypeOfPickup => pickupType;
 
         #endregion
     }
