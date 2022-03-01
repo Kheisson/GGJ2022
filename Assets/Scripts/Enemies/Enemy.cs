@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using Helpers;
 using Pickups;
 using Projectile;
 using UnityEngine;
@@ -61,16 +62,11 @@ namespace Enemies
 
         private void Defeat()
         {
-            if (_pickups.Count == 0)
+            if (this.ReturnSuccessfulProbability())
             {
-                _pickups = SpawnManager.Instance.GetPickables(enemySetupSo.TypeOfPickup, enemySetupSo.PickupSpawnAmount);
+                SpawnManager.Instance.GetPickables(transform, true);
             }
 
-            foreach (var pickup in _pickups)
-            {
-                pickup.SpawnOnDestroy(transform);
-            }
-            
             gameObject.SetActive(false);
         }
 
