@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Pickups;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -10,8 +12,8 @@ namespace Core
     {
         [SerializeField] private LevelProgressionSo levelProgressionSo;
         private List<Enemy> _enemies = new List<Enemy>();
-        private List<Pickup> _pickups = new List<Pickup>();
         private static SpawnManager _instance;
+        private string[] _pickupTypes;
 
         public static SpawnManager Instance => _instance;
 
@@ -22,6 +24,7 @@ namespace Core
             
             DontDestroyOnLoad(gameObject);
             var init = SpawnGrid.Grid;
+            _pickupTypes = Enum.GetNames(typeof(PickupType));
         }
 
         private IEnumerator StartSpawningCoroutine()
@@ -60,22 +63,19 @@ namespace Core
 
         public void StartSpawning() => StartCoroutine(StartSpawningCoroutine());
 
-        public List<Pickup> GetPickables(PickupType pickupType, int amountToSpawn)
+        public void GetPickables(Transform spawnPosition, bool pickRandom, string pickup = "Triangle", int amountToSpawn = 1)
         {
-            var b = _pickups.FindAll(pickup =>
-                pickup.name.Contains(pickupType.ToString()) && !pickup.gameObject.activeInHierarchy);
-
-            if (b.Count == amountToSpawn)
-                return b;
-                
-            var pickupGO = Resources.Load<Pickup>($"Pickups/{pickupType}");
-            for (int i = 0; i < amountToSpawn - b.Count; i++)
+            if (pickRandom)
             {
-                _pickups.Add(Instantiate(pickupGO, transform));
-                b.Add(Instantiate(pickupGO, transform));
+                pickup = _pickupTypes[Random.Range(0, _pickupTypes.Length)];
             }
 
-            return b;
+            for (var i = 0; i < amountToSpawn; i++)
+            {
+                var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
+                var go = Instantiate(loadedPickup, transform);
+                go.SpawnOnDestroy(spawnPosition);
+            }
         }
     }
 }
