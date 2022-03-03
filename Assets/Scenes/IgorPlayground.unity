@@ -413,6 +413,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 624470362, guid: 0658561d1e2801e4f8077fcaa0cc8fb9, type: 3}
+      propertyPath: enteringSceneEase
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 624470362, guid: 0658561d1e2801e4f8077fcaa0cc8fb9, type: 3}
+      propertyPath: planeRotationEase
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 1132926434386089202, guid: 0658561d1e2801e4f8077fcaa0cc8fb9, type: 3}
       propertyPath: m_RootOrder
       value: 3

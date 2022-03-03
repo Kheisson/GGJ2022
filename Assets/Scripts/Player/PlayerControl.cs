@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using DG.Tweening;
 using Projectile;
 using UnityEngine;
 
@@ -20,6 +20,7 @@ namespace Player
 
         [SerializeField] private PlayerSettingsSo playerSettingsSo;
         [SerializeField] private Transform projectileSpawnPosition;
+        [SerializeField] private Ease enteringSceneEase;
         private List<IProjectile> _projectiles;
         private Rigidbody _playerRb;
         private Vector3 _screenBoundaries;
@@ -30,6 +31,10 @@ namespace Player
         private int _playerHealth;
         private bool _disableControl = true;
         
+        //Dotween configuration
+        [SerializeField] private float dotweenRotationDuration = 0.5f;
+        [SerializeField] private Ease planeRotationEase;
+         private Vector3 _rotateVector = new Vector3(0f, 30f, 0f);
         public event Action PlayerDefeatedEvent;
         public event Action<int> PlayerDamagedEvent;
 
@@ -55,9 +60,13 @@ namespace Player
 
         private void Start()
         {
-            StartCoroutine(MoveToStartingPosition(new Vector3(0, _screenBoundaries.y / _screenBoundaryDivider, 0)));
+            transform.DOMoveY(_screenBoundaries.y / _screenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
+            {
+                _disableControl = false;
+                SpawnManager.Instance.StartSpawning();
+            });
         }
-
+        
         private void FixedUpdate()
         {
             if (_disableControl) return;
@@ -97,14 +106,42 @@ namespace Player
         /// </summary>
         private void HandleMovement()
         {
-            //Mobile Controls
+            //Mobile Controls for general movement
             if (Input.touchCount <= 0) return;
             var touch = Input.GetTouch(0);
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
             point = new Vector2(-point.x, -point.y);
             transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, playerSettingsSo.MobileSpeed);
+            
+            //If there is a finger on screen, shoot
             if(touch.phase != TouchPhase.Ended)
                 HandleAttack();
+            
+            //If there was a swipe, calculate swipe and apply rotation
+            if (touch.phase == TouchPhase.Moved)
+            {
+                HandleRotation(point.x);
+            }
+        }
+
+        private void HandleRotation(float pointX)
+        {
+            if (DOTween.IsTweening(transform))
+                return;
+            if (pointX > 1.0f)
+            {
+                transform.DORotate(_rotateVector * -1f, dotweenRotationDuration).SetEase(planeRotationEase).OnComplete(() =>
+                {
+                    transform.DORotate(Vector3.zero, dotweenRotationDuration);
+                });
+            }
+            else if (pointX < -1.0f)
+            {
+                transform.DORotate(_rotateVector, dotweenRotationDuration).SetEase(planeRotationEase).OnComplete(() =>
+                {
+                    transform.DORotate(Vector3.zero, dotweenRotationDuration);
+                });
+            }
         }
 
         /// <summary>
@@ -122,26 +159,10 @@ namespace Player
             transform.position = clampedPosition;
         }
         
-        /// <summary>
-        /// Lerps player position to the starting position and enabled controls
-        /// </summary>
-        /// <param name="startingPosition"> Sets the position the craft should start at</param>
-        private IEnumerator MoveToStartingPosition(Vector3 startingPosition)
-        {
-            while (Vector3.Distance(startingPosition, transform.position) > 0.1f) 
-            {
-                transform.position = Vector3.Lerp(transform.position, startingPosition, Time.deltaTime);
-                yield return null;
-            }
-
-            transform.position = new Vector3(0, _screenBoundaries.y / _screenBoundaryDivider, 0);
-            _disableControl = false;
-            SpawnManager.Instance.StartSpawning();
-        }
-
         private void OnPlayerDefeatedEvent()
         {
             Debug.Log("Player died!");
+            //transform.DOKill();
         }
         
         public void Damage(int damage)

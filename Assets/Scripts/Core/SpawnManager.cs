@@ -10,12 +10,18 @@ namespace Core
 {
     public class SpawnManager : MonoBehaviour
     {
+        #region Fields
+
         [SerializeField] private LevelProgressionSo levelProgressionSo;
         private List<Enemy> _enemies = new List<Enemy>();
         private static SpawnManager _instance;
         private string[] _pickupTypes;
 
         public static SpawnManager Instance => _instance;
+
+        #endregion
+
+        #region Methods
 
         private void Awake()
         {
@@ -29,6 +35,8 @@ namespace Core
 
         private IEnumerator StartSpawningCoroutine()
         {
+            yield return new WaitForSeconds(levelProgressionSo.DelaySpawnTimer);
+            
             for (int i = 0; i < levelProgressionSo.EnemySpawnList.Count; i++)
             {
                 for (int j = 0; j < levelProgressionSo.SpawnEachAmount[i]; j++)
@@ -77,5 +85,7 @@ namespace Core
                 go.SpawnOnDestroy(spawnPosition);
             }
         }
+
+        #endregion
     }
 }
