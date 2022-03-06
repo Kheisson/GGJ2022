@@ -18,6 +18,10 @@ namespace Core
         private string[] _pickupTypes;
 
         public static SpawnManager Instance => _instance;
+        public string LevelName => levelProgressionSo.name;
+        
+        //Events
+        public Action FinishedSpawningEvent;
 
         #endregion
 
@@ -65,6 +69,8 @@ namespace Core
                 
                 yield return new WaitForSeconds(levelProgressionSo.DelaySpawnTimer);
             }
+
+            FinishedSpawningEvent?.Invoke();
         }
 
         private void StopSpawning() => StopAllCoroutines();
@@ -83,6 +89,7 @@ namespace Core
                 var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
                 var go = Instantiate(loadedPickup, transform);
                 go.SpawnOnDestroy(spawnPosition);
+                go.PickupPickedEvent += GameManager.Instance.CreditUIEvent;
             }
         }
 

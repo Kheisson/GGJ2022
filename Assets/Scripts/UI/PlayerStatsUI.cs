@@ -12,6 +12,7 @@ namespace UI
         private void Awake()
         {
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
+            healthBar.fillAmount = 1f;
         }
 
         private void OnEnable()

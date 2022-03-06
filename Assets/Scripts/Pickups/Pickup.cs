@@ -57,6 +57,11 @@ namespace Pickups
             Destroy(gameObject);
         }
 
+        private void OnDestroy()
+        {
+            PickupPickedEvent -= GameManager.Instance.CreditUIEvent;
+        }
+
         #endregion
     }
 }

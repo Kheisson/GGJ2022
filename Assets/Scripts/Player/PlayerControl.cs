@@ -32,10 +32,12 @@ namespace Player
         private bool _disableControl = true;
         
         //Dotween configuration
+        [Header("Dotween Configuration")]
         [SerializeField] private float dotweenRotationDuration = 0.5f;
         [SerializeField] private Ease planeRotationEase;
-         private Vector3 _rotateVector = new Vector3(0f, 30f, 0f);
+        [SerializeField] private Vector3 _rotateVector = new Vector3(0f, 30f, 0f);
         public event Action PlayerDefeatedEvent;
+        public event Action PlayerMovedToStartingPosition;
         public event Action<int> PlayerDamagedEvent;
 
         #endregion
@@ -55,7 +57,6 @@ namespace Player
             _screenBoundaries = GameSettings.ScreenBoundaries;
             _sizeOffset = GetComponent<Collider>().bounds.extents.x;
             _playerHealth = playerSettingsSo.MaxHealth;
-            PlayerDefeatedEvent += PlayerDefeatedEvent;
         }
 
         private void Start()
@@ -63,7 +64,7 @@ namespace Player
             transform.DOMoveY(_screenBoundaries.y / _screenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
             {
                 _disableControl = false;
-                SpawnManager.Instance.StartSpawning();
+                PlayerMovedToStartingPosition?.Invoke();
             });
         }
         
@@ -124,6 +125,10 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Rotates the body of the plain based on the swipe of the player
+        /// </summary>
+        /// <param name="pointX"></param>
         private void HandleRotation(float pointX)
         {
             if (DOTween.IsTweening(transform))
@@ -159,7 +164,7 @@ namespace Player
             transform.position = clampedPosition;
         }
         
-        private void OnPlayerDefeatedEvent()
+        private void PlayerDefeated()
         {
             Debug.Log("Player died!");
             //transform.DOKill();
@@ -169,7 +174,7 @@ namespace Player
         {
             if (_playerHealth - damage <= 0)
             {
-                PlayerDefeatedEvent?.Invoke();
+                PlayerDefeated();
             }
             else
             {
