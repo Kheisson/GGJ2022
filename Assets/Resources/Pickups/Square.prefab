@@ -111,3 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountToCredit: 25
   decayTimer: 5
+  shakeDuration: 0.5
+  shakeStrength: 0.5
+  shakeRepeats: 3
+  shakeEase: 29

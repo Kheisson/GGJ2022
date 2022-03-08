@@ -15,4 +15,4 @@ MonoBehaviour:
   currentWeapon: {fileID: 3776202562678289712, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
   mobileSpeed: 0.3
   spawnCount: 20
-  maxHealth: 900
+  maxHealth: 125

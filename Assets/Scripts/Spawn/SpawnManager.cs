@@ -10,12 +10,22 @@ namespace Core
 {
     public class SpawnManager : MonoBehaviour
     {
+        #region Fields
+
         [SerializeField] private LevelProgressionSo levelProgressionSo;
         private List<Enemy> _enemies = new List<Enemy>();
         private static SpawnManager _instance;
         private string[] _pickupTypes;
 
         public static SpawnManager Instance => _instance;
+        public string LevelName => levelProgressionSo.name;
+        
+        //Events
+        public Action FinishedSpawningEvent;
+
+        #endregion
+
+        #region Methods
 
         private void Awake()
         {
@@ -29,6 +39,8 @@ namespace Core
 
         private IEnumerator StartSpawningCoroutine()
         {
+            yield return new WaitForSeconds(levelProgressionSo.DelaySpawnTimer);
+            
             for (int i = 0; i < levelProgressionSo.EnemySpawnList.Count; i++)
             {
                 for (int j = 0; j < levelProgressionSo.SpawnEachAmount[i]; j++)
@@ -57,6 +69,8 @@ namespace Core
                 
                 yield return new WaitForSeconds(levelProgressionSo.DelaySpawnTimer);
             }
+
+            FinishedSpawningEvent?.Invoke();
         }
 
         private void StopSpawning() => StopAllCoroutines();
@@ -75,7 +89,10 @@ namespace Core
                 var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
                 var go = Instantiate(loadedPickup, transform);
                 go.SpawnOnDestroy(spawnPosition);
+                go.PickupPickedEvent += GameManager.Instance.CreditUIEvent;
             }
         }
+
+        #endregion
     }
 }

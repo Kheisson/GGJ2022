@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IgorPlayground.unity
     guid: 471a7923f6f0f49d4bf360cbb593363e
+  - enabled: 1
+    path: Assets/Scenes/main.unity
+    guid: aebe5a812e2cf0544bdb5b91e0c61883
   m_configObjects: {}
