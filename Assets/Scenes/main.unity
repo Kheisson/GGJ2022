@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 1144871539}
   - component: {fileID: 1144871538}
   m_Layer: 5
-  m_Name: CoinWallet
+  m_Name: CoinsWallet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
