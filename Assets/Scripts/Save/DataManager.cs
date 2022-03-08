@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace Save
         private static int BestScore;
         private static string BestScorePlayerName;
 
-        private const string DataPath = "/Raptor/data.json";
+        private const string DataPath = "/data.json";
 
         #endregion
 
@@ -29,26 +28,6 @@ namespace Save
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-
-        public string GetPlayerName()
-        {
-            return PlayerName;
-        }
-
-        public void SetPlayerName(string playerName)
-        {
-            PlayerName = playerName;
-        }
-
-        public string GetBestScorePlayerName()
-        {
-            return BestScorePlayerName;
-        }
-
-        public void SetBestScorePlayerName(string playerName)
-        {
-            BestScorePlayerName = playerName;
         }
 
         public int GetBestScore()
@@ -71,24 +50,33 @@ namespace Save
         [Serializable]
         private class SaveData
         {
-            public string playerName;
-            public int bestScore;
-            public List<GameLevel> gameLevelList = new List<GameLevel>();
+            public GameLevel gameLevel;
+            public int totalAmountCurrency;
         }
 
+        [Serializable]
         private class GameLevel
         {
-            public string levelNum;
-            public string bestScore;
+            public string levelName;
+            //public int bestScore;
+            public int curreny;
+
+            public GameLevel(string levelName, int curreny)
+            {
+                this.levelName = levelName;
+                this.curreny = curreny;
+            }
         }
 
-        public void SaveScore(int level)
+        public void SaveScore(string level, int currency)
         {
             SaveData save = new SaveData();
-            save.playerName = PlayerName;
-            save.bestScore = BestScore;
+            /*save.playerName = PlayerName;
+            save.bestScore = BestScore;*/
+            save.gameLevel = new GameLevel(level, currency);
 
             string json = JsonUtility.ToJson(save);
+            Debug.Log(json);
             File.WriteAllText(Application.persistentDataPath + DataPath, json);
         }
 
@@ -96,8 +84,8 @@ namespace Save
         {
             string path = File.ReadAllText(Application.persistentDataPath + DataPath);
             SaveData load = JsonUtility.FromJson<SaveData>(path);
-            BestScorePlayerName = load.playerName;
-            BestScore = load.bestScore;
+            /*BestScorePlayerName = load.playerName;
+            BestScore = load.bestScore;*/
         }
 
         #endregion

@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2123463436}
+  coinWalletText: {fileID: 1243469444}
 --- !u!1 &620943142
 GameObject:
   m_ObjectHideFlags: 0

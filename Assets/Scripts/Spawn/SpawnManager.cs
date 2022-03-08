@@ -77,7 +77,7 @@ namespace Core
 
         public void StartSpawning() => StartCoroutine(StartSpawningCoroutine());
 
-        public void GetPickables(Transform spawnPosition, bool pickRandom, string pickup = "Triangle", int amountToSpawn = 1)
+        public void GetPickables(Transform spawnPosition, bool pickRandom, int amountToCredit, string pickup = "Triangle", int amountToSpawn = 1)
         {
             if (pickRandom)
             {
@@ -88,7 +88,7 @@ namespace Core
             {
                 var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
                 var go = Instantiate(loadedPickup, transform);
-                go.SpawnOnDestroy(spawnPosition);
+                go.SpawnOnDestroy(spawnPosition, amountToCredit);
                 go.PickupPickedEvent += GameManager.Instance.CreditUIEvent;
             }
         }

@@ -9,8 +9,7 @@ namespace Pickups
     public class Pickup : MonoBehaviour
     {
         #region Fields
-
-        [SerializeField] private int amountToCredit;
+        
         [SerializeField] private float decayTimer = 5f;
 
         [Header("DOTween Configuration")] 
@@ -20,6 +19,7 @@ namespace Pickups
         [SerializeField] private Ease shakeEase;
 
         private Vector3 _floatPosition;
+        private int amountToCredit;
 
         public Action<int> PickupPickedEvent;
 
@@ -27,8 +27,9 @@ namespace Pickups
 
         #region Methods
 
-        public void SpawnOnDestroy(Transform spawnPos)
+        public void SpawnOnDestroy(Transform spawnPos, int credit)
         {
+            amountToCredit = credit;
             transform.position = spawnPos.position;
         }
 

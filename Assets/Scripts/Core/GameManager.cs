@@ -1,11 +1,13 @@
 using System;
 using Core;
 using Player;
+using Save;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private DataManager dataManager;
 
     #region Fields
     private static GameManager _instance;
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         
         levelManager = Instantiate(levelManager, transform);
+        dataManager = Instantiate(dataManager, transform);
         _playerInstance = FindObjectOfType<PlayerControl>();
         SubscribeToLevelEvents();
     }
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void OnCreditUIEvent(int credit)
     {
-        
+        DataManager.Instance.SaveScore(SpawnManager.Instance.LevelName, credit);
     }
 
     private void OnFinishedSpawningEvent()

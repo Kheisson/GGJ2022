@@ -26,8 +26,8 @@ namespace Enemies
 
         [SerializeField] private EnemySetupSo enemySetupSo;
         [SerializeField] private byte availableShots;
+        [SerializeField] private int amountToCredit = 25;
 
-        private List<Pickup> _pickups = new List<Pickup>();
         private List<IProjectile> _projectiles;
         private int _health;
         private bool _disableControl;
@@ -64,7 +64,7 @@ namespace Enemies
         {
             if (this.ReturnSuccessfulProbability())
             {
-                SpawnManager.Instance.GetPickables(transform, true);
+                SpawnManager.Instance.GetPickables(transform, false, amountToCredit);
             }
 
             gameObject.SetActive(false);
