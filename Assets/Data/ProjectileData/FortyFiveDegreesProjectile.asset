@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FortyFiveDegreesProjectile
   m_EditorClassIdentifier: 
   projectileSpeed: 25
-  fireRate: 0.2
+  fireRate: 0.5
   damage: 30

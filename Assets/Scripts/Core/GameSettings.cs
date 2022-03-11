@@ -11,6 +11,9 @@ namespace Core
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Sets the boundaries based on the screen size when the app is launched
+        /// </summary>
         public static Vector3 ScreenBoundaries
         {
             get

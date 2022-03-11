@@ -7,17 +7,31 @@ namespace UI
 {
     public class PlayerStatsUI : MonoBehaviour
     {
+        #region Fields
+
         [SerializeField] private Image healthBar;
         [SerializeField] private TextMeshProUGUI coinWalletText;
         
         private PlayerControl _player;
-        private int coinBalance;
+        private int _coinBalance;
+        
 
+        #endregion
+
+        #region Propeties
+
+        public int CoinBalance => _coinBalance;
+
+        #endregion
+
+        #region Methods
+
+        //Initializes UI to start of level defaults
         private void Awake()
         {
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
             healthBar.fillAmount = 1f;
-            coinBalance = 0;
+            _coinBalance = 0;
             coinWalletText.text = "0";
         }
 
@@ -33,16 +47,19 @@ namespace UI
             GameManager.Instance.CreditUIEvent -= OnCreditUIEvent;
 
         }
-
+        //Updates Hearts to reflect the damage the player has taken
         private void OnPlayerDamagedEvent(int value)
         {
             healthBar.fillAmount -= value / 100f;
         }
-
+        
+        //Updates Coin wallet to new balance
         private void OnCreditUIEvent(int amount)
         {
-            coinBalance += amount;
-            coinWalletText.text = coinBalance.ToString();
+            _coinBalance += amount;
+            coinWalletText.text = _coinBalance.ToString();
         }
+
+        #endregion
     }
 }

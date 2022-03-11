@@ -2,14 +2,16 @@ using System;
 using Core;
 using Player;
 using Save;
+using Spawn;
+using UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private DataManager dataManager;
 
-    #region Fields
     private static GameManager _instance;
     private PlayerControl _playerInstance;
     #endregion
@@ -58,11 +60,12 @@ public class GameManager : MonoBehaviour
 
     private void OnCreditUIEvent(int credit)
     {
-        DataManager.Instance.SaveScore(SpawnManager.Instance.LevelName, credit);
     }
 
     private void OnFinishedSpawningEvent()
     {
+        var playerBalanceOnLevelFinished = FindObjectOfType<PlayerStatsUI>().CoinBalance;
+        DataManager.SaveOnFinishedLevel(SpawnManager.Instance.LevelName, score: 1,playerBalanceOnLevelFinished);
         Debug.LogWarning($"Spawned all of the enemies in this level <color=red>{SpawnManager.Instance.LevelName}</color>");
     }
 

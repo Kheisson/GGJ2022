@@ -799,5 +799,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7592972843722606879, guid: 8e8a44db0c6b145aa97a0552cacb352f, type: 3}
+      propertyPath: levelProgressionSo
+      value: 
+      objectReference: {fileID: 11400000, guid: ed161afb65f7449c78ce5416eb778ae1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e8a44db0c6b145aa97a0552cacb352f, type: 3}

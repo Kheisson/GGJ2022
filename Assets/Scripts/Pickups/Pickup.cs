@@ -19,7 +19,7 @@ namespace Pickups
         [SerializeField] private Ease shakeEase;
 
         private Vector3 _floatPosition;
-        private int amountToCredit;
+        private int _amountToCredit;
 
         public Action<int> PickupPickedEvent;
 
@@ -27,9 +27,14 @@ namespace Pickups
 
         #region Methods
 
+        /// <summary>
+        /// Assigns the amount one pickup will credit and sets the spawn position of the pickup
+        /// </summary>
+        /// <param name="spawnPos">Starting position of the object</param>
+        /// <param name="credit">Credit due to player if he interacts with object</param>
         public void SpawnOnDestroy(Transform spawnPos, int credit)
         {
-            amountToCredit = credit;
+            _amountToCredit = credit;
             transform.position = spawnPos.position;
         }
 
@@ -37,7 +42,8 @@ namespace Pickups
         {
             transform.position += _floatPosition * Time.fixedDeltaTime;
         }
-
+        
+        // Dotween integration for floating and shacking 
         private void OnEnable()
         {
             _floatPosition = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, -2f), 0f);
@@ -51,9 +57,10 @@ namespace Pickups
             Destroy(this);
         }
 
+        // Will credit user and destroy object when it collides with player
         private void OnTriggerEnter(Collider other)
         {
-            PickupPickedEvent?.Invoke(amountToCredit);
+            PickupPickedEvent?.Invoke(_amountToCredit);
             transform.DOKill();
             Destroy(gameObject);
         }

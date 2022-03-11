@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Helpers;
-using Pickups;
 using Projectile;
+using Spawn;
 using UnityEngine;
 
 namespace Enemies
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class Enemy : MonoBehaviour, IDamagable
     {
         #region Consts
@@ -29,13 +29,13 @@ namespace Enemies
         [SerializeField] private int amountToCredit = 25;
 
         private List<IProjectile> _projectiles;
+        private Collider _collider;
         private int _health;
         private bool _disableControl;
 
         #endregion
 
         #region Methods
-
         private void Awake()
         {
             var rb = GetComponent<Rigidbody>();
@@ -44,6 +44,9 @@ namespace Enemies
                              RigidbodyConstraints.FreezeRotationX |
                              RigidbodyConstraints.FreezeRotationY |
                              RigidbodyConstraints.FreezeRotationZ;
+            _collider = GetComponent<Collider>();
+            _collider.enabled = false;
+
         }
 
         private void OnEnable()
@@ -73,12 +76,14 @@ namespace Enemies
         private void OnBecameInvisible()
         {
             gameObject.SetActive(false);
+            _collider.enabled = false;
         }
 
         private void OnBecameVisible()
         {
             _disableControl = false;
             Attack();
+            _collider.enabled = true;
         }
         
         private IEnumerator EnemyAttackCoroutine()
@@ -91,7 +96,7 @@ namespace Enemies
                     yield return new WaitForSeconds(_projectiles[i].FireRate);
                 }
 
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
             }
         }
 
@@ -99,12 +104,13 @@ namespace Enemies
         { 
             StartCoroutine(EnemyAttackCoroutine());
         }
-
+        
         private void CreateProjectileQueue()
         {
             _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, transform);
         }
 
+        //Will deactivate and damage player if collision occurs
         private void OnTriggerEnter(Collider other)
         {
             if (!other.name.Contains("Player"))
