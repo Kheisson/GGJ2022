@@ -10,35 +10,36 @@ namespace Player
         [SerializeField] private float mobileSpeed; 
         [SerializeField] private int spawnCount;
         [SerializeField] private int maxHealth = 900;
+        [SerializeField] private int playerHealth;
 
        
 
-        public GameObject CurrentWeapon
-        {
-            get => currentWeapon;
-            set => currentWeapon = value;
-        }
+        public GameObject CurrentWeapon => currentWeapon;
 
-        public int SpawnCount
-        {
-            get => spawnCount;
-            set => spawnCount = value;
-        }
+        public int SpawnCount => spawnCount;
 
-        public float MobileSpeed
-        {
-            get => mobileSpeed;
-            set => mobileSpeed = value;
-        }
+        public float MobileSpeed => mobileSpeed;
 
         public int MaxHealth => maxHealth;
-        
+
+        public int PlayerHealth => playerHealth;
+
 
         public void IncreaseMaxHealth(int newMaxHealth)
         {
             maxHealth = newMaxHealth;
         }
-        
 
+        public void Replenish(int health)
+        {
+            playerHealth += health;
+            if (playerHealth > maxHealth)
+                playerHealth = maxHealth;
+        }
+
+        public void Replenish()
+        {
+            playerHealth = maxHealth;
+        }
     }
 }

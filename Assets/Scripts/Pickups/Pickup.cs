@@ -1,4 +1,5 @@
 using System;
+using Core;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +12,7 @@ namespace Pickups
         #region Fields
         
         [SerializeField] private float decayTimer = 5f;
+        [SerializeField] private float speed = 5f;
 
         [Header("DOTween Configuration")] 
         [SerializeField] private float shakeDuration;
@@ -40,7 +42,7 @@ namespace Pickups
 
         private void FixedUpdate()
         {
-            transform.position += _floatPosition * Time.fixedDeltaTime;
+            transform.position += _floatPosition * Time.fixedDeltaTime * speed;
         }
         
         // Dotween integration for floating and shacking 

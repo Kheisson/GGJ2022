@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core
+namespace Level
 {
     [CreateAssetMenu(fileName = "New Stage", menuName = "Scriptables/New Stage")]
     public class LevelProgressionSo : ScriptableObject
