@@ -23,7 +23,7 @@ namespace Pickups
         private Vector3 _floatPosition;
         private int _amountToCredit;
 
-        public Action<int> PickupPickedEvent;
+        public Action<int, string> PickupPickedEvent;
 
         #endregion
 
@@ -62,7 +62,7 @@ namespace Pickups
         // Will credit user and destroy object when it collides with player
         private void OnTriggerEnter(Collider other)
         {
-            PickupPickedEvent?.Invoke(_amountToCredit);
+            PickupPickedEvent?.Invoke(_amountToCredit, gameObject.name);
             transform.DOKill();
             Destroy(gameObject);
         }

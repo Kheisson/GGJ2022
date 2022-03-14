@@ -24,7 +24,7 @@ namespace Core
 
         public Action StartLevelEvent;
         public Action EndLevelEvent;
-        public Action<int> CreditUIEvent;
+        public Action<int, string> CreditUIEvent;
 
         #endregion
 
@@ -62,7 +62,7 @@ namespace Core
             Debug.Log("UI scene <color=green>loaded</color>");
         }
 
-        private void OnCreditUIEvent(int credit)
+        private void OnCreditUIEvent(int credit, string pickupName)
         {
         }
 

@@ -10,6 +10,8 @@ namespace Enemies
 
         [SerializeField] private int health;
         [SerializeField] private float speed;
+        [SerializeField] private byte availableShots;
+        [SerializeField] private int amountToCredit;
         [SerializeField] private GameObject weapon;
         [SerializeField] private int pickupSpawnAmount = 3;
         [SerializeField] private PickupType pickupType = PickupType.Triangle;
@@ -20,6 +22,9 @@ namespace Enemies
 
         public int EnemyHealth => health;
         public float EnemySpeed => speed;
+
+        public byte AvaliableShots => availableShots;
+        public int AmountToCredit => amountToCredit;
         public GameObject EnemyProjectile => weapon;
 
         public int PickupSpawnAmount => pickupSpawnAmount;

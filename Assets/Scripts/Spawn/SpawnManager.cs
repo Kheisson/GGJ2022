@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Enemies;
+using Helpers;
 using Level;
 using Pickups;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Spawn
         private List<Enemy> _enemies = new List<Enemy>();
         private static SpawnManager _instance;
         private string[] _pickupTypes;
+        private float _pickupDropChance = 0.9f;
         #endregion
         
         #region Properties
@@ -101,6 +103,12 @@ namespace Spawn
                 pickup = _pickupTypes[Random.Range(0, _pickupTypes.Length)];
             }
 
+            if (this.ReturnSuccessfulProbability(_pickupDropChance))
+            {
+                pickup = "Circle";
+                amountToSpawn = 1;
+            }
+            
             for (var i = 0; i < amountToSpawn; i++)
             {
                 var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");

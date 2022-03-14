@@ -25,11 +25,10 @@ namespace Enemies
         #region Fields
 
         [SerializeField] private EnemySetupSo enemySetupSo;
-        [SerializeField] private byte availableShots;
-        [SerializeField] private int amountToCredit = 25;
 
         private List<IProjectile> _projectiles;
         private Collider _collider;
+        private Transform[] _children;
         private int _health;
         private bool _disableControl;
 
@@ -46,7 +45,7 @@ namespace Enemies
                              RigidbodyConstraints.FreezeRotationZ;
             _collider = GetComponent<Collider>();
             _collider.enabled = false;
-
+            _children = new Transform[enemySetupSo.AvaliableShots];
         }
 
         private void OnEnable()
@@ -55,6 +54,12 @@ namespace Enemies
             _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();
+            
+            if (_children[0] != null) return;
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                _children[i] = transform.GetChild(i);
+            }
         }
 
         private void FixedUpdate()
@@ -67,9 +72,9 @@ namespace Enemies
         {
             if (this.ReturnSuccessfulProbability())
             {
-                SpawnManager.Instance.GetPickables(transform, false, amountToCredit);
+                SpawnManager.Instance.GetPickables(transform, false, enemySetupSo.AmountToCredit);
             }
-
+            transform.DetachChildren();
             gameObject.SetActive(false);
         }
 
@@ -77,10 +82,15 @@ namespace Enemies
         {
             gameObject.SetActive(false);
             _collider.enabled = false;
+            StopAllCoroutines();
         }
 
         private void OnBecameVisible()
         {
+            foreach (var child in _children)
+            {
+                child.SetParent(transform);
+            }
             _disableControl = false;
             Attack();
             _collider.enabled = true;
@@ -90,7 +100,7 @@ namespace Enemies
         {
             while (true)
             {
-                for (int i = 0; i < availableShots; i++)
+                for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
                     _projectiles[i].Fire(transform.position - (Vector3.up * 6));
                     yield return new WaitForSeconds(_projectiles[i].FireRate);
@@ -107,7 +117,7 @@ namespace Enemies
         
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, transform);
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, enemySetupSo.AvaliableShots, transform);
         }
 
         //Will deactivate and damage player if collision occurs
