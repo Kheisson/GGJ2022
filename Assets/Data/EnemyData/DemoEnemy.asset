@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   speed: 0.5
+  availableShots: 3
+  amountToCredit: 25
   weapon: {fileID: 273339286909359908, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
+  pickupSpawnAmount: 3
+  pickupType: 0

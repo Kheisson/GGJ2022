@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Core
@@ -7,10 +8,16 @@ namespace Core
         #region Fields
         
         private static Vector3 _screenBoundaries;
+        private static float? _screenBoundariesTop = null;
+        private const float SCREEN_BUFFERZONE = 10f;
+        private const float SCREEN_BOUNDRY_DIVIDER = 1.3f;
 
         #endregion
 
-        #region Methods
+        #region Properties
+        /// <summary>
+        /// Sets the boundaries based on the screen size when the app is launched
+        /// </summary>
         public static Vector3 ScreenBoundaries
         {
             get
@@ -25,6 +32,22 @@ namespace Core
                 return _screenBoundaries;
             }
         }
+
+        public static float? ScreenBoundariesTop
+        {
+            get
+            {
+                if (_screenBoundariesTop != null)
+                {
+                    return _screenBoundariesTop;
+                }
+
+                _screenBoundariesTop = Math.Abs(_screenBoundaries.y + SCREEN_BUFFERZONE);
+                return _screenBoundariesTop;
+            }
+        }
+
+        public static float ScreenBoundaryDivider => SCREEN_BOUNDRY_DIVIDER;
 
         #endregion
     }

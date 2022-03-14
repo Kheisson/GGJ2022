@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 namespace Save
@@ -10,12 +7,8 @@ namespace Save
         #region Fields
 
         public static DataManager Instance { get; private set; }
-        private static string PlayerName;
-        private static int BestScore;
-        private static string BestScorePlayerName;
-
-        private const string DataPath = "/Raptor/data.json";
-
+        private static SaveData _saveData;
+        private static FileHandler _fileHandler;
         #endregion
 
         #region Methods
@@ -29,77 +22,33 @@ namespace Save
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            _fileHandler = new FileHandler();
+            _saveData = _fileHandler.LoadSaveData();
         }
 
-        public string GetPlayerName()
-        {
-            return PlayerName;
-        }
 
-        public void SetPlayerName(string playerName)
+        /// <summary>
+        /// Saved data on device when a level has finished
+        /// </summary>
+        /// <param name="levelName">Level name as based in the level progression SO</param>
+        /// <param name="score">Score achieved in the level</param>
+        /// <param name="amountToCredit">Credits achieved in level</param>
+        public static void SaveOnFinishedLevel(string levelName, int score, int amountToCredit)
         {
-            PlayerName = playerName;
-        }
-
-        public string GetBestScorePlayerName()
-        {
-            return BestScorePlayerName;
-        }
-
-        public void SetBestScorePlayerName(string playerName)
-        {
-            BestScorePlayerName = playerName;
-        }
-
-        public int GetBestScore()
-        {
-            return BestScore;
-        }
-
-        public void SetBestScore(int newScore)
-        {
-            if(newScore > BestScore)
+            _saveData.wallet += amountToCredit;
+            var match = _saveData.levels.Find(level => level.levelName == levelName);
+            if (match != null)
             {
-                BestScore = newScore;
+                match.bestScore = match.bestScore < score ? score : match.bestScore;
             }
+            else
+            {
+                _saveData.levels.Add(new GameLevel(levelName, score));
+            }
+            
+            _fileHandler.SaveToStorage(_saveData);
         }
-
-        #endregion
-
-        #region Save/Load system
-
-        [Serializable]
-        private class SaveData
-        {
-            public string playerName;
-            public int bestScore;
-            public List<GameLevel> gameLevelList = new List<GameLevel>();
-        }
-
-        private class GameLevel
-        {
-            public string levelNum;
-            public string bestScore;
-        }
-
-        public void SaveScore(int level)
-        {
-            SaveData save = new SaveData();
-            save.playerName = PlayerName;
-            save.bestScore = BestScore;
-
-            string json = JsonUtility.ToJson(save);
-            File.WriteAllText(Application.persistentDataPath + DataPath, json);
-        }
-
-        public void LoadScore()
-        {
-            string path = File.ReadAllText(Application.persistentDataPath + DataPath);
-            SaveData load = JsonUtility.FromJson<SaveData>(path);
-            BestScorePlayerName = load.playerName;
-            BestScore = load.bestScore;
-        }
-
         #endregion
     }
 }

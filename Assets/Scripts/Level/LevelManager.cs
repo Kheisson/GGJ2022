@@ -2,32 +2,34 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class LevelManager : MonoBehaviour
+namespace Level
 {
-
-    #region Fields
-
-    private const string UISceneName = "main";
-
-    public Action UISceneLoadedEvent;
-
-    #endregion
-
-    #region Methods
-
-    private void Awake()
+    public class LevelManager : MonoBehaviour
     {
-        var uiScene = SceneManager.LoadSceneAsync(UISceneName, LoadSceneMode.Additive);
-        while (uiScene.isDone)
-        {
-            return;
-        }
-        uiScene.allowSceneActivation = true;
-        uiScene.completed += operation => UISceneLoadedEvent?.Invoke();
-    }
 
-    #endregion
+        #region Fields
+
+        private const string UISceneName = "main";
+
+        public Action UISceneLoadedEvent;
+
+        #endregion
+
+        #region Methods
+
+        private void Awake()
+        {
+            var uiScene = SceneManager.LoadSceneAsync(UISceneName, LoadSceneMode.Additive);
+            while (uiScene.isDone)
+            {
+                return;
+            }
+            uiScene.allowSceneActivation = true;
+            uiScene.completed += operation => UISceneLoadedEvent?.Invoke();
+        }
+
+        #endregion
     
     
+    }
 }

@@ -13,7 +13,6 @@ namespace Player
     {
         #region Consts
         private Vector2 _velocity = Vector2.zero;
-        private readonly float _screenBoundaryDivider = 1.3f;
         #endregion
 
         #region Fields
@@ -23,12 +22,10 @@ namespace Player
         [SerializeField] private Ease enteringSceneEase;
         private List<IProjectile> _projectiles;
         private Rigidbody _playerRb;
-        private Vector3 _screenBoundaries;
         private Camera _mainCamera;
         private float _sizeOffset;
         private float _delayFire;
         private float _fireRate;
-        private int _playerHealth;
         private bool _disableControl = true;
         
         //Dotween configuration
@@ -54,14 +51,13 @@ namespace Player
             _mainCamera = Camera.main;
             _playerRb = GetComponent<Rigidbody>();
             _playerRb.useGravity = false;
-            _screenBoundaries = GameSettings.ScreenBoundaries;
             _sizeOffset = GetComponent<Collider>().bounds.extents.x;
-            _playerHealth = playerSettingsSo.MaxHealth;
+            playerSettingsSo.Replenish();
         }
 
         private void Start()
         {
-            transform.DOMoveY(_screenBoundaries.y / _screenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
+            transform.DOMoveY(GameSettings.ScreenBoundaries.y / GameSettings.ScreenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
             {
                 _disableControl = false;
                 PlayerMovedToStartingPosition?.Invoke();
@@ -112,6 +108,10 @@ namespace Player
             var touch = Input.GetTouch(0);
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
             point = new Vector2(-point.x, -point.y);
+            
+            //Bufferzone on top of screen
+            if (point.y > GameSettings.ScreenBoundariesTop)
+                return;
             transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, playerSettingsSo.MobileSpeed);
             
             //If there is a finger on screen, shoot
@@ -157,8 +157,8 @@ namespace Player
             var position = transform.position;
             var clampedPosition = new Vector3
             {
-                x = Mathf.Clamp(position.x, _screenBoundaries.x + _sizeOffset, -_screenBoundaries.x - _sizeOffset),
-                y = Mathf.Clamp(position.y, _screenBoundaries.y + _sizeOffset, -_screenBoundaries.y - _sizeOffset),
+                x = Mathf.Clamp(position.x, GameSettings.ScreenBoundaries.x + _sizeOffset, -GameSettings.ScreenBoundaries.x - _sizeOffset),
+                y = Mathf.Clamp(position.y, GameSettings.ScreenBoundaries.y + _sizeOffset, -GameSettings.ScreenBoundaries.y - _sizeOffset),
                 z = position.z
             };
             transform.position = clampedPosition;
@@ -172,14 +172,14 @@ namespace Player
         
         public void Damage(int damage)
         {
-            if (_playerHealth - damage <= 0)
+            if (playerSettingsSo.PlayerHealth - damage <= 0)
             {
                 PlayerDefeated();
             }
             else
             {
                 PlayerDamagedEvent?.Invoke(damage);
-                _playerHealth -= damage;
+                playerSettingsSo.Replenish(-damage);
             }
         }
         #endregion

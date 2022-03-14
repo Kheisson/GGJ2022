@@ -20,6 +20,13 @@ namespace Projectile
 
         #region Methods
 
+        /// <summary>
+        /// Factory for projectiles
+        /// </summary>
+        /// <param name="projectile">The mold of the projectile in gameobject form</param>
+        /// <param name="spawnCount">Amount of projectiles to spawn</param>
+        /// <param name="parentObject">Parent transform in hierarchy</param>
+        /// <returns></returns>
         public List<IProjectile> CreateWeaponQueue(GameObject projectile, int spawnCount, Transform parentObject)
         {
             var weapons = new List<IProjectile>();

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b27252ecb4d448aa376783655e9de3a, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  delaySpawnTimer: 0
+  delaySpawnTimer: 2.66
   enemySpawnList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
   spawnEachAmount: 01000000010000000100000001000000

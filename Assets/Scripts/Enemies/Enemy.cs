@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Helpers;
-using Pickups;
 using Projectile;
+using Spawn;
 using UnityEngine;
 
 namespace Enemies
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class Enemy : MonoBehaviour, IDamagable
     {
         #region Consts
@@ -25,17 +25,16 @@ namespace Enemies
         #region Fields
 
         [SerializeField] private EnemySetupSo enemySetupSo;
-        [SerializeField] private byte availableShots;
 
-        private List<Pickup> _pickups = new List<Pickup>();
         private List<IProjectile> _projectiles;
+        private Collider _collider;
+        private Transform[] _children;
         private int _health;
         private bool _disableControl;
 
         #endregion
 
         #region Methods
-
         private void Awake()
         {
             var rb = GetComponent<Rigidbody>();
@@ -44,6 +43,9 @@ namespace Enemies
                              RigidbodyConstraints.FreezeRotationX |
                              RigidbodyConstraints.FreezeRotationY |
                              RigidbodyConstraints.FreezeRotationZ;
+            _collider = GetComponent<Collider>();
+            _collider.enabled = false;
+            _children = new Transform[enemySetupSo.AvaliableShots];
         }
 
         private void OnEnable()
@@ -52,6 +54,12 @@ namespace Enemies
             _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();
+            
+            if (_children[0] != null) return;
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                _children[i] = transform.GetChild(i);
+            }
         }
 
         private void FixedUpdate()
@@ -64,34 +72,41 @@ namespace Enemies
         {
             if (this.ReturnSuccessfulProbability())
             {
-                SpawnManager.Instance.GetPickables(transform, true);
+                SpawnManager.Instance.GetPickables(transform, false, enemySetupSo.AmountToCredit);
             }
-
+            transform.DetachChildren();
             gameObject.SetActive(false);
         }
 
         private void OnBecameInvisible()
         {
             gameObject.SetActive(false);
+            _collider.enabled = false;
+            StopAllCoroutines();
         }
 
         private void OnBecameVisible()
         {
+            foreach (var child in _children)
+            {
+                child.SetParent(transform);
+            }
             _disableControl = false;
             Attack();
+            _collider.enabled = true;
         }
         
         private IEnumerator EnemyAttackCoroutine()
         {
             while (true)
             {
-                for (int i = 0; i < availableShots; i++)
+                for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
                     _projectiles[i].Fire(transform.position - (Vector3.up * 6));
                     yield return new WaitForSeconds(_projectiles[i].FireRate);
                 }
 
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
             }
         }
 
@@ -99,12 +114,13 @@ namespace Enemies
         { 
             StartCoroutine(EnemyAttackCoroutine());
         }
-
+        
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, availableShots, transform);
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, enemySetupSo.AvaliableShots, transform);
         }
 
+        //Will deactivate and damage player if collision occurs
         private void OnTriggerEnter(Collider other)
         {
             if (!other.name.Contains("Player"))
