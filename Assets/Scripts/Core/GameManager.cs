@@ -76,10 +76,12 @@ namespace Core
         private void OnStartLevelEvent()
         {
             SpawnManager.Instance.StartSpawning();
+            levelManager.LevelOnGoingChange();
         }
 
         private void OnEndLevel()
         {
+            levelManager.LevelOnGoingChange();
             levelManager.UISceneLoadedEvent -= OnUISceneLoadedEvent;
             Destroy(levelManager);
         }

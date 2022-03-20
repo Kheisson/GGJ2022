@@ -19,9 +19,7 @@ namespace Save
             {
                 Destroy(gameObject);
             }
-
             Instance = this;
-            DontDestroyOnLoad(gameObject);
 
             _fileHandler = new FileHandler();
             _saveData = _fileHandler.LoadSaveData();
