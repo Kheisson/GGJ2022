@@ -8,9 +8,11 @@ namespace Level
     {
 
         #region Fields
-
+        [SerializeField] private float backgroundSpeed = 12f;
+        private GameObject _backgroundGameObject;
+        private bool _levelOnGoing = false;
         private const string UISceneName = "main";
-
+        
         public Action UISceneLoadedEvent;
 
         #endregion
@@ -28,8 +30,21 @@ namespace Level
             uiScene.completed += operation => UISceneLoadedEvent?.Invoke();
         }
 
+        private void Start()
+        {
+            _backgroundGameObject = GameObject.FindGameObjectWithTag("Background");
+        }
+
+        private void Update()
+        {
+            if (!_levelOnGoing) return;
+            _backgroundGameObject.transform.Translate(Vector3.forward * backgroundSpeed * Time.deltaTime);
+        }
+
+        public void LevelOnGoingChange() => _levelOnGoing = !_levelOnGoing;
+
         #endregion
-    
-    
+
+
     }
 }

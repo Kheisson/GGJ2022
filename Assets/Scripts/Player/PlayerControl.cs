@@ -183,5 +183,18 @@ namespace Player
             }
         }
         #endregion
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(Vector3.zero, new Vector3(GameSettings.ScreenBoundaries.x * 2f, -GameSettings.ScreenBoundaries.y * 100,0));
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(new Vector2(-GameSettings.ScreenBoundaries.x, 
+                GameSettings.ScreenBoundaries.y / GameSettings.ScreenBoundaryDivider),new Vector2(GameSettings.ScreenBoundaries.x, 
+                GameSettings.ScreenBoundaries.y / GameSettings.ScreenBoundaryDivider) );
+        }
+#endif
     }
 }
