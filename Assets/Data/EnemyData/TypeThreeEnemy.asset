@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TypeThreeEnemy
   m_EditorClassIdentifier: 
   health: 40
-  speed: 0.5
+  speed: 12
   availableShots: 2
   amountToCredit: 75
   weapon: {fileID: 4167122863067444432, guid: 62b7b4b56df7c442cb8e74e38b3c9f5c, type: 3}

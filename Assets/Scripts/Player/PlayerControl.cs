@@ -107,7 +107,7 @@ namespace Player
             if (Input.touchCount <= 0) return;
             var touch = Input.GetTouch(0);
             var point = _mainCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -80.0f));
-            point = new Vector2(-point.x, -point.y);
+            point = new Vector2(-point.x, -point.y + playerSettingsSo.YOffset);
             
             //Bufferzone on top of screen
             if (point.y > GameSettings.ScreenBoundariesTop)

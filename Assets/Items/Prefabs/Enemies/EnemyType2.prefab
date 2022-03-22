@@ -110,5 +110,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySetupSo: {fileID: 11400000, guid: 07e76600065a64ea3a934162feb192bb, type: 2}
-  availableShots: 5
-  amountToCredit: 50

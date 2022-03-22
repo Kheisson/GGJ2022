@@ -25,6 +25,9 @@ namespace Spawn
         #region Properties
         public static SpawnManager Instance => _instance;
         public string LevelName => levelProgressionSo.name;
+        public int EnemyWaves => levelProgressionSo.EnemySpawnList.Count;
+        public int EnemiesInLevel => _enemies.Count;
+
         #endregion
         
         #region Events

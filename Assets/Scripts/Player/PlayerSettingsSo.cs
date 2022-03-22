@@ -8,6 +8,7 @@ namespace Player
     {
         [SerializeField] private GameObject currentWeapon;
         [SerializeField] private float mobileSpeed; 
+        [SerializeField] private float yOffset = 5f; 
         [SerializeField] private int spawnCount;
         [SerializeField] private int maxHealth = 900;
         [SerializeField] private int playerHealth;
@@ -19,6 +20,7 @@ namespace Player
         public int SpawnCount => spawnCount;
 
         public float MobileSpeed => mobileSpeed;
+        public float YOffset => yOffset;
 
         public int MaxHealth => maxHealth;
 

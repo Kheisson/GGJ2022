@@ -30,7 +30,6 @@ namespace Enemies
         private Collider _collider;
         private Transform[] _children;
         private int _health;
-        private bool _disableControl;
 
         #endregion
 
@@ -51,7 +50,6 @@ namespace Enemies
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
-            _disableControl = true;
             if (_projectiles == null || _projectiles.Count == 0)
                 CreateProjectileQueue();
             
@@ -62,10 +60,12 @@ namespace Enemies
             }
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if(!_disableControl)
-                transform.position += Vector3.down * enemySetupSo.EnemySpeed;
+            transform.position += Vector3.down * enemySetupSo.EnemySpeed * Time.deltaTime;
+            
+            if(transform.position.y < GameSettings.ScreenBoundaries.y - 5f)
+                OffScreen();
         }
 
         private void Defeat()
@@ -78,7 +78,7 @@ namespace Enemies
             gameObject.SetActive(false);
         }
 
-        private void OnBecameInvisible()
+        private void OffScreen()
         {
             gameObject.SetActive(false);
             _collider.enabled = false;
@@ -91,7 +91,6 @@ namespace Enemies
             {
                 child.SetParent(transform);
             }
-            _disableControl = false;
             Attack();
             _collider.enabled = true;
         }
