@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2778474001479855423}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4864563358218018702}
+        m_TargetAssemblyTypeName: UI.LevelFailedPopup, Assembly-CSharp
+        m_MethodName: RetryButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &929755377084880642
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5080975448655132710}
   - component: {fileID: 1526247295408128591}
-  - component: {fileID: 6960693285112416963}
+  - component: {fileID: 4864563358218018702}
   m_Layer: 5
   m_Name: LevelFailed
   m_TagString: Untagged
@@ -783,7 +795,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7079044922623318925}
   m_CullTransparentMesh: 1
---- !u!114 &6960693285112416963
+--- !u!114 &4864563358218018702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -792,12 +804,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7079044922623318925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 747dbbd3e91f46ab82128f2ec0b55147, type: 3}
+  m_Script: {fileID: 11500000, guid: c372d563fdcc4f10a0321279a3855a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabledButtonSprite: {fileID: 21300000, guid: b25271efb7e89f849bd5b2787ecc643c, type: 3}
-  disabledButtonSprite: {fileID: 21300000, guid: 09e00dabd5dcf1b409833b15d6a602c4, type: 3}
-  targetImageOfButton: {fileID: 0}
 --- !u!1 &7413067050856985731
 GameObject:
   m_ObjectHideFlags: 0

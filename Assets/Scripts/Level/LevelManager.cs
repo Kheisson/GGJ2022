@@ -40,7 +40,7 @@ namespace Level
             if (!_levelOnGoing) return;
             _backgroundGameObject.transform.Translate(Vector3.forward * backgroundSpeed * Time.deltaTime);
         }
-
+       
         public void LevelOnGoingChange() => _levelOnGoing = !_levelOnGoing;
 
         #endregion

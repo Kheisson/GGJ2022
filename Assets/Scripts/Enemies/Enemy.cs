@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Helpers;
+using Pickups;
 using Projectile;
-using Spawn;
 using UnityEngine;
 
 namespace Enemies
@@ -20,6 +21,7 @@ namespace Enemies
             z = 0
         };
         
+        private const byte COLLISION_DAMAGE = 25;
         #endregion
         
         #region Fields
@@ -30,7 +32,8 @@ namespace Enemies
         private Collider _collider;
         private Transform[] _children;
         private int _health;
-
+        private float _pickupDropChance = 0.8f;
+        private string _pickupName;
         #endregion
 
         #region Methods
@@ -45,6 +48,7 @@ namespace Enemies
             _collider = GetComponent<Collider>();
             _collider.enabled = false;
             _children = new Transform[enemySetupSo.AvaliableShots];
+            _pickupName = Enum.GetName(typeof(PickupType), enemySetupSo.TypeOfPickup);
         }
 
         private void OnEnable()
@@ -70,10 +74,8 @@ namespace Enemies
 
         private void Defeat()
         {
-            if (this.ReturnSuccessfulProbability())
-            {
-                SpawnManager.Instance.GetPickables(transform, false, enemySetupSo.AmountToCredit);
-            }
+            SpawnPickup(1, enemySetupSo.AmountToCredit);
+
             transform.DetachChildren();
             gameObject.SetActive(false);
         }
@@ -119,6 +121,29 @@ namespace Enemies
             _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, enemySetupSo.AvaliableShots, transform);
         }
 
+        /// <summary>
+        /// Spawns a pickup at enemy position
+        /// </summary>
+        /// <param name="amountToCredit">Determines the credit amount the pickup will grant</param>
+        /// <param name="amountToSpawn">The amount of pickups to spawn</param>
+        private void SpawnPickup(int amountToSpawn, int amountToCredit)
+        {
+            var pickup = _pickupName;
+            if (this.ReturnSuccessfulProbability(_pickupDropChance))
+            {
+                pickup = "Circle";
+                amountToSpawn = 1;
+            }
+            
+            for (var i = 0; i < amountToSpawn; i++)
+            {
+                var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
+                var go = Instantiate(loadedPickup, transform);
+                go.SpawnOnDestroy(transform, amountToCredit);
+                go.PickupPickedEvent += GameManager.Instance.CreditUIEvent;
+            }
+        }
+
         //Will deactivate and damage player if collision occurs
         private void OnTriggerEnter(Collider other)
         {
@@ -126,7 +151,7 @@ namespace Enemies
                 return;
             
             if (other.TryGetComponent(typeof(IDamagable), out var subject))
-                subject.GetComponent<IDamagable>().Damage(25);
+                subject.GetComponent<IDamagable>().Damage(COLLISION_DAMAGE);
             
             gameObject.SetActive(false);
         }

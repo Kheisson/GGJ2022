@@ -1,13 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Core;
 using Enemies;
-using Helpers;
 using Level;
-using Pickups;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Spawn
 {
@@ -18,8 +14,6 @@ namespace Spawn
         [SerializeField] private LevelProgressionSo levelProgressionSo;
         private List<Enemy> _enemies = new List<Enemy>();
         private static SpawnManager _instance;
-        private string[] _pickupTypes;
-        private float _pickupDropChance = 0.9f;
         #endregion
         
         #region Properties
@@ -41,10 +35,7 @@ namespace Spawn
         {
             if(_instance == null)
                 _instance = this;
-            
-            DontDestroyOnLoad(gameObject);
-            SpawnGrid.Init(); 
-            _pickupTypes = Enum.GetNames(typeof(PickupType));
+            SpawnGrid.Init();
         }
         /// <summary>
         /// Goes over the player progression SO and searches for gameObjects that are not active and that they have the correct type by name.
@@ -88,38 +79,9 @@ namespace Spawn
         }
 
         private void StopSpawning() => StopAllCoroutines();
+        
 
         public void StartSpawning() => StartCoroutine(StartSpawningCoroutine());
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="spawnPosition">The starting position of the pickable</param>
-        /// <param name="pickRandom">If true one of the types will be picked at random</param>
-        /// <param name="amountToCredit">Determines the credit amount the pickup will grant</param>
-        /// <param name="pickup">A string representing the type - a list is found in PickupType</param>
-        /// <param name="amountToSpawn">The amount of pickups to spawn</param>
-        public void GetPickables(Transform spawnPosition, bool pickRandom, int amountToCredit, string pickup = "Triangle", int amountToSpawn = 1)
-        {
-            if (pickRandom)
-            {
-                pickup = _pickupTypes[Random.Range(0, _pickupTypes.Length)];
-            }
-
-            if (this.ReturnSuccessfulProbability(_pickupDropChance))
-            {
-                pickup = "Circle";
-                amountToSpawn = 1;
-            }
-            
-            for (var i = 0; i < amountToSpawn; i++)
-            {
-                var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
-                var go = Instantiate(loadedPickup, transform);
-                go.SpawnOnDestroy(spawnPosition, amountToCredit);
-                go.PickupPickedEvent += GameManager.Instance.CreditUIEvent;
-            }
-        }
 
         #endregion
     }

@@ -111,6 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSettingsSo: {fileID: 11400000, guid: 06010855ad7b34ec8b95c60dc37db245, type: 2}
   projectileSpawnPosition: {fileID: 1568451832665494738}
+  enteringSceneEase: 0
+  dotweenRotationDuration: 0.5
+  planeRotationEase: 0
+  _rotateVector: {x: 0, y: 30, z: 0}
 --- !u!1001 &1526141357552210322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,10 +301,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 93b3ad317bb7bf44296185dd528b9d6c, type: 3}
       propertyPath: m_Name
       value: CockPit01
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 93b3ad317bb7bf44296185dd528b9d6c, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93b3ad317bb7bf44296185dd528b9d6c, type: 3}

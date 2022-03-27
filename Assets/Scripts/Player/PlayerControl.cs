@@ -56,7 +56,7 @@ namespace Player
         }
 
         private void Start()
-        {
+        { 
             transform.DOMoveY(GameSettings.ScreenBoundaries.y / GameSettings.ScreenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
             {
                 _disableControl = false;
@@ -167,6 +167,7 @@ namespace Player
         private void PlayerDefeated()
         {
             Debug.Log("Player died!");
+            PlayerDefeatedEvent?.Invoke();
             //transform.DOKill();
         }
         

@@ -1,23 +1,29 @@
 using System;
+using DG.Tweening;
 using Level;
 using Player;
 using Save;
 using Spawn;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
     public class GameManager : MonoBehaviour
     {
         #region Fields
+
         [SerializeField] private LevelManager levelManager;
         [SerializeField] private DataManager dataManager;
+        [SerializeField] private Popup failLevelPopup;
 
         private static GameManager _instance;
         private PlayerControl _playerInstance;
+        private LevelManager _levelManager;
 
         private static bool _isAudioMuted = false;
+
         #endregion
 
         #region Events
@@ -32,18 +38,21 @@ namespace Core
 
         public static GameManager Instance => _instance;
         public static bool IsAudioMuted => _isAudioMuted;
+
         #endregion
 
         #region Methods
 
         private void Start()
         {
-            if(_instance == null)
+            if (Instance == null)
                 _instance = this;
-            
+            else
+                Destroy(this.gameObject);
+
             DontDestroyOnLoad(gameObject);
-        
-            levelManager = Instantiate(levelManager, transform);
+
+            _levelManager = Instantiate(levelManager, transform);
             dataManager = Instantiate(dataManager, transform);
             _playerInstance = FindObjectOfType<PlayerControl>();
             SubscribeToLevelEvents();
@@ -51,8 +60,9 @@ namespace Core
 
         private void SubscribeToLevelEvents()
         {
-            levelManager.UISceneLoadedEvent += OnUISceneLoadedEvent;
+            _levelManager.UISceneLoadedEvent += OnUISceneLoadedEvent;
             _playerInstance.PlayerMovedToStartingPosition += OnStartLevelEvent;
+            _playerInstance.PlayerDefeatedEvent += OnPlayerDefeatedEvent;
             SpawnManager.Instance.FinishedSpawningEvent += OnFinishedSpawningEvent;
             CreditUIEvent += OnCreditUIEvent;
         }
@@ -69,8 +79,9 @@ namespace Core
         private void OnFinishedSpawningEvent()
         {
             var playerBalanceOnLevelFinished = FindObjectOfType<PlayerStatsUI>().CoinBalance;
-            DataManager.SaveOnFinishedLevel(SpawnManager.Instance.LevelName, score: 1,playerBalanceOnLevelFinished);
-            Debug.LogWarning($"Spawned all of the enemies in this level <color=red>{SpawnManager.Instance.LevelName}</color>");
+            DataManager.SaveOnFinishedLevel(SpawnManager.Instance.LevelName, score: 1, playerBalanceOnLevelFinished);
+            Debug.LogWarning(
+                $"Spawned all of the enemies in this level <color=red>{SpawnManager.Instance.LevelName}</color>");
         }
 
         private void OnStartLevelEvent()
@@ -83,7 +94,11 @@ namespace Core
         {
             levelManager.LevelOnGoingChange();
             levelManager.UISceneLoadedEvent -= OnUISceneLoadedEvent;
-            Destroy(levelManager);
+        }
+
+        private void OnPlayerDefeatedEvent()
+        {
+            FindObjectOfType<PopupManager>().ShowPopup(failLevelPopup);
         }
 
         public static bool Mute()
@@ -92,6 +107,20 @@ namespace Core
             var audioSource = Camera.main.GetComponent<AudioSource>();
             audioSource.mute = _isAudioMuted;
             return _isAudioMuted;
+        }
+
+        public void ReloadLevel()
+        {
+            //TODO: Make a scene manager
+            DOTween.KillAll();
+
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("main")).completed += operation =>
+            {
+                OnEndLevel();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Debug.Log("Reloading Scene");
+                Time.timeScale = 1f;
+            };
         }
 
         #endregion

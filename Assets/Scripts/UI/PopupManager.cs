@@ -7,7 +7,7 @@ namespace UI
         #region Fields
 
         [SerializeField] private GameObject blackCover;
-        private Popup _popupInstance;
+        private Popup _popup;
 
         #endregion
 
@@ -15,11 +15,11 @@ namespace UI
 
         public void ShowPopup(Popup popup)
         {
-            if (_popupInstance == null)
+            if (_popup == null)
             {
                 var popupGameObject = Instantiate(popup, transform);
-                _popupInstance = popupGameObject.GetComponent<Popup>();
-                _popupInstance.PopupClosedEvent += HidePopup;
+                _popup = popupGameObject.GetComponent<Popup>();
+                _popup.PopupClosedEvent += HidePopup;
             }
 
             Time.timeScale = 0f;
@@ -28,8 +28,8 @@ namespace UI
 
         private void HidePopup()
         {
-            _popupInstance.PopupClosedEvent -= HidePopup;
-            Destroy(_popupInstance.gameObject);
+            _popup.PopupClosedEvent -= HidePopup;
+            Destroy(_popup.gameObject);
             Time.timeScale = 1f;
             blackCover.SetActive(false);
         }
