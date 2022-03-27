@@ -4,6 +4,8 @@ namespace UI
 {
     public class LevelFailedPopup : Popup
     {
+        #region Methods
+
         private void Hide()
         {
             OnPopupClosedEvent();
@@ -18,5 +20,7 @@ namespace UI
         {
             //TODO: Move Player to map scene
         }
+
+        #endregion
     }
 }
