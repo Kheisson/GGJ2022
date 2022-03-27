@@ -21,8 +21,7 @@ namespace UI
                 _popup = popupGameObject.GetComponent<Popup>();
                 _popup.PopupClosedEvent += HidePopup;
             }
-
-            Time.timeScale = 0f;
+            
             blackCover.SetActive(true);
         }
 
@@ -30,7 +29,6 @@ namespace UI
         {
             _popup.PopupClosedEvent -= HidePopup;
             Destroy(_popup.gameObject);
-            Time.timeScale = 1f;
             blackCover.SetActive(false);
         }
         

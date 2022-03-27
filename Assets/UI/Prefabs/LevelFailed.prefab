@@ -807,6 +807,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c372d563fdcc4f10a0321279a3855a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inDuration: 0.25
+  outDuration: 0.15
+  inEase: 2
+  outEase: 3
 --- !u!1 &7413067050856985731
 GameObject:
   m_ObjectHideFlags: 0
