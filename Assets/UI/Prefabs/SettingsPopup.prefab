@@ -1002,6 +1002,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747dbbd3e91f46ab82128f2ec0b55147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inDuration: 0.25
+  outDuration: 0.15
+  inEase: 2
+  outEase: 3
   enabledButtonSprite: {fileID: 21300000, guid: b25271efb7e89f849bd5b2787ecc643c, type: 3}
   disabledButtonSprite: {fileID: 21300000, guid: 09e00dabd5dcf1b409833b15d6a602c4, type: 3}
   targetImageOfButton: {fileID: 1624894562547916665}
