@@ -32,7 +32,9 @@ namespace Core
                 return _screenBoundaries;
             }
         }
-
+        /// <summary>
+        /// Returns a coordinate on the Y axis that represents a deadzone on top (where the buttons are)
+        /// </summary>
         public static float? ScreenBoundariesTop
         {
             get

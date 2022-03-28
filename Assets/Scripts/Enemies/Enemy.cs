@@ -34,6 +34,9 @@ namespace Enemies
         private int _health;
         private float _pickupDropChance = 0.8f;
         private string _pickupName;
+        //Cached C++ elements
+        private Transform _transform;
+        private GameObject _gameObject;
         #endregion
 
         #region Methods
@@ -49,6 +52,8 @@ namespace Enemies
             _collider.enabled = false;
             _children = new Transform[enemySetupSo.AvaliableShots];
             _pickupName = Enum.GetName(typeof(PickupType), enemySetupSo.TypeOfPickup);
+            _transform = transform;
+            _gameObject = gameObject;
         }
 
         private void OnEnable()
@@ -58,17 +63,17 @@ namespace Enemies
                 CreateProjectileQueue();
             
             if (_children[0] != null) return;
-            for (var i = 0; i < transform.childCount; i++)
+            for (var i = 0; i < _transform.childCount; i++)
             {
-                _children[i] = transform.GetChild(i);
+                _children[i] = _transform.GetChild(i);
             }
         }
 
         private void Update()
         {
-            transform.position += Vector3.down * enemySetupSo.EnemySpeed * Time.deltaTime;
+            _transform.position += enemySetupSo.EnemySpeed * Time.deltaTime * Vector3.down;
             
-            if(transform.position.y < GameSettings.ScreenBoundaries.y - 5f)
+            if(_transform.position.y < GameSettings.ScreenBoundaries.y - 5f)
                 OffScreen();
         }
 
@@ -76,13 +81,13 @@ namespace Enemies
         {
             SpawnPickup(1, enemySetupSo.AmountToCredit);
 
-            transform.DetachChildren();
-            gameObject.SetActive(false);
+            _transform.DetachChildren();
+            _gameObject.SetActive(false);
         }
 
         private void OffScreen()
         {
-            gameObject.SetActive(false);
+            _gameObject.SetActive(false);
             _collider.enabled = false;
             StopAllCoroutines();
         }
@@ -91,7 +96,7 @@ namespace Enemies
         {
             foreach (var child in _children)
             {
-                child.SetParent(transform);
+                child.SetParent(_transform);
             }
             Attack();
             _collider.enabled = true;
@@ -103,7 +108,7 @@ namespace Enemies
             {
                 for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
-                    _projectiles[i].Fire(transform.position - (Vector3.up * 6));
+                    _projectiles[i].Fire(_transform.position - (Vector3.up * 6));
                     yield return new WaitForSeconds(_projectiles[i].FireRate);
                 }
 
@@ -118,7 +123,7 @@ namespace Enemies
         
         private void CreateProjectileQueue()
         {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, enemySetupSo.AvaliableShots, transform);
+            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, enemySetupSo.AvaliableShots, _transform);
         }
 
         /// <summary>
@@ -138,8 +143,8 @@ namespace Enemies
             for (var i = 0; i < amountToSpawn; i++)
             {
                 var loadedPickup = Resources.Load<Pickup>($"Pickups/{pickup}");
-                var go = Instantiate(loadedPickup, transform);
-                go.SpawnOnDestroy(transform, amountToCredit);
+                var go = Instantiate(loadedPickup, _transform);
+                go.SpawnOnDestroy(_transform, amountToCredit);
                 go.PickupPickedEvent += GameManager.Instance.CreditUIEvent;
             }
         }
@@ -153,7 +158,7 @@ namespace Enemies
             if (other.TryGetComponent(typeof(IDamagable), out var subject))
                 subject.GetComponent<IDamagable>().Damage(COLLISION_DAMAGE);
             
-            gameObject.SetActive(false);
+            _gameObject.SetActive(false);
         }
 
         /// <summary>

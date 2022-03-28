@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Core;
 using DG.Tweening;
 using Projectile;
@@ -27,6 +28,7 @@ namespace Player
         private float _delayFire;
         private float _fireRate;
         private bool _disableControl = true;
+        private Transform _transform;
         
         //Dotween configuration
         [Header("Dotween Configuration")]
@@ -52,12 +54,13 @@ namespace Player
             _playerRb = GetComponent<Rigidbody>();
             _playerRb.useGravity = false;
             _sizeOffset = GetComponent<Collider>().bounds.extents.x;
+            _transform = transform;
             playerSettingsSo.Replenish();
         }
 
         private void Start()
         { 
-            transform.DOMoveY(GameSettings.ScreenBoundaries.y / GameSettings.ScreenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
+            _transform.DOMoveY(GameSettings.ScreenBoundaries.y / GameSettings.ScreenBoundaryDivider, 3f).SetEase(enteringSceneEase).OnComplete(() =>
             {
                 _disableControl = false;
                 PlayerMovedToStartingPosition?.Invoke();
@@ -112,7 +115,7 @@ namespace Player
             //Bufferzone on top of screen
             if (point.y > GameSettings.ScreenBoundariesTop)
                 return;
-            transform.position = Vector2.SmoothDamp(transform.position, point, ref _velocity, playerSettingsSo.MobileSpeed);
+            _transform.position = Vector2.SmoothDamp(_transform.position, point, ref _velocity, playerSettingsSo.MobileSpeed);
             
             //If there is a finger on screen, shoot
             if(touch.phase != TouchPhase.Ended)
@@ -131,20 +134,20 @@ namespace Player
         /// <param name="pointX"></param>
         private void HandleRotation(float pointX)
         {
-            if (DOTween.IsTweening(transform))
+            if (DOTween.IsTweening(_transform))
                 return;
             if (pointX > 1.0f)
             {
-                transform.DORotate(_rotateVector * -1f, dotweenRotationDuration).SetEase(planeRotationEase).OnComplete(() =>
+                _transform.DORotate(_rotateVector * -1f, dotweenRotationDuration).SetEase(planeRotationEase).OnComplete(() =>
                 {
-                    transform.DORotate(Vector3.zero, dotweenRotationDuration);
+                    _transform.DORotate(Vector3.zero, dotweenRotationDuration);
                 });
             }
             else if (pointX < -1.0f)
             {
-                transform.DORotate(_rotateVector, dotweenRotationDuration).SetEase(planeRotationEase).OnComplete(() =>
+                _transform.DORotate(_rotateVector, dotweenRotationDuration).SetEase(planeRotationEase).OnComplete(() =>
                 {
-                    transform.DORotate(Vector3.zero, dotweenRotationDuration);
+                    _transform.DORotate(Vector3.zero, dotweenRotationDuration);
                 });
             }
         }
@@ -154,14 +157,14 @@ namespace Player
         /// </summary>
         private void ClampPosition()
         {
-            var position = transform.position;
+            var position = _transform.position;
             var clampedPosition = new Vector3
             {
                 x = Mathf.Clamp(position.x, GameSettings.ScreenBoundaries.x + _sizeOffset, -GameSettings.ScreenBoundaries.x - _sizeOffset),
                 y = Mathf.Clamp(position.y, GameSettings.ScreenBoundaries.y + _sizeOffset, -GameSettings.ScreenBoundaries.y - _sizeOffset),
                 z = position.z
             };
-            transform.position = clampedPosition;
+            _transform.position = clampedPosition;
         }
         
         private void PlayerDefeated()
@@ -182,6 +185,14 @@ namespace Player
                 PlayerDamagedEvent?.Invoke(damage);
                 playerSettingsSo.Replenish(-damage);
             }
+        }
+
+        public void Damage(int damage, bool alternative)
+        {
+            if(alternative)
+                playerSettingsSo.Replenish(damage);
+            else
+                Damage(-damage);
         }
         #endregion
 

@@ -42,7 +42,7 @@ namespace Pickups
 
         private void FixedUpdate()
         {
-            transform.position += _floatPosition * Time.fixedDeltaTime * speed;
+            transform.position += Time.fixedDeltaTime * speed * _floatPosition;
         }
         
         // Dotween integration for floating and shacking 

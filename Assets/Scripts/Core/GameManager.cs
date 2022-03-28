@@ -45,19 +45,41 @@ namespace Core
 
         private void Start()
         {
+            Init();
+            StartLevel();
+        }
+
+        /// <summary>
+        /// Instantiates a instance of the level and subscribes to the
+        /// player and level manager events 
+        /// </summary>
+        private void StartLevel()
+        {
+            _levelManager = Instantiate(levelManager, transform);
+            var playerGameObject = GameObject.FindGameObjectWithTag("Player");
+            _playerInstance = playerGameObject.GetComponent<PlayerControl>();
+            SubscribeToLevelEvents();
+        }
+
+        /// <summary>
+        /// Instantiates a data manager for saving capabilities and loads the GameObject to DontDestroy
+        /// </summary>
+        private void Init()
+        {
             if (Instance == null)
                 _instance = this;
             else
                 Destroy(this.gameObject);
 
             DontDestroyOnLoad(gameObject);
-
-            _levelManager = Instantiate(levelManager, transform);
-            dataManager = Instantiate(dataManager, transform);
-            _playerInstance = FindObjectOfType<PlayerControl>();
-            SubscribeToLevelEvents();
+            
+            dataManager = Instantiate(dataManager, transform); 
         }
 
+        /// <summary>
+        /// Subscribes to UI scene being loaded, to player moved to starting point
+        /// Finished spawning event and credit wallet event
+        /// </summary>
         private void SubscribeToLevelEvents()
         {
             _levelManager.UISceneLoadedEvent += OnUISceneLoadedEvent;
@@ -72,18 +94,25 @@ namespace Core
             Debug.Log("UI scene <color=green>loaded</color>");
         }
 
+        /// <summary>
+        /// Event is called for pickups to credit the wallet when pickup picked 
+        /// </summary>
+        /// <param name="credit"></param>
+        /// <param name="pickupName"></param>
         private void OnCreditUIEvent(int credit, string pickupName)
         {
+            //Only for signature purposes, used through instance in the UI/Enemy scripts
         }
-
+        
         private void OnFinishedSpawningEvent()
         {
-            var playerBalanceOnLevelFinished = FindObjectOfType<PlayerStatsUI>().CoinBalance;
+            var uiManager = GameObject.FindGameObjectWithTag("UIManager");
+            var playerBalanceOnLevelFinished = uiManager.GetComponent<PlayerStatsUI>().CoinBalance;
             DataManager.SaveOnFinishedLevel(SpawnManager.Instance.LevelName, score: 1, playerBalanceOnLevelFinished);
             Debug.LogWarning(
                 $"Spawned all of the enemies in this level <color=red>{SpawnManager.Instance.LevelName}</color>");
         }
-
+        
         private void OnStartLevelEvent()
         {
             SpawnManager.Instance.StartSpawning();
@@ -98,7 +127,8 @@ namespace Core
 
         private void OnPlayerDefeatedEvent()
         {
-            FindObjectOfType<PopupManager>().ShowPopup(failLevelPopup);
+            var uiManager = GameObject.FindGameObjectWithTag("UIManager");
+            uiManager.GetComponent<PopupManager>().ShowPopup(failLevelPopup);
         }
 
         public static bool Mute()
@@ -109,6 +139,9 @@ namespace Core
             return _isAudioMuted;
         }
 
+        /// <summary>
+        /// Unloads the UI scene, and reloads the active scene
+        /// </summary>
         public void ReloadLevel()
         {
             //TODO: Make a scene manager

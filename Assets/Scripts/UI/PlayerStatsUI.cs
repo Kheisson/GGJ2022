@@ -57,9 +57,12 @@ namespace UI
         //Updates Coin wallet to new balance
         private void OnCreditUIEvent(int amount, string pickupName)
         {
-            if(pickupName.Contains("Circle"))
+            if (pickupName.Contains("Circle"))
+            {
+                _player.Damage(amount, alternative: true);
                 OnPlayerDamagedEvent(-amount);
-            
+            }
+
             _coinBalance += amount;
             coinWalletText.text = _coinBalance.ToString();
         }

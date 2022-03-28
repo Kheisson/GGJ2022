@@ -5,7 +5,7 @@ namespace Projectile
 {
     public class PlayerTargetProjectile : BaseProjectile
     {
-        private static PlayerControl _player;
+        private static Transform _player;
         
         /// <summary>
         /// Will target player and shoot at it's direction
@@ -16,9 +16,11 @@ namespace Projectile
             base.Fire(startingPoint);
             
             if (_player == null)
-                _player = FindObjectOfType<PlayerControl>();
-            
-            transform.LookAt(_player != null ? _player.transform.position : Vector3.zero,
+                _player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            if (_player.position.y > transform.position.y)
+                return;
+            transform.LookAt(_player != null ? _player.position : Vector3.zero,
                 Vector3.forward);
         }
     }
