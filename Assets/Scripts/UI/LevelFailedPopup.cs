@@ -18,7 +18,7 @@ namespace UI
 
         public void AbortMission()
         {
-            //TODO: Move Player to map scene
+            LoadToMap();
         }
 
         #endregion

@@ -10,23 +10,18 @@ namespace Spawn
     public class SpawnManager : MonoBehaviour
     {
         #region Fields
-
-        [SerializeField] private LevelProgressionSo levelProgressionSo;
+        
         private List<Enemy> _enemies = new List<Enemy>();
         private static SpawnManager _instance;
-        #endregion
-        
-        #region Properties
-        public static SpawnManager Instance => _instance;
-        public string LevelName => levelProgressionSo.name;
-        public int EnemyWaves => levelProgressionSo.EnemySpawnList.Count;
-        public int EnemiesInLevel => _enemies.Count;
 
+        #endregion
+
+        #region Properties
+        public LevelProgressionSo LevelProgressionSo { get; set; }
         #endregion
         
         #region Events
         public Action FinishedSpawningEvent;
-
         #endregion
 
         #region Methods
@@ -44,13 +39,13 @@ namespace Spawn
         /// </summary>
         private IEnumerator StartSpawningCoroutine()
         {
-            yield return new WaitForSeconds(levelProgressionSo.DelaySpawnTimer);
+            yield return new WaitForSeconds(LevelProgressionSo.DelaySpawnTimer);
             
-            for (int i = 0; i < levelProgressionSo.EnemySpawnList.Count; i++)
+            for (int i = 0; i < LevelProgressionSo.EnemySpawnList.Count; i++)
             {
-                for (int j = 0; j < levelProgressionSo.SpawnEachAmount[i]; j++)
+                for (int j = 0; j < LevelProgressionSo.SpawnEachAmount[i]; j++)
                 {
-                    var go = _enemies.Find( x => !x.gameObject.activeSelf && x.name.Contains(levelProgressionSo.EnemySpawnList[i].name));
+                    var go = _enemies.Find( x => !x.gameObject.activeSelf && x.name.Contains(LevelProgressionSo.EnemySpawnList[i].name));
                    
                     var newPos = SpawnGrid.GetOpenSpot();
                     if (newPos == Vector3.back) //Guard for no more open space left on grid
@@ -58,7 +53,7 @@ namespace Spawn
                     
                     if (go == null)
                     {
-                        var spawnCandidate = Instantiate(levelProgressionSo.EnemySpawnList[i], 
+                        var spawnCandidate = Instantiate(LevelProgressionSo.EnemySpawnList[i], 
                             Enemy.UniversalEnemyStartingPosition + newPos,
                             Quaternion.identity, transform).GetComponent<Enemy>();
                         _enemies.Add(spawnCandidate);
@@ -72,7 +67,7 @@ namespace Spawn
                 
                 SpawnGrid.ClearGrid();
                 
-                yield return new WaitForSeconds(levelProgressionSo.DelaySpawnTimer);
+                yield return new WaitForSeconds(LevelProgressionSo.DelaySpawnTimer);
             }
 
             FinishedSpawningEvent?.Invoke();

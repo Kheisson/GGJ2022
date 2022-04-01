@@ -13,11 +13,11 @@ public class DebugCanvas : MonoBehaviour
     private void Update()
     {
         if(!debug) Destroy(gameObject);
-        _debugString = $"Level Name: {SpawnManager.Instance.LevelName}\n" +
-                       $"Enemy waves: {SpawnManager.Instance.EnemyWaves}\n" +
-                       $"Enemies already spawned: {SpawnManager.Instance.EnemiesInLevel}\n" +
-                       $"Screen Width: {GameSettings.ScreenBoundaries.x}\n" +
-                       $"Screen Height: {GameSettings.ScreenBoundaries.y}\n";
+        _debugString = @"$""Level Name: {SpawnManager.Instance.LevelName}\n"" +
+                       $""Enemy waves: {SpawnManager.Instance.EnemyWaves}\n"" +
+                       $""Enemies already spawned: {SpawnManager.Instance.EnemiesInLevel}\n"" +
+                       $""Screen Width: {GameSettings.ScreenBoundaries.x}\n"" +
+                       $""Screen Height: {GameSettings.ScreenBoundaries.y}\n""";
         textMeshProUGUI.text = _debugString;
     }
 

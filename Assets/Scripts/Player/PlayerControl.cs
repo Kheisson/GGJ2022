@@ -176,15 +176,14 @@ namespace Player
         
         public void Damage(int damage)
         {
+            PlayerDamagedEvent?.Invoke(damage);
+            playerSettingsSo.Replenish(-damage);
+            
             if (playerSettingsSo.PlayerHealth - damage <= 0)
             {
                 PlayerDefeated();
             }
-            else
-            {
-                PlayerDamagedEvent?.Invoke(damage);
-                playerSettingsSo.Replenish(-damage);
-            }
+
         }
 
         public void Damage(int damage, bool alternative)

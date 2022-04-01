@@ -21,6 +21,11 @@ namespace UI
             targetImageOfButton.sprite = mode ? disabledButtonSprite : enabledButtonSprite;
         }
 
+        public void AbortMission()
+        {
+            LoadToMap();
+        }
+
         private void Awake()
         {
             targetImageOfButton.sprite = GameManager.IsAudioMuted ? disabledButtonSprite : enabledButtonSprite;

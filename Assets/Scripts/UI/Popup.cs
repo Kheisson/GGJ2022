@@ -1,4 +1,5 @@
 using System;
+using Core;
 using DG.Tweening;
 using UnityEngine;
 
@@ -31,6 +32,11 @@ namespace UI
                 PopupClosedEvent?.Invoke();
             });
             
+        }
+
+        protected void LoadToMap()
+        {
+            GameManager.Instance.LoadMap();
         }
     }
 }

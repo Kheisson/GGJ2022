@@ -1,10 +1,6 @@
 using System;
 using DG.Tweening;
-using Level;
-using Player;
 using Save;
-using Spawn;
-using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,13 +10,10 @@ namespace Core
     {
         #region Fields
 
-        [SerializeField] private LevelManager levelManager;
         [SerializeField] private DataManager dataManager;
-        [SerializeField] private Popup failLevelPopup;
+        [SerializeField] private SceneLoadHandler sceneLoadHandler;
 
         private static GameManager _instance;
-        private PlayerControl _playerInstance;
-        private LevelManager _levelManager;
 
         private static bool _isAudioMuted = false;
 
@@ -28,8 +21,6 @@ namespace Core
 
         #region Events
 
-        public Action StartLevelEvent;
-        public Action EndLevelEvent;
         public Action<int, string> CreditUIEvent;
 
         #endregion
@@ -43,7 +34,7 @@ namespace Core
 
         #region Methods
 
-        private void Start()
+        private void Awake()
         {
             Init();
             StartLevel();
@@ -55,9 +46,6 @@ namespace Core
         /// </summary>
         private void StartLevel()
         {
-            _levelManager = Instantiate(levelManager, transform);
-            var playerGameObject = GameObject.FindGameObjectWithTag("Player");
-            _playerInstance = playerGameObject.GetComponent<PlayerControl>();
             SubscribeToLevelEvents();
         }
 
@@ -72,8 +60,8 @@ namespace Core
                 Destroy(this.gameObject);
 
             DontDestroyOnLoad(gameObject);
-            
-            dataManager = Instantiate(dataManager, transform); 
+
+            dataManager = Instantiate(dataManager, transform);
         }
 
         /// <summary>
@@ -82,16 +70,7 @@ namespace Core
         /// </summary>
         private void SubscribeToLevelEvents()
         {
-            _levelManager.UISceneLoadedEvent += OnUISceneLoadedEvent;
-            _playerInstance.PlayerMovedToStartingPosition += OnStartLevelEvent;
-            _playerInstance.PlayerDefeatedEvent += OnPlayerDefeatedEvent;
-            SpawnManager.Instance.FinishedSpawningEvent += OnFinishedSpawningEvent;
             CreditUIEvent += OnCreditUIEvent;
-        }
-
-        private void OnUISceneLoadedEvent()
-        {
-            Debug.Log("UI scene <color=green>loaded</color>");
         }
 
         /// <summary>
@@ -102,33 +81,6 @@ namespace Core
         private void OnCreditUIEvent(int credit, string pickupName)
         {
             //Only for signature purposes, used through instance in the UI/Enemy scripts
-        }
-        
-        private void OnFinishedSpawningEvent()
-        {
-            var uiManager = GameObject.FindGameObjectWithTag("UIManager");
-            var playerBalanceOnLevelFinished = uiManager.GetComponent<PlayerStatsUI>().CoinBalance;
-            DataManager.SaveOnFinishedLevel(SpawnManager.Instance.LevelName, score: 1, playerBalanceOnLevelFinished);
-            Debug.LogWarning(
-                $"Spawned all of the enemies in this level <color=red>{SpawnManager.Instance.LevelName}</color>");
-        }
-        
-        private void OnStartLevelEvent()
-        {
-            SpawnManager.Instance.StartSpawning();
-            levelManager.LevelOnGoingChange();
-        }
-
-        private void OnEndLevel()
-        {
-            levelManager.LevelOnGoingChange();
-            levelManager.UISceneLoadedEvent -= OnUISceneLoadedEvent;
-        }
-
-        private void OnPlayerDefeatedEvent()
-        {
-            var uiManager = GameObject.FindGameObjectWithTag("UIManager");
-            uiManager.GetComponent<PopupManager>().ShowPopup(failLevelPopup);
         }
 
         public static bool Mute()
@@ -149,10 +101,27 @@ namespace Core
 
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("main")).completed += operation =>
             {
-                OnEndLevel();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 Debug.Log("Reloading Scene");
                 Time.timeScale = 1f;
+            };
+        }
+
+        public void LoadLevel(string level)
+        {
+            SceneManager.LoadSceneAsync("LoadingScene").completed += operation =>
+            {
+                var levelLoader = FindObjectOfType<SceneLoadHandler>();
+                levelLoader.LoadLevel(level);
+            };
+        }
+
+        public void LoadMap()
+        {
+            SceneManager.LoadSceneAsync("LoadingScene").completed += operation =>
+            {
+                var levelLoader = FindObjectOfType<SceneLoadHandler>();
+                levelLoader.LoadToMap();
             };
         }
 
