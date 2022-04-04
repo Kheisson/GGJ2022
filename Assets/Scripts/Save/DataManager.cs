@@ -1,3 +1,4 @@
+using Shop;
 using UnityEngine;
 
 namespace Save
@@ -6,7 +7,7 @@ namespace Save
     {
         #region Fields
 
-        public static DataManager Instance { get; private set; }
+        private static DataManager Instance { get; set; }
         private static SaveData _saveData;
         private static FileHandler _fileHandler;
         #endregion
@@ -46,6 +47,61 @@ namespace Save
             }
             
             _fileHandler.SaveToStorage(_saveData);
+        }
+
+        public static void SaveOnPurchase(int balance)
+        {
+            _saveData.wallet = balance;
+            _fileHandler.SaveToStorage(_saveData);
+        }
+
+        public static void SaveOnEquip(ShopItemType type, int itemID)
+        {
+            var bodyData = _saveData.bodyData;
+            switch (type)
+            {
+                case ShopItemType.Cockpit:
+                    bodyData.cockpit = itemID;
+                    break;
+                case ShopItemType.Tail:
+                    bodyData.tail = itemID;
+                    break;
+                case ShopItemType.Wing:
+                    bodyData.wings = itemID;
+                    break;
+                default:
+                    Debug.Log($"ERROR: Item type unknown {type}");
+                    break;
+            }
+            _fileHandler.SaveToStorage(_saveData);
+        }
+
+        public static SaveData GetPlayerData()
+        {
+            return _saveData;
+        }
+
+        public static int GetEquippedItem(ShopItemType type)
+        {
+            var bodyData = _saveData.bodyData;
+            var itemID = -1;
+            switch (type)
+            {
+                case ShopItemType.Cockpit:
+                    itemID = bodyData.cockpit;
+                    break;
+                case ShopItemType.Tail:
+                    itemID = bodyData.tail;
+                    break;
+                case ShopItemType.Wing:
+                    itemID = bodyData.wings;
+                    break;
+                default:
+                    Debug.Log($"ERROR: Item type unknown {type}");
+                    break;
+            }
+
+            return itemID;
         }
         #endregion
     }

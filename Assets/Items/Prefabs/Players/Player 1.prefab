@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 624470363}
   - component: {fileID: 624470364}
   - component: {fileID: 624470362}
+  - component: {fileID: 4427099680501942226}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player
@@ -214,6 +215,21 @@ MonoBehaviour:
   dotweenRotationDuration: 0.5
   planeRotationEase: 0
   _rotateVector: {x: 0, y: 30, z: 0}
+--- !u!114 &4427099680501942226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426994567043645281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfb0137c33d420c9c934b2b3f23ca75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cockpitsParent: {fileID: 3088820939155186633}
+  tailsParent: {fileID: 3653333243284097580}
+  wingsParent: {fileID: 2298064685750471470}
 --- !u!1001 &117520543901121235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -271,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e990f1b032e75684d9def81356bf03f3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e990f1b032e75684d9def81356bf03f3, type: 3}
@@ -407,7 +423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b3061948663b1b84ea68fbbe1bc4a52e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3061948663b1b84ea68fbbe1bc4a52e, type: 3}
@@ -473,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1eecafa8294971846ac6a4d728ea463a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eecafa8294971846ac6a4d728ea463a, type: 3}
@@ -609,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af5c07683855bc240bd03d9b043df6ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af5c07683855bc240bd03d9b043df6ba, type: 3}
@@ -672,6 +688,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a16da27c25c699f4687dcec52b026735, type: 3}
       propertyPath: m_Name
       value: Wing03
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a16da27c25c699f4687dcec52b026735, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a16da27c25c699f4687dcec52b026735, type: 3}
@@ -800,6 +820,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 435cd5366bb8fff43879654e1500f63b, type: 3}
       propertyPath: m_Name
       value: CockPit03
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 435cd5366bb8fff43879654e1500f63b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 435cd5366bb8fff43879654e1500f63b, type: 3}

@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ namespace Core
 
         IEnumerator BeginLoading(string sceneName)
         {
+            DOTween.KillAll();
             progressBar.fillAmount = 0f;
             yield return new WaitForSecondsRealtime(1f);
             var sceneToLoad = SceneManager.LoadSceneAsync(sceneName);

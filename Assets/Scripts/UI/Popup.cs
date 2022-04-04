@@ -15,6 +15,7 @@ namespace UI
 
         private void OnEnable()
         {
+            Time.timeScale = 1f;
             var rect = GetComponent<RectTransform>();
             rect.localScale = Vector3.zero;
             rect.DOScale(Vector3.one, inDuration).SetEase(inEase).OnComplete(() =>

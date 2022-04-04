@@ -7,24 +7,24 @@ namespace Save
     /// <summary>
     /// Serializable classes to store data
     /// levels - gamelevel comprised of best score and level name
-    /// body - comprised of strings to mark skins for the planes body
+    /// bodyData - comprised of strings to mark skins for the planes bodyData
     /// wallet - balance of player
     /// </summary>
     [Serializable]
     public class SaveData
     {
         public List<GameLevel> levels;
-        public PlayerBody body;
+        public PlayerBodyData bodyData;
         public int wallet;
 
         public SaveData()
         {
             wallet = 0;
-            body = new PlayerBody
+            bodyData = new PlayerBodyData
             {
-                cockpit = "default",
-                wings = "default",
-                tail = "default"
+                cockpit = 0,
+                wings = 0,
+                tail = 0
             };
         }
     }

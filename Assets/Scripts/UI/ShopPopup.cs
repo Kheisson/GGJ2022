@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI
@@ -39,6 +38,11 @@ namespace UI
             wingDeals.SetActive(false);
             cockpitDeals.SetActive(false);
             tailDeals.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            OnPopupClosedEvent();
         }
     }
 }
