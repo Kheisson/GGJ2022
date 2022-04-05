@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tail1
   m_EditorClassIdentifier: 
   itemName: Cool
+  itemImage: {fileID: 21300000, guid: 2b6d8ccbf6700544bab80b47d3c263f8, type: 3}
   unlocked: 0
   cost: 100
   id: 1

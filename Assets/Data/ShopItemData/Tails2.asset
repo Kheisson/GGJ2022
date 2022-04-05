@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tails2
   m_EditorClassIdentifier: 
   itemName: Sick
+  itemImage: {fileID: 21300000, guid: 6b36bc1f7c0f9684283b3a30ad702a28, type: 3}
   unlocked: 0
   cost: 200
   id: 2

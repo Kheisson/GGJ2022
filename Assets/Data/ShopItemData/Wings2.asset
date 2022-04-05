@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Wings2
   m_EditorClassIdentifier: 
   itemName: Sick
+  itemImage: {fileID: 21300000, guid: d7387e0d67288264ebe46e8a09d41165, type: 3}
   unlocked: 0
   cost: 200
   id: 2
