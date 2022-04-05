@@ -20,9 +20,13 @@ namespace Player
             LoadWardrobe();
         }
 
+        /// <summary>
+        /// Based on the body data, the 3 parent models on the player gameObject are selected
+        /// Transform of parent contains its children 
+        /// </summary>
         private void LoadWardrobe()
         {
-            var bodyData = DataManager.GetPlayerData().bodyData;
+            var bodyData = DataManager.GetPlayerBodyData();
             foreach (Transform cockpit in cockpitsParent.transform)
             {
                 cockpit.gameObject.SetActive(false);

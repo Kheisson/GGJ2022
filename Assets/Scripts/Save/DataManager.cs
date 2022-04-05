@@ -1,3 +1,4 @@
+using Player;
 using Shop;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ namespace Save
     public class DataManager : MonoBehaviour
     {
         #region Fields
-
         private static DataManager Instance { get; set; }
         private static SaveData _saveData;
         private static FileHandler _fileHandler;
@@ -49,12 +49,14 @@ namespace Save
             _fileHandler.SaveToStorage(_saveData);
         }
 
+        //Updates balance and saves
         public static void SaveOnPurchase(int balance)
         {
             _saveData.wallet = balance;
             _fileHandler.SaveToStorage(_saveData);
         }
 
+        //Saves the game when an object from the garage is equipped
         public static void SaveOnEquip(ShopItemType type, int itemID)
         {
             var bodyData = _saveData.bodyData;
@@ -76,11 +78,17 @@ namespace Save
             _fileHandler.SaveToStorage(_saveData);
         }
 
-        public static SaveData GetPlayerData()
+        public static PlayerBodyData GetPlayerBodyData()
         {
-            return _saveData;
+            return _saveData.bodyData;
         }
 
+        public static int GetPlayerBalance()
+        {
+            return _saveData.wallet;
+        }
+
+        //Returns the currently equipped item based on the item type
         public static int GetEquippedItem(ShopItemType type)
         {
             var bodyData = _saveData.bodyData;

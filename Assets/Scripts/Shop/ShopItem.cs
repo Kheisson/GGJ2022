@@ -25,7 +25,7 @@ namespace Shop
 
         public void Buy()
         {
-            var wallet = DataManager.GetPlayerData().wallet;
+            var wallet = DataManager.GetPlayerBalance();
             if (wallet - shopItem.ItemCost > 0)
             {
                 wallet -= shopItem.ItemCost;

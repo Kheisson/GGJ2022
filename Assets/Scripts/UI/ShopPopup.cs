@@ -10,6 +10,7 @@ namespace UI
         [SerializeField] private GameObject wingDeals;
         [SerializeField] private GameObject tailDeals;
         
+        //Sets the rect content to the cockpit parent and disables the others
         public void ShowCockpitParts(RectTransform rectTransform)
         {
             if (scrollRect.content == rectTransform)
@@ -19,7 +20,7 @@ namespace UI
             tailDeals.SetActive(false);
             cockpitDeals.SetActive(true);
         }
-        
+        //Sets the rect content to the wings parent and disables the others
         public void ShowWingParts(RectTransform rectTransform)
         {
             if (scrollRect.content == rectTransform)
@@ -29,7 +30,7 @@ namespace UI
             tailDeals.SetActive(false);
             wingDeals.SetActive(true);
         }
-        
+        //Sets the rect content to the tail parent and disables the others
         public void ShowTailParts(RectTransform rectTransform)
         {
             if (scrollRect.content == rectTransform)
@@ -39,7 +40,7 @@ namespace UI
             cockpitDeals.SetActive(false);
             tailDeals.SetActive(true);
         }
-
+        //Closes the popup
         public void Hide()
         {
             OnPopupClosedEvent();

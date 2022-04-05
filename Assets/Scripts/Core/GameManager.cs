@@ -82,7 +82,8 @@ namespace Core
         {
             //Only for signature purposes, used through instance in the UI/Enemy scripts
         }
-
+        
+        //Mutes the Audio source on the Main Camera
         public static bool Mute()
         {
             _isAudioMuted = !_isAudioMuted;
@@ -107,6 +108,7 @@ namespace Core
             };
         }
 
+        //Loads the LoadingScene scene
         public void LoadLevel(string level)
         {
             SceneManager.LoadSceneAsync("LoadingScene").completed += operation =>
@@ -116,6 +118,7 @@ namespace Core
             };
         }
 
+        //Loads the Map scene
         public void LoadMap()
         {
             SceneManager.LoadSceneAsync("LoadingScene").completed += operation =>

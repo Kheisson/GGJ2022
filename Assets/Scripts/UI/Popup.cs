@@ -13,6 +13,7 @@ namespace UI
         [SerializeField] private Ease outEase = Ease.OutSine;
         public event Action PopupClosedEvent;
 
+        //Stops gameplay and performs a tween to enlarge rect scale from 0 to 1
         private void OnEnable()
         {
             Time.timeScale = 1f;
@@ -23,7 +24,7 @@ namespace UI
                 Time.timeScale = 0f;
             });
         }
-
+        //Shirks back the rect to 0
         protected virtual void OnPopupClosedEvent()
         {
             var rect = GetComponent<RectTransform>();

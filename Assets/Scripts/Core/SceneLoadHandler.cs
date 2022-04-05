@@ -17,6 +17,7 @@ namespace Core
 
         #region Methods
 
+        //Coroutine to load and update the loading bar
         IEnumerator BeginLoading(string sceneName)
         {
             DOTween.KillAll();
@@ -34,12 +35,13 @@ namespace Core
                 yield return null;
             }
         }
+        //Public method for loading a scene from the loading scene
         public void LoadLevel(string levelNum)
         {
             var level = Level + levelNum;
             StartCoroutine(BeginLoading(level));
         }
-
+        //Load back to map - used by GameManager
         public void LoadToMap()
         {
             StartCoroutine(BeginLoading(Map));
