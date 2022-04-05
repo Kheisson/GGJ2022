@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cockpit2
   m_EditorClassIdentifier: 
   itemName: Sick
+  itemImage: {fileID: 21300000, guid: d696937966797724b8d42769cb046cd5, type: 3}
   unlocked: 0
   cost: 200
   id: 2

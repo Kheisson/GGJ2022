@@ -1,6 +1,7 @@
 using Save;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Shop
 {
@@ -11,13 +12,19 @@ namespace Shop
         [SerializeField] private GameObject buyButton;
         [SerializeField] private GameObject equipButton;
         [SerializeField] private GameObject priceText;
+        [SerializeField] private Image cosmeticIconPlacement;
         #endregion
 
         #region Methods
 
         private void OnEnable()
         {
-            if (shopItem.ItemUnlocked) return;
+            cosmeticIconPlacement.sprite = shopItem.ItemImage;
+            if (shopItem.ItemUnlocked)
+            {
+                equipButton.SetActive(true);
+                return;
+            }
             buyButton.SetActive(true);
             priceText.SetActive(true);
             GetComponentInChildren<TextMeshProUGUI>().text = shopItem.ItemCost.ToString();
@@ -29,6 +36,7 @@ namespace Shop
             if (wallet - shopItem.ItemCost > 0)
             {
                 wallet -= shopItem.ItemCost;
+                shopItem.ItemUnlocked = true;
                 buyButton.SetActive(false);
                 priceText.SetActive(false);
                 DataManager.SaveOnPurchase(wallet);

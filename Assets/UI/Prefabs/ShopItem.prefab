@@ -141,6 +141,7 @@ MonoBehaviour:
   buyButton: {fileID: 6757312766434317166}
   equipButton: {fileID: 6233675497428616871}
   priceText: {fileID: 5545502868019287040}
+  cosmeticIconPlacement: {fileID: 3259755170314705820}
 --- !u!1 &2521327734423100172
 GameObject:
   m_ObjectHideFlags: 0
