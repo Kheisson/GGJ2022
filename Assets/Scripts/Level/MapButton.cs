@@ -1,17 +1,18 @@
+using AirFishLab.ScrollingList;
 using Core;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Level
 {
     public class MapButton : MonoBehaviour
     {
-        public void LoadLevel()
+        [SerializeField] private CircularScrollingList _circularScrollingList;
+
+        public void LoadLevel(int level)
         {
-            var eventSystem = FindObjectOfType<EventSystem>();
-            var levelName = eventSystem.currentSelectedGameObject.gameObject.GetComponentInChildren<TextMeshProUGUI>().text;
-            GameManager.Instance.LoadLevel(levelName);
+            var levelNumber = (int) _circularScrollingList.listBank.GetListContent(level);
+            GameManager.Instance.LoadLevel(levelNumber.ToString());
+            print($"Loading scene: {levelNumber.ToString()}");
         }
     }
 }

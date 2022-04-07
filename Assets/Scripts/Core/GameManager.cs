@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Save;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Core
 
         private static bool _isAudioMuted = false;
 
+        private static HashSet<int> _clearedLevels;
         #endregion
 
         #region Events
@@ -47,6 +49,7 @@ namespace Core
         private void StartLevel()
         {
             SubscribeToLevelEvents();
+            _clearedLevels = DataManager.GetClearedLevels();
         }
 
         /// <summary>
@@ -126,6 +129,16 @@ namespace Core
                 var levelLoader = FindObjectOfType<SceneLoadHandler>();
                 levelLoader.LoadToMap();
             };
+        }
+
+        public void AddCompletedLevel(string level)
+        {
+            _clearedLevels.Add(int.Parse(level.Split('l')[1]));
+        }
+
+        public bool GetClearedLevel(int level)
+        {
+            return _clearedLevels.Contains(level);
         }
 
         #endregion

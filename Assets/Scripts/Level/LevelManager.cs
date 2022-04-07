@@ -1,3 +1,4 @@
+using Core;
 using Player;
 using Save;
 using Spawn;
@@ -59,6 +60,7 @@ namespace Level
             DataManager.SaveOnFinishedLevel(levelProgressionSo.name, score: 1, playerBalanceOnLevelFinished);
             Debug.LogWarning(
                 $"Spawned all of the enemies in this level <color=red>{levelProgressionSo.name}</color>");
+            GameManager.Instance.AddCompletedLevel(levelProgressionSo.name);
         }
 
         private void OnPlayerDefeatedEvent()

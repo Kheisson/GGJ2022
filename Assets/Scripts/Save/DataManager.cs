@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Player;
 using Shop;
 using UnityEngine;
@@ -86,6 +88,17 @@ namespace Save
         public static int GetPlayerBalance()
         {
             return _saveData.wallet;
+        }
+
+        public static HashSet<int> GetClearedLevels()
+        {
+            var levels = new HashSet<int>();
+            foreach (var level in _saveData.levels)
+            {
+                levels.Add(int.Parse(level.levelName.Split('l')[1]));
+            }
+
+            return levels;
         }
 
         //Returns the currently equipped item based on the item type
