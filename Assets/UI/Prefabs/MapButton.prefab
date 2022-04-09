@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _contentText: {fileID: 2528115804336100786}
+  onButton: {fileID: 7127043110334960342}
+  offButton: {fileID: 8409275480812498940}
 --- !u!114 &1459271005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +274,7 @@ GameObject:
   - component: {fileID: 3000027155848733386}
   - component: {fileID: 5148182600920552205}
   m_Layer: 5
-  m_Name: MapButtonoff
+  m_Name: MapButtonOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e62b154fcc2469ba557600f14d67c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _circularScrollingList: {fileID: 1689284540468336991}
+  circularScrollingList: {fileID: 1689284540468336991}
 --- !u!114 &1689284540468336991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,6 +583,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1689284540468336976}
     m_Modifications:
+    - target: {fileID: 1459271005, guid: ab3a4e6e43398ed429b1c3c0e5332b46, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5080975448655132710, guid: ab3a4e6e43398ed429b1c3c0e5332b46, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -670,6 +674,10 @@ PrefabInstance:
     - target: {fileID: 7079044922623318925, guid: ab3a4e6e43398ed429b1c3c0e5332b46, type: 3}
       propertyPath: m_Name
       value: ListBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409275480812498940, guid: ab3a4e6e43398ed429b1c3c0e5332b46, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3a4e6e43398ed429b1c3c0e5332b46, type: 3}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 // The bank for providing the content for the box to display
 // Must be inherit from the class BaseListBank
-namespace Plugins.CircularScrollingList.Scripts
+namespace AirFishLab.Fixes
 {
     public class IntListBank : BaseListBank
     {

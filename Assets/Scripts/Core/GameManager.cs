@@ -130,7 +130,7 @@ namespace Core
                 levelLoader.LoadToMap();
             };
         }
-
+        
         public void AddCompletedLevel(string level)
         {
             _clearedLevels.Add(int.Parse(level.Split('l')[1]));
@@ -142,5 +142,6 @@ namespace Core
         }
 
         #endregion
+        
     }
 }

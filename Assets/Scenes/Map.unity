@@ -392,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1689284540468336976, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1689284540468336976, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
       propertyPath: m_AnchorMax.x
@@ -469,6 +469,10 @@ PrefabInstance:
     - target: {fileID: 1689284540468336979, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
       propertyPath: m_Name
       value: MapButtonsScroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188365301901738841, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
@@ -836,8 +840,8 @@ RectTransform:
   - {fileID: 219237484}
   - {fileID: 1568631794}
   - {fileID: 1340567454}
-  - {fileID: 83583773}
   - {fileID: 1019722695}
+  - {fileID: 83583773}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

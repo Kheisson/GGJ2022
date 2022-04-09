@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 // The box used for displaying the content
 // Must be inherited from the class ListBox
-namespace Plugins.CircularScrollingList.Scripts
+namespace AirFishLab.Fixes
 {
     public class IntListBox : ListBox
     {
@@ -14,6 +14,8 @@ namespace Plugins.CircularScrollingList.Scripts
         [SerializeField] private GameObject onButton;
         [SerializeField] private GameObject offButton;
         private RectTransform _rectTransform;
+
+        public string Text => _contentText.text;
         
         // This function is invoked by the `CircularScrollingList` for updating the list content.
         // The type of the content will be converted to `object` in the `IntListBank` (Defined later)
@@ -22,6 +24,14 @@ namespace Plugins.CircularScrollingList.Scripts
         private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
+        }
+
+        public void TurnButton(bool mode)
+        {
+            onButton.SetActive(mode);
+            offButton.SetActive(!mode);
+            var button = GetComponent<Button>();
+            button.enabled = mode;
         }
 
         protected override void UpdateDisplayContent(object content)
