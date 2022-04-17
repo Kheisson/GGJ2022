@@ -17,6 +17,7 @@ namespace Level
             InvokeRepeating(nameof(UpdateButtonStates), 0.1f, 0.1f);
         }
 
+        //Affected by dynamic int thats passed from the button
         public void LoadLevel(int level)
         {
             var levelNumber = (int) circularScrollingList.listBank.GetListContent(level);
@@ -24,6 +25,7 @@ namespace Level
             print($"Loading scene: {levelNumber.ToString()}");
         }
 
+        //Restores time scale to flow and caches the listBank 
         private void Init()
         {
             Time.timeScale = 1f;
@@ -33,6 +35,8 @@ namespace Level
                 _listBoxes.Add(box);
             }
         }
+        
+        //Runs every 1.0 seconds and updates the button state of the level selection buttons
         private void UpdateButtonStates()
         {
             foreach (var box in _listBoxes)

@@ -2057,17 +2057,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9000238038268499085}
     m_Modifications:
-    - target: {fileID: 1123394073581020118, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
-      propertyPath: shopItem
-      value: 
-      objectReference: {fileID: 11400000, guid: 06534ec5a5ab94f6aa0873372caece34, type: 2}
     - target: {fileID: 2052348712913630556, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
       propertyPath: m_Name
       value: Deal1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259755170314705820, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
-      propertyPath: m_Sprite
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6024277264761195994, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
       propertyPath: m_Pivot.x
@@ -2152,10 +2144,6 @@ PrefabInstance:
     - target: {fileID: 6024277264761195994, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6233675497428616871, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
@@ -2284,6 +2272,10 @@ PrefabInstance:
     - target: {fileID: 2052348712913630556, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
       propertyPath: m_Name
       value: Deal3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052348712913630556, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6024277264761195994, guid: fd703a72b3a0c40f7aadfc938fe19b95, type: 3}
       propertyPath: m_Pivot.x

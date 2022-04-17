@@ -100,7 +100,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052348712913630556}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c8bb20643441a38b78cdc65cd186e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopItem: {fileID: 0}
+  shopItem: {fileID: 11400000, guid: 06534ec5a5ab94f6aa0873372caece34, type: 2}
   buyButton: {fileID: 6757312766434317166}
   equipButton: {fileID: 6233675497428616871}
   priceText: {fileID: 5545502868019287040}
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fa20fb53ba968054a9e265db8c87f044, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

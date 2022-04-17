@@ -14,6 +14,7 @@ namespace AirFishLab.Fixes
         [SerializeField] private GameObject onButton;
         [SerializeField] private GameObject offButton;
         private RectTransform _rectTransform;
+        private Button _button;
 
         public string Text => _contentText.text;
         
@@ -24,14 +25,14 @@ namespace AirFishLab.Fixes
         private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
+            _button = GetComponent<Button>();
         }
 
         public void TurnButton(bool mode)
         {
             onButton.SetActive(mode);
             offButton.SetActive(!mode);
-            var button = GetComponent<Button>();
-            button.enabled = mode;
+            _button.enabled = mode;
         }
 
         protected override void UpdateDisplayContent(object content)

@@ -1,4 +1,5 @@
 using Core;
+using Enemies;
 using UnityEngine;
 
 namespace Projectile
@@ -47,6 +48,9 @@ namespace Projectile
         {
             if (other.TryGetComponent(typeof(IDamagable), out var subject))
             {
+                if (subject.GetComponentInParent(typeof(Enemy)) != null) //Guards against enemy self-harm
+                    return;
+                
                 subject.GetComponent<IDamagable>().Damage(projectileDetails.Damage);
                 gameObject.SetActive(false);
             }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Player;
 using Shop;
 using UnityEngine;
@@ -56,6 +55,7 @@ namespace Save
         {
             _saveData.wallet = balance;
             _fileHandler.SaveToStorage(_saveData);
+            PlayerPrefs.Save();
         }
 
         //Saves the game when an object from the garage is equipped

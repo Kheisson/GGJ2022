@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Save;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,6 +32,8 @@ namespace Core
 
         public static GameManager Instance => _instance;
         public static bool IsAudioMuted => _isAudioMuted;
+
+        public bool IsImortal;
 
         #endregion
 
@@ -131,11 +134,13 @@ namespace Core
             };
         }
         
+        //In use for level scroll map, based on the level name
         public void AddCompletedLevel(string level)
         {
             _clearedLevels.Add(int.Parse(level.Split('l')[1]));
         }
 
+        //returns true if the hashset contains the level 
         public bool GetClearedLevel(int level)
         {
             return _clearedLevels.Contains(level);

@@ -109,9 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129ea14e5eab48b496de1f7c0dfee0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountToCredit: 25
   decayTimer: 5
+  speed: 5
   shakeDuration: 0.5
-  shakeStrength: 0.5
+  shakeStrength: 1
   shakeRepeats: 3
   shakeEase: 29
+  rotationSpeed: 2

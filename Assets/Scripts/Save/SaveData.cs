@@ -26,6 +26,7 @@ namespace Save
                 wings = 0,
                 tail = 0
             };
+            levels = new List<GameLevel>() {new GameLevel("Level1", 1)};
         }
     }
 

@@ -176,6 +176,8 @@ namespace Player
         
         public void Damage(int damage)
         {
+            if (GameManager.Instance.IsImortal)
+                return;
             PlayerDamagedEvent?.Invoke(damage);
             playerSettingsSo.Replenish(-damage);
             
@@ -188,6 +190,8 @@ namespace Player
 
         public void Damage(int damage, bool alternative)
         {
+            if (GameManager.Instance.IsImortal)
+                return;
             if(alternative)
                 playerSettingsSo.Replenish(damage);
             else

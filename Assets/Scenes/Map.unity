@@ -470,10 +470,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapButtonsScroll
       objectReference: {fileID: 0}
-    - target: {fileID: 7188365301901738841, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9c7666823304fe2bc50794685b0d05, type: 3}
 --- !u!224 &1019722695 stripped

@@ -20,23 +20,28 @@ namespace Shop
         private void OnEnable()
         {
             cosmeticIconPlacement.sprite = shopItem.ItemImage;
-            if (shopItem.ItemUnlocked)
+            if (PlayerPrefs.GetInt(shopItem.name, 0) == 1 || shopItem.name.Contains("0"))
             {
                 equipButton.SetActive(true);
-                return;
+                buyButton.SetActive(false);
+                priceText.SetActive(false);
             }
-            buyButton.SetActive(true);
-            priceText.SetActive(true);
-            GetComponentInChildren<TextMeshProUGUI>().text = shopItem.ItemCost.ToString();
+            else
+            {
+                buyButton.SetActive(true);
+                priceText.SetActive(true);
+                GetComponentInChildren<TextMeshProUGUI>().text = shopItem.ItemCost.ToString();
+            }
         }
 
+        //Checks if there is enough credit, if there is then unlocks data and updates buttons (visually)
         public void Buy()
         {
             var wallet = DataManager.GetPlayerBalance();
             if (wallet - shopItem.ItemCost > 0)
             {
                 wallet -= shopItem.ItemCost;
-                shopItem.ItemUnlocked = true;
+                PlayerPrefs.SetInt(shopItem.name, 1);
                 buyButton.SetActive(false);
                 priceText.SetActive(false);
                 DataManager.SaveOnPurchase(wallet);
@@ -48,6 +53,7 @@ namespace Shop
             }
         }
 
+        //Saves the equipped data in data.json
         public void Equip()
         {
             var itemID = DataManager.GetEquippedItem(shopItem.ItemType);

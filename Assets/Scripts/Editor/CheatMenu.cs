@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Core;
 using Save;
 using UnityEditor;
 using UnityEngine;
@@ -75,6 +76,8 @@ namespace Editor
                 DataManager.SaveOnFinishedLevel("Level1", 0, int.Parse(credit));
             }
 
+            GameManager.Instance.IsImortal = infiniteLife;
+
             levelToOpen = "";
             amountToCredit = "";
         }
@@ -88,6 +91,7 @@ namespace Editor
                 {
                     File.Delete(file);
                     Debug.Log("<color=red>Save file deleted</color>");
+                    PlayerPrefs.DeleteAll();
                 }
                 else
                 {
