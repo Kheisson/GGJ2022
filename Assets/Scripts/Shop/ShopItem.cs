@@ -11,6 +11,7 @@ namespace Shop
         [SerializeField] private ShopItemData shopItem;
         [SerializeField] private GameObject buyButton;
         [SerializeField] private GameObject equipButton;
+        [SerializeField] private GameObject selectionFrame;
         [SerializeField] private GameObject priceText;
         [SerializeField] private Image cosmeticIconPlacement;
         #endregion
@@ -32,6 +33,10 @@ namespace Shop
                 priceText.SetActive(true);
                 GetComponentInChildren<TextMeshProUGUI>().text = shopItem.ItemCost.ToString();
             }
+
+            var body = DataManager.GetEquippedItem(shopItem.ItemType);
+            if(body == shopItem.ItemId)
+                SetSelected(true);
         }
 
         //Checks if there is enough credit, if there is then unlocks data and updates buttons (visually)
@@ -60,6 +65,17 @@ namespace Shop
             if (itemID == shopItem.ItemId)
                 return;
             DataManager.SaveOnEquip(shopItem.ItemType, shopItem.ItemId);
+            var shopItems = GameObject.FindGameObjectsWithTag("ShopItem");
+            foreach (var item in shopItems)
+            {
+                item.GetComponent<ShopItem>().SetSelected(false);
+            }
+            SetSelected(true);
+        }
+
+        private void SetSelected(bool isSelected)
+        {
+            selectionFrame.SetActive(isSelected);
         }
 
         #endregion
