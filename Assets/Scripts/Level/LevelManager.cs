@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Core;
+using Enemies;
 using Player;
 using Save;
 using Spawn;
@@ -15,6 +17,7 @@ namespace Level
         [SerializeField] private float backgroundSpeed = 12f;
         [SerializeField] private LevelProgressionSo levelProgressionSo;
         [SerializeField] private Popup failLevelPopup;
+        [SerializeField] private List<Enemy> enemyTypes;
 
         private GameObject _backgroundGameObject;
         private bool _levelOnGoing = false;
@@ -93,6 +96,7 @@ namespace Level
         {
             _spawnManager = new GameObject("SpawnManager").AddComponent<SpawnManager>();
             _spawnManager.LevelProgressionSo = levelProgressionSo;
+            _spawnManager.Enemies = enemyTypes;
         }
 
         #endregion

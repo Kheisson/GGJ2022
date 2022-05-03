@@ -1,8 +1,5 @@
-using System;
-using Core;
 using Level;
 using UnityEditor;
-using UnityEngine;
 
 namespace Editor
 {
@@ -12,7 +9,8 @@ namespace Editor
         
         public override void OnInspectorGUI()
         {
-            var body = (LevelProgressionSo) target;
+            base.DrawDefaultInspector();
+            /*var body = (LevelProgressionSo) target;
             serializedObject.Update();
             EditorGUILayout.LabelField("Level Editor:", EditorStyles.boldLabel);
             EditorGUILayout.Space(10);
@@ -40,7 +38,8 @@ namespace Editor
             EditorGUILayout.Space(20);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("delaySpawnTimer"),true);
             serializedObject.ApplyModifiedProperties();
-            
+            */
+
         }
     }
 }
