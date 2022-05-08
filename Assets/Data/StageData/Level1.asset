@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b27252ecb4d448aa376783655e9de3a, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  delaySpawnTimer: 5
-  enemySpawnList:
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  spawnEachAmount: 020000000300000004000000050000000400000003000000020000000100000001000000010000000100000001000000
+  units:
+  - enemyType: 0
+    positionOnGrid: 4
+    delay: 4
+  - enemyType: 1
+    positionOnGrid: 3
+    delay: 4
+  - enemyType: 2
+    positionOnGrid: 1
+    delay: 4
+  - enemyType: 2
+    positionOnGrid: 1
+    delay: 4
+  - enemyType: 0
+    positionOnGrid: 0
+    delay: 4

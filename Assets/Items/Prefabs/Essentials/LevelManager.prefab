@@ -43,3 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229446d5908f147818c13e0649d79e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundSpeed: 12
+  levelProgressionSo: {fileID: 11400000, guid: 70170ffbac04d4859a29b860e4706a23, type: 2}
+  failLevelPopup: {fileID: 0}
+  enemyTypes:
+  - {fileID: 7179329321672597339, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 2214393168083097886, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
+  - {fileID: 2679902041142841855, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
+  - {fileID: 7179329321672597339, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
+  - {fileID: 2214393168083097886, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
+  - {fileID: 2679902041142841855, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
+  - {fileID: 7179329321672597339, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
