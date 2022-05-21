@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   units:
-  - enemyType: 0
+  - enemyType: 1
     positionOnGrid: 4
     delay: 4
-  - enemyType: 0
+  - enemyType: 1
     positionOnGrid: 0
     delay: 6
   - enemyType: 1
@@ -25,10 +25,10 @@ MonoBehaviour:
   - enemyType: 1
     positionOnGrid: 3
     delay: 4
-  - enemyType: 6
+  - enemyType: 1
     positionOnGrid: 2
     delay: 3
-  - enemyType: 6
+  - enemyType: 1
     positionOnGrid: 2
     delay: 7
   - enemyType: 5

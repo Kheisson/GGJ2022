@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Core;
 using Helpers;
 using Pickups;
-using Projectile;
 using UnityEngine;
 
 namespace Enemies
@@ -27,10 +25,7 @@ namespace Enemies
         #region Fields
 
         [SerializeField] private EnemySetupSo enemySetupSo;
-
-        private List<IProjectile> _projectiles;
         private Collider _collider;
-        private Transform[] _children;
         private int _health;
         private float _pickupDropChance = 0.8f;
         private string _pickupName;
@@ -50,7 +45,6 @@ namespace Enemies
                              RigidbodyConstraints.FreezeRotationZ;
             _collider = GetComponent<Collider>();
             _collider.enabled = false;
-            _children = new Transform[enemySetupSo.AvaliableShots];
             _pickupName = Enum.GetName(typeof(PickupType), enemySetupSo.TypeOfPickup);
             _transform = transform;
             _gameObject = gameObject;
@@ -59,14 +53,6 @@ namespace Enemies
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
-            if (_projectiles == null || _projectiles.Count == 0)
-                CreateProjectileQueue();
-            
-            if (_children[0] != null) return;
-            for (var i = 0; i < _transform.childCount; i++)
-            {
-                _children[i] = _transform.GetChild(i);
-            }
         }
 
         private void Update()
@@ -94,10 +80,6 @@ namespace Enemies
 
         private void OnBecameVisible()
         {
-            foreach (var child in _children)
-            {
-                child.SetParent(_transform);
-            }
             Attack();
             _collider.enabled = true;
         }
@@ -108,8 +90,8 @@ namespace Enemies
             {
                 for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
-                    _projectiles[i].Fire(_transform.position - (Vector3.up * 6));
-                    yield return new WaitForSeconds(_projectiles[i].FireRate);
+                    GameManager.Spawner.FireProjectile(enemySetupSo.EnemyProjectile.name,_transform.position - (Vector3.up * 6));
+                    yield return new WaitForSeconds(3f);
                 }
 
                 yield return new WaitForSeconds(1f);
@@ -119,11 +101,6 @@ namespace Enemies
         private void Attack()
         { 
             StartCoroutine(EnemyAttackCoroutine());
-        }
-        
-        private void CreateProjectileQueue()
-        {
-            _projectiles = ProjectileFactory.Instance.CreateWeaponQueue(enemySetupSo.EnemyProjectile, enemySetupSo.AvaliableShots, _transform);
         }
 
         /// <summary>
@@ -171,6 +148,16 @@ namespace Enemies
             
             if(_health <= 0)
                 Defeat();
+        }
+        /// <summary>
+        /// Initiates the enemy to the correct behavioural style
+        /// </summary>
+        /// <param name="enemyType"></param>
+        public void Init(EnemyType enemyType)
+        {
+            //TODO: Movement setup
+            //TODO: Weapon setup
+            GameManager.Spawner.SetupProjectile(enemySetupSo.EnemyProjectile);
         }
         
         #endregion

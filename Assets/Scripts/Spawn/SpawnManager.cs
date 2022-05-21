@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Level;
+using Projectile;
 using UnityEngine;
 
 namespace Spawn
@@ -11,6 +12,7 @@ namespace Spawn
     {
         #region Fields
         private List<GameObject> _enemies = new List<GameObject>();
+        private List<IProjectile> _projectiles = new List<IProjectile>();
         #endregion
 
         #region Properties
@@ -54,6 +56,7 @@ namespace Spawn
                         Enemy.UniversalEnemyStartingPosition + newPos,
                         Quaternion.identity,
                         transform);
+                    spawnCandidate.GetComponent<Enemy>().Init(spawnUnitList[i].enemyType);
                     _enemies.Add(spawnCandidate) ;
                 }
                 else
@@ -69,9 +72,25 @@ namespace Spawn
         }
 
         private void StopSpawning() => StopAllCoroutines();
-
-
         public void StartSpawning() => StartCoroutine(StartSpawningCoroutine());
+
+        public void FireProjectile(string projectileType, Vector3 spawnPoint)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.name.Contains(projectileType) &&
+                    !child.gameObject.activeInHierarchy)
+                {
+                    child.GetComponent<IProjectile>().Fire(spawnPoint);
+                }
+            }
+        }
+
+        public void SetupProjectile(GameObject projectile)
+        {
+            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 2, transform);
+            _projectiles.AddRange(projectiles);
+        }
 
         #endregion
     }

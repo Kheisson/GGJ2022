@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7592972843722606879}
   m_Layer: 0
   m_Name: SpawnManager
-  m_TagString: Untagged
+  m_TagString: SpawnManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,4 +43,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32208fa8eadc4c9fbffc1248eac35860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelProgressionSo: {fileID: 11400000, guid: ed161afb65f7449c78ce5416eb778ae1, type: 2}

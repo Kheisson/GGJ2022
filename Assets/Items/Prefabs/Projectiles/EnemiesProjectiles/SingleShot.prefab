@@ -7,10 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 874463390, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
-      propertyPath: projectileDetails
-      value: 
-      objectReference: {fileID: 11400000, guid: a2251a27b882d4aeba9d61df15cb86fa, type: 2}
     - target: {fileID: 3776202562678289676, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -57,21 +53,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3776202562678289712, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
       propertyPath: m_Name
-      value: EnemyDemoProjectile
+      value: SingleShot
       objectReference: {fileID: 0}
-    - target: {fileID: 3776202562678289714, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 57548a42983e142248ae7515099665dd, type: 2}
-    m_RemovedComponents:
-    - {fileID: 8498794687199603328, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
 --- !u!1 &273339286909359908 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3776202562678289712, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
   m_PrefabInstance: {fileID: 4011823927016808980}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-7601215158127201867
+--- !u!114 &-8811626288666881045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,4 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2311b2b4fd04005a72f1fd166f79e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDetails: {fileID: 11400000, guid: a2251a27b882d4aeba9d61df15cb86fa, type: 2}
+  projectileDetails: {fileID: 0}
