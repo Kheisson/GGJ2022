@@ -75,5 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c2f9ab348e4832a5ca422315e1a4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDetails: {fileID: 0}
-  decoy: {fileID: 0}
+  projectileDetails: {fileID: 11400000, guid: 505da7e70123d4cd69be2353aa40cb85, type: 2}
+  decoy: {fileID: -8811626288666881045, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
+  decoySpawnDelay: 0.25

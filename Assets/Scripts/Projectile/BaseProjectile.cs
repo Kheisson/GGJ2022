@@ -48,9 +48,6 @@ namespace Projectile
         {
             if (other.TryGetComponent(typeof(IDamagable), out var subject))
             {
-                if (subject.GetComponent<Enemy>() != null) //Guards against enemy self-harm
-                    return;
-
                 subject.GetComponent<IDamagable>().Damage(projectileDetails.Damage);
                 gameObject.SetActive(false);
             }

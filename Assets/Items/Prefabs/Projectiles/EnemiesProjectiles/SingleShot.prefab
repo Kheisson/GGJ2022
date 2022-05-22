@@ -55,7 +55,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: SingleShot
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3776202562678289712, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3582120330160076005, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 965a1fd3dfe214e3a8b79355586cd3ac, type: 3}
 --- !u!1 &273339286909359908 stripped
 GameObject:
@@ -74,4 +79,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2311b2b4fd04005a72f1fd166f79e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDetails: {fileID: 0}
+  projectileDetails: {fileID: 11400000, guid: 66f1d54e8fd1940a18ffd6fd6c32a9ca, type: 2}

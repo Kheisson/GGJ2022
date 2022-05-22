@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1102831173339122902, guid: 557fd2c5c9fdb48cab892538b5221fd5, type: 3}
+      propertyPath: enemySetupSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 51da6d80d05ab45de9312c745e4dfb08, type: 2}
     - target: {fileID: 8302614769202365305, guid: 557fd2c5c9fdb48cab892538b5221fd5, type: 3}
       propertyPath: m_Name
-      value: EnemyType4
+      value: EnemyType5
       objectReference: {fileID: 0}
     - target: {fileID: 8679281491584768451, guid: 557fd2c5c9fdb48cab892538b5221fd5, type: 3}
       propertyPath: m_RootOrder

@@ -8,6 +8,7 @@ TagManager:
   - UIManager
   - ShopItem
   - SpawnManager
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - UI
   - Player
   - Pickups
-  - 
-  - 
-  - 
+  - EnemyProjectile
+  - PlayerProjectile
+  - Enemy
   - 
   - 
   - 

@@ -91,10 +91,10 @@ namespace Enemies
                 for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
                     GameManager.Spawner.FireProjectile(enemySetupSo.EnemyProjectile.name,_transform.position - (Vector3.up * 6));
-                    yield return new WaitForSeconds(3f);
+                    //yield return new WaitForSeconds(0.3f);
                 }
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(enemySetupSo.EnemyProjectile.FireRate);
             }
         }
 
@@ -157,7 +157,7 @@ namespace Enemies
         {
             //TODO: Movement setup
             //TODO: Weapon setup
-            GameManager.Spawner.SetupProjectile(enemySetupSo.EnemyProjectile);
+            GameManager.Spawner.SetupProjectile(enemySetupSo.EnemyProjectile.gameObject);
         }
         
         #endregion

@@ -53,7 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 986573103899662373, guid: 5a6a7b4a2e59b49169019b733ee6b7e9, type: 3}
       propertyPath: m_Name
-      value: EnemyType5
+      value: EnemyType6
       objectReference: {fileID: 0}
+    - target: {fileID: 8198759405803001738, guid: 5a6a7b4a2e59b49169019b733ee6b7e9, type: 3}
+      propertyPath: enemySetupSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 06563ed5d0a2c437fb00e689b9779165, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a6a7b4a2e59b49169019b733ee6b7e9, type: 3}

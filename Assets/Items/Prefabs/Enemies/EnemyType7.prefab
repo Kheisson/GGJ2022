@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1672136906147481231, guid: 3f909b4a6f68c4b4d902962f2636f5fe, type: 3}
       propertyPath: m_Name
-      value: EnemyType6
+      value: EnemyType7
       objectReference: {fileID: 0}
     - target: {fileID: 2053446836790598709, guid: 3f909b4a6f68c4b4d902962f2636f5fe, type: 3}
       propertyPath: m_RootOrder
@@ -55,5 +55,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7728815327825283360, guid: 3f909b4a6f68c4b4d902962f2636f5fe, type: 3}
+      propertyPath: enemySetupSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 78047151c0aa6413e9d7642670a079fd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f909b4a6f68c4b4d902962f2636f5fe, type: 3}

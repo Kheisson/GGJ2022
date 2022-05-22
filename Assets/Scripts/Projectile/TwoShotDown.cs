@@ -6,12 +6,13 @@ namespace Projectile
     public class TwoShotDown : BaseProjectile
     {
         [SerializeField] private BaseProjectile decoy;
+        [SerializeField] private float decoySpawnDelay;
         private Vector2 _decoyStartingPoint;
         public override void Fire(Vector2 startingPoint)
         {
             base.Fire(startingPoint);
             _decoyStartingPoint = startingPoint;
-            Invoke(nameof(CreateDecoy), 0.5f);
+            Invoke(nameof(CreateDecoy), decoySpawnDelay);
         }
 
         private void CreateDecoy()

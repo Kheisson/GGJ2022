@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2679902041142841855, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
+      propertyPath: enemySetupSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b42f372192484cf7a33800a422e76db, type: 2}
     - target: {fileID: 5912636040073086186, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6432890185671433808, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
       propertyPath: m_Name
-      value: EnemyType3
+      value: EnemyType4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}

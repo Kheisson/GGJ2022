@@ -57,6 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8811626288666881045, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
+    - {fileID: 439914521656202993, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
 --- !u!1 &4119832812161814198 stripped
 GameObject:
@@ -75,4 +76,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d91cbf17ece497ebc62cf3fc8c85ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileDetails: {fileID: 0}
+  projectileDetails: {fileID: 11400000, guid: f143e5afd37fb4c9daebc081c08229e8, type: 2}
+  decoy: {fileID: -8811626288666881045, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}
