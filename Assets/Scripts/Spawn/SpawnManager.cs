@@ -13,7 +13,7 @@ namespace Spawn
         #region Fields
         private List<GameObject> _enemies = new List<GameObject>();
         private List<IProjectile> _projectiles = new List<IProjectile>();
-        private Transform _projectileBucket;
+        private GameObject _projectileBucket = null;
         #endregion
 
         #region Properties
@@ -22,9 +22,7 @@ namespace Spawn
         #endregion
 
         #region Events
-
         public Action FinishedSpawningEvent;
-
         #endregion
 
         #region Methods
@@ -32,7 +30,7 @@ namespace Spawn
         private void Awake()
         {
             SpawnGrid.Init();
-            _projectileBucket = Instantiate(new GameObject("Projectile Bucket"), transform).transform;
+            _projectileBucket = new GameObject("ProjectileBucket");
         }
 
         /// <summary>
@@ -78,7 +76,7 @@ namespace Spawn
 
         public void FireProjectile(string projectileType, Vector3 spawnPoint)
         {
-            foreach (Transform child in _projectileBucket)
+            foreach (Transform child in _projectileBucket.transform)
             {
                 if (child.gameObject.name.Contains(projectileType) &&
                     !child.gameObject.activeInHierarchy)
@@ -90,7 +88,7 @@ namespace Spawn
 
         public void SetupProjectile(GameObject projectile)
         {
-            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 1, _projectileBucket);
+            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 1, _projectileBucket.transform);
             _projectiles.AddRange(projectiles);
         }
 

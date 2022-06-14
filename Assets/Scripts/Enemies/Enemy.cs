@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Core;
 using Helpers;
+using MovementModules;
 using Pickups;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ namespace Enemies
         //Cached C++ elements
         private Transform _transform;
         private GameObject _gameObject;
+        private MovingEnemy _moveModule;
         #endregion
 
         #region Methods
@@ -53,6 +55,8 @@ namespace Enemies
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
+            if(_moveModule != null)
+                _moveModule.StartMoving();
         }
 
         private void Update()
@@ -91,7 +95,7 @@ namespace Enemies
                 for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
                     GameManager.Spawner.FireProjectile(enemySetupSo.EnemyProjectile.name,_transform.position - (Vector3.up * 6));
-                    //yield return new WaitForSeconds(0.3f);
+                    yield return new WaitForSeconds(0.25f);
                 }
 
                 yield return new WaitForSeconds(enemySetupSo.EnemyProjectile.FireRate);
@@ -155,9 +159,10 @@ namespace Enemies
         /// <param name="enemyType"></param>
         public void Init(EnemyType enemyType)
         {
-            //TODO: Movement setup
-            //TODO: Weapon setup
+            _moveModule = MoveModule.AddMovingModule(enemyType, transform);
             GameManager.Spawner.SetupProjectile(enemySetupSo.EnemyProjectile.gameObject);
+            if(_moveModule != null)
+                _moveModule.StartMoving();
         }
         
         #endregion
