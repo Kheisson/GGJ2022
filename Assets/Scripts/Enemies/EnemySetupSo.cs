@@ -1,4 +1,5 @@
 using Pickups;
+using Projectile;
 using UnityEngine;
 
 namespace Enemies
@@ -12,7 +13,7 @@ namespace Enemies
         [SerializeField] private float speed;
         [SerializeField] private byte availableShots;
         [SerializeField] private int amountToCredit;
-        [SerializeField] private GameObject weapon;
+        [SerializeField] private BaseProjectile weapon;
         [SerializeField] private int pickupSpawnAmount = 3;
         [SerializeField] private PickupType pickupType = PickupType.Triangle;
 
@@ -25,7 +26,7 @@ namespace Enemies
 
         public byte AvaliableShots => availableShots;
         public int AmountToCredit => amountToCredit;
-        public GameObject EnemyProjectile => weapon;
+        public BaseProjectile EnemyProjectile => weapon;
 
         public int PickupSpawnAmount => pickupSpawnAmount;
         public PickupType TypeOfPickup => pickupType;

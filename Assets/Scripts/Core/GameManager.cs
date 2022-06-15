@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Save;
-using UnityEditor;
+using Spawn;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +16,7 @@ namespace Core
         [SerializeField] private SceneLoadHandler sceneLoadHandler;
 
         private static GameManager _instance;
+        private static SpawnManager _spawner;
 
         private static bool _isAudioMuted = false;
 
@@ -31,6 +32,21 @@ namespace Core
         #region Properties
 
         public static GameManager Instance => _instance;
+
+        public static SpawnManager Spawner
+        {
+            get
+            {
+                if (_spawner != null)
+                {
+                    return _spawner;
+                }
+                _spawner = GameObject.FindWithTag("SpawnManager").GetComponent<SpawnManager>();
+                return _spawner;
+            }
+            private set => _spawner = value;
+        }
+
         public static bool IsAudioMuted => _isAudioMuted;
 
         public bool IsImortal;
@@ -103,7 +119,6 @@ namespace Core
         /// </summary>
         public void ReloadLevel()
         {
-            //TODO: Make a scene manager
             DOTween.KillAll();
 
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("main")).completed += operation =>

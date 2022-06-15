@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4611685570842639929}
   - component: {fileID: 4373570090408312299}
   - component: {fileID: 7179329321672597339}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyType1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157899f9e778442a90fd42eefa6c4be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySetupSo: {fileID: 11400000, guid: d05d4498ab715430fb34192f230c5912, type: 2}
+  enemySetupSo: {fileID: 11400000, guid: d3ef6ce5a3c924748849c490e020bc6b, type: 2}

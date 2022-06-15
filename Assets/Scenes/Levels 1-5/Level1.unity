@@ -921,6 +921,22 @@ PrefabInstance:
       propertyPath: levelProgressionSo
       value: 
       objectReference: {fileID: 11400000, guid: 70170ffbac04d4859a29b860e4706a23, type: 2}
+    - target: {fileID: 5969643280076479177, guid: 4c88d5fc8f52f4b7aaea110a992aa5e7, type: 3}
+      propertyPath: enemyTypes.Array.data[3]
+      value: 
+      objectReference: {fileID: 1102831173339122902, guid: 557fd2c5c9fdb48cab892538b5221fd5, type: 3}
+    - target: {fileID: 5969643280076479177, guid: 4c88d5fc8f52f4b7aaea110a992aa5e7, type: 3}
+      propertyPath: enemyTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 8198759405803001738, guid: 5a6a7b4a2e59b49169019b733ee6b7e9, type: 3}
+    - target: {fileID: 5969643280076479177, guid: 4c88d5fc8f52f4b7aaea110a992aa5e7, type: 3}
+      propertyPath: enemyTypes.Array.data[5]
+      value: 
+      objectReference: {fileID: 7728815327825283360, guid: 3f909b4a6f68c4b4d902962f2636f5fe, type: 3}
+    - target: {fileID: 5969643280076479177, guid: 4c88d5fc8f52f4b7aaea110a992aa5e7, type: 3}
+      propertyPath: enemyTypes.Array.data[6]
+      value: 
+      objectReference: {fileID: 4777166081909500377, guid: 84cb0d196e39148e291355e01d272247, type: 3}
     - target: {fileID: 8478222781482961813, guid: 4c88d5fc8f52f4b7aaea110a992aa5e7, type: 3}
       propertyPath: m_RootOrder
       value: 0

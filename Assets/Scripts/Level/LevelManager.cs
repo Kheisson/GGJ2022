@@ -25,7 +25,7 @@ namespace Level
         private PlayerControl _playerInstance;
         private SpawnManager _spawnManager;
 
-        
+        private const string SPAWN_MANAGER_NAME = "SpawnManager";
         #endregion
 
         #region Methods
@@ -94,7 +94,8 @@ namespace Level
 
         private void InitLevel()
         {
-            _spawnManager = new GameObject("SpawnManager").AddComponent<SpawnManager>();
+            _spawnManager = new GameObject(SPAWN_MANAGER_NAME).AddComponent<SpawnManager>();
+            _spawnManager.tag = SPAWN_MANAGER_NAME;
             _spawnManager.LevelProgressionSo = levelProgressionSo;
             _spawnManager.Enemies = enemyTypes;
         }
