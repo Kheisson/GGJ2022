@@ -23,8 +23,10 @@ namespace MovementModules
                     moveModule = parent.gameObject.AddComponent<TypeFourMovement>();
                     break;
                 case EnemyType.Type5:
+                    moveModule = parent.gameObject.AddComponent<TypeFiveMovement>();
                     break;
                 case EnemyType.Type6:
+                    moveModule = parent.gameObject.AddComponent<TypeSixMovement>();
                     break;
                 case EnemyType.Type7:
                     break;
