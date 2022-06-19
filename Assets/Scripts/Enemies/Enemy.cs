@@ -87,18 +87,18 @@ namespace Enemies
             Attack();
             _collider.enabled = true;
         }
-        
+
+        private void OnDisable() => StopAllCoroutines();
+
         private IEnumerator EnemyAttackCoroutine()
         {
             while (true)
             {
                 for (int i = 0; i < enemySetupSo.AvaliableShots; i++)
                 {
-                    GameManager.Spawner.FireProjectile(enemySetupSo.EnemyProjectile.name,_transform.position - (Vector3.up * 6));
-                    yield return new WaitForSeconds(0.25f);
+                    GameManager.Spawner.FireProjectile(enemySetupSo.EnemyProjectile,_transform.position - (Vector3.up * 6));
                 }
-
-                yield return new WaitForSeconds(enemySetupSo.EnemyProjectile.FireRate);
+                yield return new WaitForSecondsRealtime(enemySetupSo.EnemyProjectile.FireRate);
             }
         }
 

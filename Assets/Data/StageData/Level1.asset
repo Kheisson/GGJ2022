@@ -13,36 +13,15 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   units:
-  - enemyType: 4
-    positionOnGrid: 4
-    delay: 4
-  - enemyType: 4
-    positionOnGrid: 4
-    delay: 6
-  - enemyType: 4
-    positionOnGrid: 4
-    delay: 2
-  - enemyType: 4
-    positionOnGrid: 4
-    delay: 4
   - enemyType: 2
-    positionOnGrid: 4
-    delay: 3
-  - enemyType: 1
-    positionOnGrid: 4
-    delay: 7
-  - enemyType: 2
-    positionOnGrid: 4
-    delay: 2
-  - enemyType: 2
-    positionOnGrid: 4
-    delay: 5
-  - enemyType: 0
     positionOnGrid: 2
     delay: 4
-  - enemyType: 3
-    positionOnGrid: 3
-    delay: 3
-  - enemyType: 3
-    positionOnGrid: 1
-    delay: 3
+  - enemyType: 2
+    positionOnGrid: 4
+    delay: 4
+  - enemyType: 2
+    positionOnGrid: 0
+    delay: 4
+  - enemyType: 2
+    positionOnGrid: 4
+    delay: 4

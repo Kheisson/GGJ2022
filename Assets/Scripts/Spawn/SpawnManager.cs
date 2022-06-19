@@ -74,21 +74,22 @@ namespace Spawn
         private void StopSpawning() => StopAllCoroutines();
         public void StartSpawning() => StartCoroutine(StartSpawningCoroutine());
 
-        public void FireProjectile(string projectileType, Vector3 spawnPoint)
+        public void FireProjectile(BaseProjectile projectile, Vector3 spawnPoint)
         {
             foreach (Transform child in _projectileBucket.transform)
             {
-                if (child.gameObject.name.Contains(projectileType) &&
+                if (child.gameObject.name.Contains(projectile.name) &&
                     !child.gameObject.activeInHierarchy)
                 {
                     child.GetComponent<IProjectile>().Fire(spawnPoint);
+                    break;
                 }
             }
         }
 
         public void SetupProjectile(GameObject projectile)
         {
-            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 1, _projectileBucket.transform);
+            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 5, _projectileBucket.transform);
             _projectiles.AddRange(projectiles);
         }
 

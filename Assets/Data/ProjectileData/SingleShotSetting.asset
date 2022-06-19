@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fef5b8344047f397d821fa5bb268d2, type: 3}
   m_Name: SingleShotSetting
   m_EditorClassIdentifier: 
-  projectileSpeed: 25
-  fireRate: 1.25
+  projectileSpeed: 35
+  fireRate: 2.75
   damage: 20

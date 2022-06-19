@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using Spawn;
 using UnityEngine;
 
@@ -9,12 +10,13 @@ namespace MovementModules
         private void Awake()
         {
             orderOfExecutionDelay = 3f;
-            horizontalSpeed = 0.1f;
+            horizontalSpeed = 1f;
         }
 
         public override void StartMoving()
         {
-            StartCoroutine(nameof(StartMovingCoroutine));
+            //StartCoroutine(nameof(StartMovingCoroutine));
+            Invoke(nameof(TweenMovement), 3f);
         }
 
         private IEnumerator StartMovingCoroutine()
@@ -23,9 +25,10 @@ namespace MovementModules
             var mostLeftPosition = SpawnGrid.GetSpot(0);
             while (transform.position.x > mostLeftPosition.x)
             {
+                
                 var holderPosition = new Vector3
                 {
-                    x = Mathf.Lerp(transform.position.x, mostLeftPosition.x, horizontalSpeed),
+                    x = Mathf.MoveTowards(transform.position.x, mostLeftPosition.x, horizontalSpeed),
                     y = transform.position.y,
                     z = transform.position.z
                 };
@@ -37,5 +40,10 @@ namespace MovementModules
             }
         }
 
+        private void TweenMovement()
+        {
+            var mostLeftPosition = SpawnGrid.GetSpot(0);
+            transform.DOMoveX(mostLeftPosition.x, horizontalSpeed).SetEase(Ease.InOutSine);
+        }
     }
 }
