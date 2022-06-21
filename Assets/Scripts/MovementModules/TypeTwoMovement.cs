@@ -1,48 +1,30 @@
-using System.Collections;
 using DG.Tweening;
 using Spawn;
-using UnityEngine;
 
 namespace MovementModules
 {
     public class TypeTwoMovement : MovingEnemy
     {
-        private void Awake()
-        {
-            orderOfExecutionDelay = 3f;
-            horizontalSpeed = 1f;
-        }
 
-        public override void StartMoving()
+        public override void StartMoving(float delay, float speed, bool flip)
         {
-            //StartCoroutine(nameof(StartMovingCoroutine));
-            Invoke(nameof(TweenMovement), 3f);
+            horizontalSpeed = speed;
+            orderOfExecutionDelay = delay;
+            this.flip = flip;
+            Invoke(nameof(TweenMovement), orderOfExecutionDelay);
         }
-
-        private IEnumerator StartMovingCoroutine()
-        {
-            yield return new WaitForSeconds(orderOfExecutionDelay);
-            var mostLeftPosition = SpawnGrid.GetSpot(0);
-            while (transform.position.x > mostLeftPosition.x)
-            {
-                
-                var holderPosition = new Vector3
-                {
-                    x = Mathf.MoveTowards(transform.position.x, mostLeftPosition.x, horizontalSpeed),
-                    y = transform.position.y,
-                    z = transform.position.z
-                };
-                transform.position = holderPosition;
-                
-                yield return new WaitForEndOfFrame();
-                if (Mathf.Approximately(transform.position.x, mostLeftPosition.x))
-                    break;
-            }
-        }
-
+        
         private void TweenMovement()
         {
-            var mostLeftPosition = SpawnGrid.GetSpot(0);
+            var positionOnGrid = SpawnGrid.GetSpotBasedOnPosition(transform.position.x);
+            var place = 0;
+            if (flip)
+            {
+                place = positionOnGrid + 2 > 4 ? 4 : positionOnGrid + 2;
+            }
+
+            place = positionOnGrid - 2 < 0 ? 0 : positionOnGrid - 2;
+            var mostLeftPosition = SpawnGrid.GetSpot(place);
             transform.DOMoveX(mostLeftPosition.x, horizontalSpeed).SetEase(Ease.InOutSine);
         }
     }

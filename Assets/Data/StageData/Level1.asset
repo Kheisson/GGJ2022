@@ -16,12 +16,60 @@ MonoBehaviour:
   - enemyType: 2
     positionOnGrid: 2
     delay: 4
+    horizontalSpeed: 0.5
+    flip: 0
+    screenSectionStartMoving: 2
+  - enemyType: 2
+    positionOnGrid: 3
+    delay: 4
+    horizontalSpeed: 0.5
+    flip: 1
+    screenSectionStartMoving: 3
+  - enemyType: 2
+    positionOnGrid: 2
+    delay: 4
+    horizontalSpeed: 0.5
+    flip: 0
+    screenSectionStartMoving: 4
+  - enemyType: 2
+    positionOnGrid: 1
+    delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 5
   - enemyType: 2
     positionOnGrid: 4
     delay: 4
-  - enemyType: 2
-    positionOnGrid: 0
-    delay: 4
+    horizontalSpeed: 1
+    flip: 1
+    screenSectionStartMoving: 6
   - enemyType: 2
     positionOnGrid: 4
     delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 7
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 7
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 7
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 7
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 7

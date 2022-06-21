@@ -18,6 +18,7 @@ namespace Projectile
         private void CreateDecoy()
         {
             var copy = Instantiate(decoy, GameManager.Spawner.transform).GetComponent<BaseProjectile>();
+            copy.SetDecoy(ProjectileSpeed, Damage);
             copy.Fire(_decoyStartingPoint);
         }
     }

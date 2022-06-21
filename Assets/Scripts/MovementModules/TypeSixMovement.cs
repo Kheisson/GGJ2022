@@ -13,7 +13,7 @@ namespace MovementModules
             horizontalSpeed = 0.05f;
         }
 
-        public override void StartMoving()
+        public override void StartMoving(float delay, float speed, bool b)
         {
             StartCoroutine(nameof(StartMovingCoroutine));
         }

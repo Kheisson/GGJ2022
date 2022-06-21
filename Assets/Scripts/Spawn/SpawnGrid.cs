@@ -20,10 +20,40 @@ namespace Spawn
         {
             InitializeGrid();
         }
-
+        //Gets a position based on a grid spot
         public static Vector3 GetSpot(int position)
         {
             return Grid[position].Location;
+        }
+        //Returns a relative spot based on the X values of the item
+        public static int GetSpotBasedOnPosition(float position)
+        {
+            int place = 0;
+            switch (position)
+            {
+               case -17f:
+                   place = 0;
+                   break;
+               case -8.5f:
+                   place = 1;
+                   break;
+               case 0f:
+                   place = 2;
+                   break;
+               case 8.5f:
+                   place = 3;
+                   break;
+               case 17f:
+                   place = 4;
+                   break;
+               case -25.5f:
+                   place = 0;
+                   break;
+               case 25.5f:
+                   place = 4;
+                   break;
+            }
+            return place;
         }
 
         /// <summary>

@@ -7,7 +7,8 @@ namespace MovementModules
     {
         public float orderOfExecutionDelay;
         public float horizontalSpeed;
-        public abstract void StartMoving();
+        public bool flip;
+        public abstract void StartMoving(float delay, float speed, bool flip);
 
     }
 }

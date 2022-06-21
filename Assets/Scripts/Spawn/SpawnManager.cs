@@ -14,6 +14,7 @@ namespace Spawn
         private List<GameObject> _enemies = new List<GameObject>();
         private List<IProjectile> _projectiles = new List<IProjectile>();
         private GameObject _projectileBucket = null;
+        private bool _bulletFound;
         #endregion
 
         #region Properties
@@ -56,13 +57,19 @@ namespace Spawn
                         Enemy.UniversalEnemyStartingPosition + newPos,
                         Quaternion.identity,
                         transform);
-                    spawnCandidate.GetComponent<Enemy>().Init(spawnUnitList[i].enemyType);
+                    spawnCandidate.GetComponent<Enemy>().Init(spawnUnitList[i].enemyType,
+                        spawnUnitList[i].horizontalSpeed,
+                        spawnUnitList[i].delay,
+                        spawnUnitList[i].flip);
                     _enemies.Add(spawnCandidate) ;
                 }
                 else
                 {
                     go.transform.position = Enemy.UniversalEnemyStartingPosition + newPos;
                     go.gameObject.SetActive(true);
+                    go.GetComponent<Enemy>().StartMoving(spawnUnitList[i].horizontalSpeed,
+                        spawnUnitList[i].delay,
+                        spawnUnitList[i].flip);
                 }
                 
                 yield return new WaitForSeconds(spawnUnitList[i].delay);
@@ -82,14 +89,21 @@ namespace Spawn
                     !child.gameObject.activeInHierarchy)
                 {
                     child.GetComponent<IProjectile>().Fire(spawnPoint);
+                    _bulletFound = true;
                     break;
                 }
             }
+
+            if (_bulletFound) {return;}
+
+            _bulletFound = false;
+            var newBullet = Instantiate(projectile, _projectileBucket.transform);
+            newBullet.GetComponent<IProjectile>().Fire(spawnPoint);
         }
 
         public void SetupProjectile(GameObject projectile)
         {
-            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 5, _projectileBucket.transform);
+            var projectiles = ProjectileFactory.Instance.CreateWeaponQueue(projectile, 1, _projectileBucket.transform);
             _projectiles.AddRange(projectiles);
         }
 

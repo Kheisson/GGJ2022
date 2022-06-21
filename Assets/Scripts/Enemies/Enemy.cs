@@ -55,8 +55,6 @@ namespace Enemies
         private void OnEnable()
         {
             _health = enemySetupSo.EnemyHealth;
-            if(_moveModule != null)
-                _moveModule.StartMoving();
         }
 
         private void Update()
@@ -157,12 +155,17 @@ namespace Enemies
         /// Initiates the enemy to the correct behavioural style
         /// </summary>
         /// <param name="enemyType"></param>
-        public void Init(EnemyType enemyType)
+        public void Init(EnemyType enemyType, float speed, float delay, bool flip)
         {
             _moveModule = MoveModule.AddMovingModule(enemyType, transform);
             GameManager.Spawner.SetupProjectile(enemySetupSo.EnemyProjectile.gameObject);
+            StartMoving(speed, delay, flip);
+        }
+
+        public void StartMoving(float speed, float delay, bool flip)
+        {
             if(_moveModule != null)
-                _moveModule.StartMoving();
+                _moveModule.StartMoving(delay, speed, flip);
         }
         
         #endregion
