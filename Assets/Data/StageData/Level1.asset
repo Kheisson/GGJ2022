@@ -13,29 +13,29 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   units:
-  - enemyType: 2
-    positionOnGrid: 2
-    delay: 4
+  - enemyType: 1
+    positionOnGrid: 0
+    delay: 0
     horizontalSpeed: 0.5
-    flip: 0
+    flip: 1
     screenSectionStartMoving: 2
-  - enemyType: 2
-    positionOnGrid: 3
+  - enemyType: 1
+    positionOnGrid: 1
     delay: 4
     horizontalSpeed: 0.5
     flip: 1
-    screenSectionStartMoving: 3
+    screenSectionStartMoving: 6
   - enemyType: 2
-    positionOnGrid: 2
+    positionOnGrid: 0
     delay: 4
     horizontalSpeed: 0.5
-    flip: 0
+    flip: 1
     screenSectionStartMoving: 4
   - enemyType: 2
-    positionOnGrid: 1
+    positionOnGrid: 4
     delay: 4
     horizontalSpeed: 1
-    flip: 0
+    flip: 1
     screenSectionStartMoving: 5
   - enemyType: 2
     positionOnGrid: 4

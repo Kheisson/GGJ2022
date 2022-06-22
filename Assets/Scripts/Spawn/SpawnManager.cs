@@ -59,7 +59,7 @@ namespace Spawn
                         transform);
                     spawnCandidate.GetComponent<Enemy>().Init(spawnUnitList[i].enemyType,
                         spawnUnitList[i].horizontalSpeed,
-                        spawnUnitList[i].delay,
+                        spawnUnitList[i].screenSectionStartMoving,
                         spawnUnitList[i].flip);
                     _enemies.Add(spawnCandidate) ;
                 }
@@ -68,7 +68,7 @@ namespace Spawn
                     go.transform.position = Enemy.UniversalEnemyStartingPosition + newPos;
                     go.gameObject.SetActive(true);
                     go.GetComponent<Enemy>().StartMoving(spawnUnitList[i].horizontalSpeed,
-                        spawnUnitList[i].delay,
+                        spawnUnitList[i].screenSectionStartMoving,
                         spawnUnitList[i].flip);
                 }
                 
