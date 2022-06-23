@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Type2Enemy
   m_EditorClassIdentifier: 
   health: 50
-  speed: 12
+  speed: 20
   availableShots: 1
   amountToCredit: 100
   weapon: {fileID: -8811626288666881045, guid: 08da23e8f7b6546158b39068a6449a13, type: 3}

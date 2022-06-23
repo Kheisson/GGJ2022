@@ -13,63 +13,177 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   units:
+  - enemyType: 0
+    positionOnGrid: 3
+    delay: 0
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 1
+    delay: 3
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 0
+    horizontalSpeed: 2
+    flip: 0
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 2
+    delay: 3
+    horizontalSpeed: 2
+    flip: 0
+    screenSectionStartMoving: 2
   - enemyType: 1
     positionOnGrid: 0
     delay: 0
-    horizontalSpeed: 0.5
+    horizontalSpeed: 2
+    flip: 1
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 2
+    delay: 3
+    horizontalSpeed: 1
+    flip: 1
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 0
+    delay: 1
+    horizontalSpeed: 1
     flip: 1
     screenSectionStartMoving: 2
   - enemyType: 1
     positionOnGrid: 1
-    delay: 4
-    horizontalSpeed: 0.5
+    delay: 1
+    horizontalSpeed: 1
     flip: 1
-    screenSectionStartMoving: 6
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 2
+    delay: 4
+    horizontalSpeed: 1
+    flip: 1
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 1
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 3
+    delay: 1
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 2
+  - enemyType: 1
+    positionOnGrid: 2
+    delay: 4
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 2
+  - enemyType: 0
+    positionOnGrid: 4
+    delay: 0
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 0
+    delay: 5
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 2
+    positionOnGrid: 4
+    delay: 3
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 2
   - enemyType: 2
     positionOnGrid: 0
-    delay: 4
-    horizontalSpeed: 0.5
-    flip: 1
-    screenSectionStartMoving: 4
-  - enemyType: 2
-    positionOnGrid: 4
-    delay: 4
+    delay: 3
     horizontalSpeed: 1
     flip: 1
-    screenSectionStartMoving: 5
-  - enemyType: 2
+    screenSectionStartMoving: 2
+  - enemyType: 1
     positionOnGrid: 4
+    delay: 2
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 1
+  - enemyType: 1
+    positionOnGrid: 0
+    delay: 2
+    horizontalSpeed: 1
+    flip: 1
+    screenSectionStartMoving: 1
+  - enemyType: 1
+    positionOnGrid: 2
+    delay: 2
+    horizontalSpeed: 1
+    flip: 0
+    screenSectionStartMoving: 1
+  - enemyType: 1
+    positionOnGrid: 2
     delay: 4
     horizontalSpeed: 1
     flip: 1
-    screenSectionStartMoving: 6
-  - enemyType: 2
-    positionOnGrid: 4
-    delay: 4
-    horizontalSpeed: 1
+    screenSectionStartMoving: 1
+  - enemyType: 0
+    positionOnGrid: 2
+    delay: 1
+    horizontalSpeed: 0
     flip: 0
-    screenSectionStartMoving: 7
-  - enemyType: 1
-    positionOnGrid: 4
-    delay: 4
-    horizontalSpeed: 1
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 1
+    delay: 0
+    horizontalSpeed: 0
     flip: 0
-    screenSectionStartMoving: 7
-  - enemyType: 1
-    positionOnGrid: 4
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 3
     delay: 4
-    horizontalSpeed: 1
+    horizontalSpeed: 0
     flip: 0
-    screenSectionStartMoving: 7
-  - enemyType: 1
+    screenSectionStartMoving: 0
+  - enemyType: 0
     positionOnGrid: 4
-    delay: 4
-    horizontalSpeed: 1
+    delay: 1
+    horizontalSpeed: 0
     flip: 0
-    screenSectionStartMoving: 7
-  - enemyType: 1
-    positionOnGrid: 4
-    delay: 4
-    horizontalSpeed: 1
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 3
+    delay: 1
+    horizontalSpeed: 0
     flip: 0
-    screenSectionStartMoving: 7
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 2
+    delay: 3
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 0
+    delay: 1
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 1
+    delay: 1
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 2
+    delay: 4
+    horizontalSpeed: 0
+    flip: 0
+    screenSectionStartMoving: 0
