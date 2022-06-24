@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Spawn;
-using UnityEngine;
 
 namespace MovementModules
 {
@@ -21,11 +20,11 @@ namespace MovementModules
             var place = 0;
             if (flip)
             {
-                place = positionOnGrid + 2 > 4 ? 4 : positionOnGrid + 2;
+                place = positionOnGrid + 2 >= 4 ? 4 : positionOnGrid + 2;
             }
             else
             {
-                place = positionOnGrid - 2 < 0 ? 0 : positionOnGrid - 2;
+                place = positionOnGrid - 2 <= 0 ? 0 : positionOnGrid - 2;
             }
 
             var mostLeftPosition = SpawnGrid.GetSpot(place);
