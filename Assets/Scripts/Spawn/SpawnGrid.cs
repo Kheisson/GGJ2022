@@ -37,7 +37,7 @@ namespace Spawn
                case -8.5f:
                    place = 1;
                    break;
-               case 0f:
+               case 0.01f:
                    place = 2;
                    break;
                case 8.5f:
@@ -84,7 +84,7 @@ namespace Spawn
             //Returns location based on the place in loop
             private float SetLocation(int space)
             {
-                var place = 0f;
+                var place = 0.01f;
                 
                 if ((space == 0 || space == 4) && _maxScreenSize == 7)
                     space = space == 0 ? 5 : 6; //Spot adjustment for iPad Resolutions

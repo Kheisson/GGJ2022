@@ -57,6 +57,7 @@ namespace Spawn
                         Enemy.UniversalEnemyStartingPosition + newPos,
                         Quaternion.identity,
                         transform);
+
                     spawnCandidate.GetComponent<Enemy>().Init(spawnUnitList[i].enemyType,
                         spawnUnitList[i].horizontalSpeed,
                         spawnUnitList[i].screenSectionStartMoving,

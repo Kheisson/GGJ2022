@@ -24,9 +24,8 @@ namespace MovementModules
             }
             else
             {
-                place = positionOnGrid - 2 <= 0 ? 0 : positionOnGrid - 2;
+                place = positionOnGrid - 2 < 0 ? 0 : positionOnGrid - 2;
             }
-
             var mostLeftPosition = SpawnGrid.GetSpot(place);
             transform.DOMoveX(mostLeftPosition.x, horizontalSpeed).SetEase(Ease.InOutSine);
         }
