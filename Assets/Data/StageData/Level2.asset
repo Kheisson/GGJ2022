@@ -12,22 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b27252ecb4d448aa376783655e9de3a, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: 
-  delaySpawnTimer: 5
-  enemySpawnList:
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 321161921404952044, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
-  - {fileID: 321161921404952044, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
-  - {fileID: 6432890185671433808, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
-  - {fileID: 6432890185671433808, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 321161921404952044, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
-  - {fileID: 6432890185671433808, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  - {fileID: 6432890185671433808, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
-  - {fileID: 321161921404952044, guid: b44d9902ca2028e47bdcd76e5201adef, type: 3}
-  - {fileID: 6432890185671433808, guid: e7415b11103c8a0419e723dfc40cbe47, type: 3}
-  - {fileID: 2665853799384555500, guid: 9d76ffb6c5997f5438089450a06fa882, type: 3}
-  spawnEachAmount: 02000000020000000300000001000000020000000200000004000000020000000300000003000000010000000100000002000000030000000400000004000000
+  units:
+  - enemyType: 3
+    positionOnGrid: 4
+    delay: 1
+    horizontalSpeed: 2
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 2
+    positionOnGrid: 4
+    delay: 1
+    horizontalSpeed: 2
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 1
+    positionOnGrid: 4
+    delay: 1
+    horizontalSpeed: 2
+    flip: 0
+    screenSectionStartMoving: 0
+  - enemyType: 0
+    positionOnGrid: 4
+    delay: 1
+    horizontalSpeed: 2
+    flip: 0
+    screenSectionStartMoving: 0

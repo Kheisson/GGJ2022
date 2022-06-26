@@ -14,7 +14,6 @@ namespace Spawn
         private List<GameObject> _enemies = new List<GameObject>();
         private List<IProjectile> _projectiles = new List<IProjectile>();
         private GameObject _projectileBucket = null;
-        private bool _bulletFound;
         #endregion
 
         #region Properties
@@ -90,14 +89,10 @@ namespace Spawn
                     !child.gameObject.activeInHierarchy)
                 {
                     child.GetComponent<IProjectile>().Fire(spawnPoint);
-                    _bulletFound = true;
-                    break;
+                    return;
                 }
             }
-
-            if (_bulletFound) {return;}
-
-            _bulletFound = false;
+            
             var newBullet = Instantiate(projectile, _projectileBucket.transform);
             newBullet.GetComponent<IProjectile>().Fire(spawnPoint);
         }

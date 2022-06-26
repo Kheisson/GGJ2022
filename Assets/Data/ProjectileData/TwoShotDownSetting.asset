@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TwoShotDownSetting
   m_EditorClassIdentifier: 
   projectileSpeed: 45
-  fireRate: 1
+  fireRate: 2
   damage: 20

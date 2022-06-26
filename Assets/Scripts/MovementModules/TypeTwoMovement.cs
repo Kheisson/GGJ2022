@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Spawn;
+using UnityEngine;
 
 namespace MovementModules
 {
@@ -16,7 +17,7 @@ namespace MovementModules
         
         private void TweenMovement()
         {
-            var positionOnGrid = SpawnGrid.GetSpotBasedOnPosition(transform.position.x);
+            var positionOnGrid = SpawnGrid.GetSpotBasedOnPosition(Mathf.Floor(transform.position.x));
             var place = 0;
             if (flip)
             {

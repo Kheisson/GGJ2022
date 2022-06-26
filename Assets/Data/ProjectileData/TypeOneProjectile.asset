@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TypeOneProjectile
   m_EditorClassIdentifier: 
   projectileSpeed: 50
-  fireRate: 1.5
+  fireRate: 2
   damage: 20

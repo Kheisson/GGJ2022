@@ -13,6 +13,7 @@ namespace Projectile
             var rightBullet = startingPoint + (Vector2.right * decoySpawnRange);
             var copy = Instantiate(decoy, GameManager.Spawner.transform).GetComponent<BaseProjectile>();
             base.Fire(leftBullet);
+            copy.SetDecoy(ProjectileSpeed, Damage);
             copy.Fire(rightBullet);
         }
     }

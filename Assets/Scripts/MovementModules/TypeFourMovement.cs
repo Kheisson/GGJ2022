@@ -1,6 +1,5 @@
-using System.Collections;
+using DG.Tweening;
 using Spawn;
-using UnityEngine;
 
 namespace MovementModules
 {
@@ -14,48 +13,21 @@ namespace MovementModules
 
         public override void StartMoving(float delay, float speed, bool b)
         {
-            StartCoroutine(nameof(StartMovingCoroutine));
+            horizontalSpeed = speed;
+            orderOfExecutionDelay = delay;
+            this.flip = flip;
+            Invoke(nameof(TweenMovement), orderOfExecutionDelay);
         }
 
-        private IEnumerator StartMovingCoroutine()
+        private void TweenMovement()
         {
-            yield return new WaitForSeconds(orderOfExecutionDelay);
             var mostLeftPosition = SpawnGrid.GetSpot(0);
-            while (transform.position.x > mostLeftPosition.x)
+            transform.DOMoveX(mostLeftPosition.x, horizontalSpeed).SetEase(Ease.InOutSine).OnComplete(() =>
             {
-                var holderPosition = new Vector3
-                {
-                    x = Mathf.Lerp(transform.position.x, mostLeftPosition.x, horizontalSpeed),
-                    y = transform.position.y,
-                    z = transform.position.z
-                };
-                transform.position = holderPosition;
+                var mostRightPosition = SpawnGrid.GetSpot(4);
+                transform.DOMoveX(mostRightPosition.x, horizontalSpeed).SetEase(Ease.InOutSine).SetDelay(2f);
+            });
 
-                yield return new WaitForEndOfFrame();
-                if (Mathf.Approximately(transform.position.x, mostLeftPosition.x))
-                    break;
-            }
-            StartCoroutine(nameof(MoveToTheRight));
-        }
-
-        private IEnumerator MoveToTheRight()
-        {
-            var mostRightPosition = SpawnGrid.GetSpot(4);
-            
-            while (transform.position.x < mostRightPosition.x)
-            {
-                var holderPosition = new Vector3
-                {
-                    x = Mathf.Lerp(transform.position.x, mostRightPosition.x, horizontalSpeed),
-                    y = transform.position.y,
-                    z = transform.position.z
-                };
-                transform.position = holderPosition;
-                
-                yield return new WaitForEndOfFrame();
-                if (Mathf.Approximately(transform.position.x, mostRightPosition.x))
-                    break;
-            }
         }
     }
 }

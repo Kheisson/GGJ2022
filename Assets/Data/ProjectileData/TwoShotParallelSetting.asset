@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TwoShotParallelSetting
   m_EditorClassIdentifier: 
   projectileSpeed: 25
-  fireRate: 1.25
+  fireRate: 2
   damage: 20
