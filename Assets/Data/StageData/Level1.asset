@@ -46,7 +46,7 @@ MonoBehaviour:
   - enemyType: 1
     positionOnGrid: 2
     delay: 3
-    horizontalSpeed: 1
+    horizontalSpeed: 2
     flip: 1
     screenSectionStartMoving: 2
   - enemyType: 1
