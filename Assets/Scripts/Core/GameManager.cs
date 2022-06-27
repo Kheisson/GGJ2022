@@ -84,6 +84,7 @@ namespace Core
             DontDestroyOnLoad(gameObject);
 
             dataManager = Instantiate(dataManager, transform);
+            Application.targetFrameRate = 60;
         }
 
         /// <summary>
